@@ -1,0 +1,4 @@
+set adjust-open "width"
+set statusbar-basename true
+set statusbar-bg "#FFFFFF"
+set render-loading false
