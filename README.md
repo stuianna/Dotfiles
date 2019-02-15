@@ -186,19 +186,19 @@ git clone https://aur.archlinux.org/yay.git
 cd st
 makepkg -si
 ```
-3j. Basic Programs
+3. Basic Programs
 ```
-yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh usidkie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox also-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-hot-modules-arch virtualbox virtualbox-guest-is w3m evince caffeine-ng
+yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcure
 ```
 4. Academic
 ```
-yay -S texlive-most mendeleydesktop-bundled webplotdigitizer-bin coin-or-cbc drawio-desktop
+yay -S texlive-most mendeleydesktop-bundled webplotdigitizer-bin coin-or drawio-desktop
 ```
 5. Development
 
 Python - Don't use PIP
 ```
-yay -S jupyter-notebook python-numpy python-matplotlib python-pulp
+yay -S jupyter-notebook python-numpy python-matplotlib python-pulp eagle qtcreator pyinstaller python-pyqt5 tk python-dash python-dash-core-components python-scipy python-grip
 ```
 ### Configuration
 
@@ -244,7 +244,7 @@ Brightness control (brightnessctl) needs to be added to visudo to work. Add / ap
 
 Mendely Desktop overrides PDF association, run: (Assuming zathura is already installed)
 ```
-mimeo -add application/pdf org.pwmt.zathura.desktop
+mimeo --add application/pdf org.pwmt.zathura.desktop
 sudo mimeo --update
 ```
 Enable tlp -> power manager

@@ -73,7 +73,7 @@ for_window [instance="matlabterm"] move scratchpad
 for_window [instance="matlabterm"] border pixel 5
 
 #calandar 
-exec --no-startup-id st -n cal -f mono:pixelsize=16 -e calcurse
+exec --no-startup-id st -n cal -f mono:pixelsize=16 -e calcurse /home/stuart/Dropbox/Other/calcurse
 bindsym $mod+y [instance="cal"] scratchpad show; [instance="cal"] move position center
 for_window [instance="cal"] floating enable
 for_window [instance="cal"] resize set 800 600

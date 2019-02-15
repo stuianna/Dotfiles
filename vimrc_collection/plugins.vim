@@ -16,6 +16,7 @@ Plugin 'VOoM'
 Plugin 'phongvcao/vim-stardict'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Ben201310/online-thesaurus-vim'
+Plugin 'JamshedVesuna/vim-markdown-preview' 
 "Plugin 'SirVer/ultisnips'
 "jPlugin 'honza/vim-snippets'
 "Plugin 'sudar/vim-arduino-snippets'
@@ -47,3 +48,5 @@ autocmd Filetype tex setl updatetime=500
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+
+let vim_markdown_preview_github=1
