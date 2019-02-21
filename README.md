@@ -346,6 +346,11 @@ VPN OPTION 2
 COMMIT
 ```
 
+The rules can be reloaded with
+```
+sudo systemctl restart iptables
+```
+
 4. A complete list of airvpn ip addresses can be found using
 ```
 dig ANY ch.all.vpn.airdns.org @dns1.airvpn.org +short
