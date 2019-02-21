@@ -28,7 +28,7 @@ exec --no-startup-id xset r rate 250 35
 exec --no-startup-id mons -a -x /home/$USER/.i3/monitor.sh
 
 #Some floating windows
-bindsym $mod+b fullscreen disable; floating enable; resize set 40 ppt 35 ppt; sticky enable; move window to position 805 42
+bindsym $mod+b fullscreen disable; floating enable; resize set 35 ppt 35 ppt; sticky enable; move window to position 805 42
 bindsym $mod+n fullscreen disable; floating disable
 
 #Lock screen
@@ -71,6 +71,9 @@ for_window [instance="matlabterm"] floating enable
 for_window [instance="matlabterm"] resize set 800 400
 for_window [instance="matlabterm"] move scratchpad
 for_window [instance="matlabterm"] border pixel 5
+
+#vocabBuilder
+exec --no-startup-id vocabBuilder-cli ~/Dropbox/words/current.csv -q 5 -t 15
 
 #calandar 
 exec --no-startup-id st -n cal -f mono:pixelsize=16 -e calcurse /home/stuart/Dropbox/Other/calcurse

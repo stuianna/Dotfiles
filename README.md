@@ -188,7 +188,7 @@ makepkg -si
 ```
 3. Basic Programs
 ```
-yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcure
+yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcure transmission-qt pdfarranger geoip
 ```
 4. Academic
 ```
@@ -199,6 +199,12 @@ yay -S texlive-most mendeleydesktop-bundled webplotdigitizer-bin coin-or drawio-
 Python - Don't use PIP
 ```
 yay -S jupyter-notebook python-numpy python-matplotlib python-pulp eagle qtcreator pyinstaller python-pyqt5 tk python-dash python-dash-core-components python-scipy python-grip
+```
+From ~/bin folder
+```
+wget https://github.com/stuianna/vocabBuilder/releases/download/v0.2.0/vocabBuilder-cli
+wget https://raw.githubusercontent.com/ekalinin/github-markdown-toc/master/gh-md-toc
+
 ```
 ### Configuration
 

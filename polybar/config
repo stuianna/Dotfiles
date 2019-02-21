@@ -57,7 +57,7 @@ font-2 = "Wuncon Siji:pixelsize=14;1"
 
 modules-left = i3
 modules-center = spotify
-modules-right = filesystem xbacklight  memory cpu wlan eth battery temperature date 
+modules-right = filesystem memory cpu location wlan eth battery temperature date 
 
 tray-position = right
 tray-padding = 2
@@ -169,6 +169,13 @@ type = custom/script
 exec = ~/.polybar/spotify.sh %artist% - %title%
 tail = true
 interval = 2
+format-underline = #1db954
+
+[module/location]
+type = custom/script
+exec = ~/.polybar/myloc.sh
+tail = true
+interval = 30
 format-underline = #1db954
 
 [module/cpu]
