@@ -346,10 +346,15 @@ VPN OPTION 2
 COMMIT
 ```
 
-The rules can be reloaded with
+The rules need to be enabled with
+```
+sudo systemctl enable iptables
+sudo systemctl start iptables
+```
+
+They can also be reloaded with: 
 ```
 sudo systemctl restart iptables
-```
 
 4. A complete list of airvpn ip addresses can be found using
 ```
