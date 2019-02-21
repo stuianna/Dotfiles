@@ -188,7 +188,8 @@ makepkg -si
 ```
 3. Basic Programs
 ```
-yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcure transmission-qt pdfarranger geoip
+yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcure transmission-qt pdfarranger geoip nmap
+
 ```
 4. Academic
 ```
@@ -344,4 +345,28 @@ generate the config file with
 ranger --copy-config=all
 ```
 inside the config file ~/.config/ranger/rc.conf set the preview_images flag to true
+
+SSH
+
+Check sshd is running
+```
+ps aux | grep sshd
+```
+If it's not and still doesn't work, start and enable the service
+
+```
+sudo systemctl start sshd
+sudo systemctl enable sshd
+```
+
+Check if it is listening on required port (22):
+```
+nmap -p 22 127.0.0.1
+```
+
+The default port and other things can be changed:
+```
+#/etc/ssh/sshd_config
+Port 22
+```
 
