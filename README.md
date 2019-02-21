@@ -188,7 +188,7 @@ makepkg -si
 ```
 3. Basic Programs
 ```
-yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcure transmission-qt pdfarranger geoip nmap
+yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcure transmission-qt pdfarranger geoip nmap dnsutils networkmanager-openvpn
 
 ```
 4. Academic
@@ -311,6 +311,47 @@ Add the following to visudo, using a comma between commands if needed
 ```
 
 The vpn is initiated at login at in .i3/config
+
+VPN OPTION 2
+
+1. Download a configuration file for 1 server on airVPN site.
+
+2. Follow  [these](https://airvpn.org/topic/25244-airvpn-using-network-manager-in-ubuntumint/) instructions to add VPN to network manager app.
+
+3. For network lock, the IP table (/etc/iptables/iptables.rules) needs to be edited a complete file might look like this:
+
+```
+*filter
+# Here are the default settings
+#:INPUT ACCEPT [0:0]
+#:FORWARD ACCEPT [0:0]
+#:OUTPUT ACCEPT [0:10]
+
+# These are for VPN
+# Change adapter wlp1s0 and tunnel tun0 to suit device
+# Final line with DROP is the IP address of the VPN servers to connect to
+#
+# HYDRA
+#-A OUTPUT -o wlp1s0+ ! -d 185.200.117.130 -j DROP 
+
+-A INPUT -i lo -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT 
+-A OUTPUT -d 255.255.255.255 -j ACCEPT 
+-A INPUT -s 255.255.255.255 -j ACCEPT 
+-A INPUT -s 192.168.0.0/16 -d 192.168.0.0/16 -j ACCEPT 
+-A OUTPUT -s 192.168.0.0/16 -d 192.168.0.0/16 -j ACCEPT
+-A FORWARD -i wlp1s0+ -o tun0+ -j ACCEPT
+-A FORWARD -i tun0+ -o wlp1s0+ -j ACCEPT 
+-A OUTPUT -o wlp1s0+ ! -d 185.200.117.130 -j DROP 
+COMMIT
+```
+
+4. A complete list of airvpn ip addresses can be found using
+```
+dig ANY ch.all.vpn.airdns.org @dns1.airvpn.org +short
+```
+
+These all could be added to the IP tables allowed addresses somehow, I tried and it didn't work.
 
 Disable PC Speaker (BEEP)
 
