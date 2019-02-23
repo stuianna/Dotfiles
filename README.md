@@ -188,7 +188,7 @@ makepkg -si
 ```
 3. Basic Programs
 ```
-yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcure transmission-qt pdfarranger geoip nmap dnsutils networkmanager-openvpn
+yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcure transmission-qt pdfarranger geoip nmap dnsutils networkmanager-openvpn mdadm samba
 
 ```
 4. Academic
@@ -421,3 +421,66 @@ The default port and other things can be changed:
 Port 22
 ```
 
+## RAID
+
+Don't use intel rapid storage technology
+
+This is for creating a NEW raid 1 array, with two disks
+
+
+1. Identify the disks with lsblk
+2. Create the array, assuming the disks are at /dev/sdb and /dev/sdc
+
+```
+sudo mdadm --create --verbose /dev/md0 --level=1 --raid-devices=2 /dev/sdb /dev/sdc
+```
+
+3. Check the progress of the sync with
+
+```
+cat /proc/mdstat
+```
+4. Create partition tables, make the file systems with fdisk, gdisk, parted, gparted etc..
+
+5. Add the partitions to fstab where required, UUID can be found with 
+
+```
+blkid
+```
+
+## Samba
+
+After installing the Samba package, a [configuration file](https://git.samba.org/samba.git/?p=samba.git;a=blob_plain;f=examples/smb.conf.default;hb=HEAD) needs to be made and placed at /etc/samba/smb.conf.
+
+1. Add a new user, this will also require a password to be set.
+```
+smbpasswd -a username
+```
+
+2. Make a directory to share
+
+3. Append the shared folder properties to the configuration file /etc/samba/smb.conf
+```
+[<directory_name>]
+path = /home/<user_name>/<directory_name>
+available = yes
+valid users = <user_name>
+read only = no
+browsable = yes
+public = yes
+writable = yes
+```
+4. Enable / start / restart the samba service
+
+```
+sudo systemctl enable smb
+sudo systemctl start smb
+sudo systemctl restart smb
+```
+
+5. In Windows, the new network drive can be mapped using the hosts IP and directory name, such as
+```
+\\192.168.x.xx\share
+```
+
+6. On Linux machines, it is easier to use sshfs
