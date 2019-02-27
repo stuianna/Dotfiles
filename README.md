@@ -389,6 +389,8 @@ Change network adapter to bridged.
 
 Change video adapter settings (64Mb ram, 2D accleration)
 
+Disable the mini-bar and status-bar in user interface tab.
+
 RANGER
 
 generate the config file with 
@@ -484,3 +486,12 @@ sudo systemctl restart smb
 ```
 
 6. On Linux machines, it is easier to use sshfs
+
+## AOE HD
+
+1. In steam, enable beta testing in setting->account, restart Steam.
+2. Under setting->steamPlay enable Steam for all other titles, restart Steam.
+3. Install AOE
+4. Under .steam/steam/steamapps/common/Age2HD, change AoK.exe to Launcher.exe, the original Launcher.exe can be deleted.
+5. Wollolooo
+
