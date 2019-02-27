@@ -212,7 +212,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+Delete exec sudo pkill openvpn; exec i3-msg exit
 
 for_window [class="^.*"] border pixel 2
-gaps inner 10
+gaps inner 5
 gaps outer 5
 
 # resize window (you can also use the mouse for that)
