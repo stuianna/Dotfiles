@@ -3,6 +3,8 @@
 
 ## Installing OS
 
+Might need to add nomodeset by pressing 'e' in the GRUB menu, this might also need to be done when booting the actual arch system.
+
 This is an EFI install, so need to boot from EFI, not Legacy 
 1. Verify boot mode
 ```
@@ -120,149 +122,317 @@ reboot
 ```
 ## Inital configuration
 
-Initial login name: root, password: ...
+This part is reached after we can suscsessfully log into a new Arch install. The goal here is to install / configure just enough functionallity to boot into X (graphical interface) and install the main bunch of packages. The initial login name is root.
 
-1. Create a user account
+## Creating a new user.
+
+Create a new user account, the default group to join in 'wheel'.
+
 ```
 useradd -m -g wheel 'newusername'
 ```
-2. Set user password
+Set a password for the new user:
 ```
 passwd 'newusername'
 ```
-3. Modify sudo access so user can access root
+
+### Escellating Privliges
+Optionally, the user can be given user privilages. Run this command to modify sudoers.
 ```
 visudo
 ```
-Uncomment the line
+Uncomment this line to allow all members of group 'wheel' to have optional (on password) root privliges.
 ```
 %wheel ALL=(ALL) ALL
 ```
-Optionally, some programs can be added so they don't need a password to run
+Optionally, some programs can be added so they don't need a password to run:
 ```
 %wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/mount,/usr/bin/umount
 ```
-4. Connect to the internet
-Search for networks
+
+## Connecting to the Internet
+
+Search for networks, SSID return is the name of the network:
 ```
 nmcli device wifi list
 ```
-Connect to network
+Connect to network:
 ```
 nmcli device wifi connect SSID password password
 ```
-[wiki](https://wiki.archlinux.org/index.php/NetworkManager) For information
+More information is available in the [wiki](https://wiki.archlinux.org/index.php/NetworkManager).
 
+## Minimal Graphical Environment and I3WM
 
-5. Install X for the graphical environment
-```
-pacman -S xorg-server xorg-xinit
-```
-6. Install I3
-```
-pacman -S i3-gaps i3status rxvt-unicode dmenu 
-```
-7. Install fonts using [these](https://www.reddit.com/r/archlinux/comments/5r5ep8/make_your_arch_fonts_beautiful_easily/) Instructions
+This minimal setup include 'git', 'firefox' and 'rxvt-unicode', which come in handy in the following steps.
 
-8. Set X to start I3 when started
 ```
-~/.xinitrc
+pacman -S xorg-server xorg-xinit i3-gaps i3status rxvt-unicode dmenu firefox git
+```
+
+Now add I3 to xinit so it starts automatically with X.
+
+```
+# FILE: /home/'newusername'/.xinitrc
+
 exec i3
 ```
-Now i3 can be started from tty with startx,  Logout of root and login to new user account
 
-## Program Configuration / Installation
-
-1. Install Git and clone this repository
+Now logout of the root account:
 ```
-sudo pacman -S git
-git clone ...
+logout
 ```
 
-2. Install Yay
+Log into new account which was just made and startx, to boot into graphical environment.
+```
+startx
+```
+
+When the I3WM config window appears, don't generate a config file, just use the defaults.
+
+# Arch Packages
+
+Once you can login and run X, the main set of packages are ready to be installed.
+
+
+## Initial Requirements
+
+These steps are required to be conducted first before the main chuck of packages can be installed.
+
+### Yay Package Manager
+
+Yay is a package manager which can access the AUR as well as normal Pacman commands.
 
 ```
 git clone https://aur.archlinux.org/yay.git
-cd st
+cd yay
 makepkg -si
+cd ..
+rmdir -rf yay
 ```
-3. Basic Programs
-```
-yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils blueman-applet brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcure transmission-qt pdfarranger geoip nmap dnsutils networkmanager-openvpn mdadm samba vlc
+### Dotfiles
+
+Grab my dotfiles for instant configuration as well as usefull template. The final command syncs my dotfiles to their approprate places. Info on the dotfiles package can be found [here](https://github.com/jbernard/dotfiles).
 
 ```
-4. Academic
+yay -S dotfiles
+git clone https://github.com/stuiann/Dotfiles.git
+dotfiles -s
+```
+
+### Fonts
+
+Install some fonts:
+
+```
+yay -S ttf-dejavu ttf-liberation noto-fonts
+```
+
+Enable fonts by creating symbolic links:
+```
+sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
+sudo ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
+sudo ln -s /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
+```
+
+Enable subpixel hinting mode by editing `/etc/profile.d/freetype2.sh` and uncommenting
+```
+export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
+```
+
+For application consistent fonts create a new file in `etc/fonts/local.conf`, with the following:
+```
+  <?xml version="1.0"?>
+  <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+  <fontconfig>
+      <match>
+          <edit mode="prepend" name="family"><string>Noto Sans</string></edit>
+      </match>
+      <match target="pattern">
+          <test qual="any" name="family"><string>serif</string></test>
+          <edit name="family" mode="assign" binding="same"><string>Noto Serif</string></edit>
+      </match>
+      <match target="pattern">
+          <test qual="any" name="family"><string>sans-serif</string></test>
+          <edit name="family" mode="assign" binding="same"><string>Noto Sans</string></edit>
+      </match>
+      <match target="pattern">
+          <test qual="any" name="family"><string>monospace</string></test>
+          <edit name="family" mode="assign" binding="same"><string>Noto Mono</string></edit>
+      </match>
+  </fontconfig>
+
+```
+
+These instructions were shamelessly stolen from [here](https://www.reddit.com/r/archlinux/comments/5r5ep8/make_your_arch_fonts_beautiful_easily/).
+
+## Program installation.
+
+The bulk of the packages get installed here.
+
+### Everyday Packages
+
+There are lot of packages here which I use for 'everyday use'. I simply add to this list as I see fit. This list usually takes at least an hour to get through.
+
+```
+yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcurse transmission-qt pdfarranger geoip nmap dnsutils networkmanager-openvpn mdadm samba vlc
+```
+### Academic Packages
+
+These packages have more of an academic flavour:
+
 ```
 yay -S texlive-most mendeleydesktop-bundled webplotdigitizer-bin coin-or drawio-desktop
 ```
-5. Development
+### Development Packages
 
-Python - Don't use PIP
+These packages have are more related to engineering / developement:
+
 ```
 yay -S jupyter-notebook python-numpy python-matplotlib python-pulp eagle qtcreator pyinstaller python-pyqt5 tk python-dash python-dash-core-components python-scipy python-grip
 ```
-From ~/bin folder
-```
-wget https://github.com/stuianna/vocabBuilder/releases/download/v0.2.0/vocabBuilder-cli
-wget https://raw.githubusercontent.com/ekalinin/github-markdown-toc/master/gh-md-toc
+### Custom Scripts / Non-AUR Programs
+
+These are programs or scripts which I or others have made which are not on the AUR. All these scripts will be available on path, if the directory is cloned into the home folder.
 
 ```
-### Configuration
-
-Vim setup -> Vundle
-```
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
-Open vim and run ':PluginInstall'
-
-
-Add a 'bin' directory for local scripts and binaries
-```
-mkdir ~/bin
-```
-Make a link to the media directory in the home directory. Only works after a removeable drive has been mounted at least once
-```
-ln -s /run/media/stuart ~/media
+git clone https://github.com/stuianna/bin
 ```
 
-Edit ~/.bash_profile and add the following
+### Blackarch
+
+[Blackarch](https://blackarch.org/) is a distribution used for security and penetration testing. The packages can be added to standard Arch by adding an unofficial repository. There are heaps of tools, in total around 35G is needed to install them all. Due to the nature of the toolset, I like to keep this in a seperate Arch VM.
+
+Wine needs to be installed before some of the Blackarch packages can be installed. Instructions for Wine are detailed lower in this document.
+
+Up to date installation instructions for Blackarch can be found [here](https://blackarch.org/downloads.html#install-repo). The jist of the are:
+
+```
+# Run https://blackarch.org/strap.sh as root and follow the instructions.
+
+$ curl -O https://blackarch.org/strap.sh
+# The SHA1 sum should match: 9f770789df3b7803105e5fbc19212889674cd503 strap.sh 
+# The SHA1 sum changes as strap.sh is modified, check above link for current sum.
+
+$ sha1sum strap.sh
+# Set execute bit
+
+$ chmod +x strap.sh
+# Run strap.sh
+
+$ sudo ./strap.sh
+```
+
+Run a system upgrade
+```
+sudo pacman -Syyu
+```
+
+Tools from the repository can be found with:
+```
+# To list all of the available tools, run
+
+$ sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u
+# To install all of the tools, run
+
+$ sudo pacman -S blackarch
+# To install a category of tools, run
+
+$ sudo pacman -S blackarch-<category>
+# To see the blackarch categories, run
+
+$ sudo pacman -Sg | grep blackarch
+```
+
+## Arch VM Guest
+
+### Guest Additions
+
+If the new machine is a Virtualbox guest, install guest additions from within the guest with:
+```
+pacman -S virtualbox-guest-utils
+```
+
+### Compton Issues
+
+Compton with the VM doesn't work well with OpenGl. In the config file `.compton/config` comment out the line:
+```
+#vsync = "opengl"; 
+```
+
+# Configuration
+
+## Bash Profile and Default Programs
+
+Edit `~/.bash_profile` and add the following, change progams and resolutions as need be.
 
 ```
 export PATH=$PATH:$HOME/bin
 export EDITOR="vim"
 export TERMINAL="st"
-export BROWSER="chromium"
+export BROWSER="firefox"
+export RESOLUTION_V=1920
+export RESOLUTION_H=1080
+export RESOLUTION_TARGET="HDMI-0"
 ```
-Sync dotfiles
+
+
+## Vim
+
+Vundle is used as a package manager for Vim. Vimrc files were included with the dotfiles.
+
+Clone the Vundle repository:
+
 ```
-dotfiles --sync
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
+Open vim and run `:PluginInstall` to install all plugins.
+
+## Zathura
 
 Zathura needs a simlink for its config file
 
 ```
 ln -s ~/.zathurarc ~/.config/zathura/zathurarc
 ```
+
+Mendely Desktop (academic listing) overrides PDF association, run: (Assuming zathura is already installed)
+```
+mimeo --add application/pdf org.pwmt.zathura.desktop
+sudo mimeo --update
+```
+
+## Media Directory
+
+A removeable drive (USB) needs to have been mounted at least once for this to work. This allows easy access mounted drives.
+
+```
+ln -s /run/media/stuart ~/media
+```
+
+### Brightness control
+
 Brightness control (brightnessctl) needs to be added to visudo to work. Add / append to line, if appending, commands are seperated by commas.
 
 ```
 %wheel ALL=(ALL) NOPASSWD: /usr/bin/brightnessctl
 ```
 
-Mendely Desktop overrides PDF association, run: (Assuming zathura is already installed)
-```
-mimeo --add application/pdf org.pwmt.zathura.desktop
-sudo mimeo --update
-```
-Enable tlp -> power manager
+## Power Management
+
+[Tlp](https://wiki.archlinux.org/index.php/TLP) should be already installed, just need to enable its services.
+
 ```
 sudo systemctl enable tlp-sleep.service
 sudo systemctl enable tlp.service
 ```
 
-System sleep on lid, and lockscreen
+## Sleep with Lid Close
 
-Create a file name sleeplock.service in /etc/systemd/system with the following
+This makes a laptop sleep on lid close and displays a lockscreen on wake.
+
+Create a file named `sleeplock.service` in `/etc/systemd/system` with the following:
+
 ```
 [Unit]
 Description=i3lock on suspend
@@ -277,23 +447,32 @@ ExecStart=/usr/bin/i3lock-wrapper
 [Install]
 WantedBy=sleep.target
 ```
-Enable the service
+Enable the service with
 ```
 sudo systemctl enable sleeplock.service
+sudo systemctl start sleeplock.service
 ```
 
-VPN
+## Ranger
 
-Openvpn is used to interface with airvpn
-
-First generate configuration files using the airvpn online config file generator, just one for planet earth for now
-
-Enable the required services
+Remove the existing ranger config directory if it already exists:
 
 ```
-sudo systemctl enable systemd-resolved.service
-sudo systemctl start systemd-resolved.service
+rm -rf ~/.config/ranger
 ```
+Link to the dotiles config
+
+```
+ln -s /home/username/.ranger /home/username/.config/ranger
+```
+
+## VPN
+
+[Airvpn](https://airvpn.org/) is used as a VPN service.
+
+### Option 1 - No Network Lock
+
+Openvpn is used to interface with airvpn, it automatically chooses the best server. First generate configuration files using the airvpn online config file generator, make a single file for all Earth. Download the file.
 
 The downloaded configuration file needs to be modified at the end of the first section, before <ca> add:
 ```
@@ -302,23 +481,36 @@ up /etc/openvpn/scripts/update-systemd-resolved
 down /etc/openvpn/scripts/update-systemd-resolved
 ```
 
-Move the configuration file to the home directory, rename it to '.airvpn_config_all.ovpn'
+Move the configuration file to the home directory, rename it to `.airvpn_config_all.ovpn`.
 
-Add the following to visudo, using a comma between commands if needed
+Add the following to visudo, using a comma between commands if needed:
 
 ```
 %wheel ALL=(ALL) NOPASSWD: /usr/bin/openvpn
 ```
 
-The vpn is initiated at login at in .i3/config
+Enable the required services
+```
+sudo systemctl enable systemd-resolved.service
+sudo systemctl start systemd-resolved.service
+```
+The vpn is started like so:
+```
+sudo openvpn ~/.airvpn_config_all.ovpn
+```
 
-VPN OPTION 2
+This can be added to `.i3/config` if auto-start is required.
+
+
+### VPN Option 2 - Network Lock and IP tables
+
+For this option, a single (or multiple) airVPN server is chosen, all external traffic is cut unless this connection is made. The process outlines the addition of a single server. More can be added by repeating these steps.
 
 1. Download a configuration file for 1 server on airVPN site.
 
 2. Follow  [these](https://airvpn.org/topic/25244-airvpn-using-network-manager-in-ubuntumint/) instructions to add VPN to network manager app.
 
-3. For network lock, the IP table (/etc/iptables/iptables.rules) needs to be edited a complete file might look like this:
+3. For network lock, the IP table (/etc/iptables/iptables.rules) needs to be edited. A complete file might look like this, replace x with the IP address of the server.
 
 ```
 *filter
@@ -332,7 +524,7 @@ VPN OPTION 2
 # Final line with DROP is the IP address of the VPN servers to connect to
 #
 # HYDRA
-#-A OUTPUT -o wlp1s0+ ! -d 185.200.117.130 -j DROP 
+#-A OUTPUT -o wlp1s0+ ! -d xxx.xxx.xxx.xxx -j DROP 
 
 -A INPUT -i lo -j ACCEPT
 -A OUTPUT -o lo -j ACCEPT 
@@ -342,35 +534,61 @@ VPN OPTION 2
 -A OUTPUT -s 192.168.0.0/16 -d 192.168.0.0/16 -j ACCEPT
 -A FORWARD -i wlp1s0+ -o tun0+ -j ACCEPT
 -A FORWARD -i tun0+ -o wlp1s0+ -j ACCEPT 
--A OUTPUT -o wlp1s0+ ! -d 185.200.117.130 -j DROP 
+-A OUTPUT -o wlp1s0+ ! -d xxx.xxx.xxx.xxx -j DROP 
 COMMIT
 ```
 
-The rules need to be enabled with
+4. The rules need to be enabled with
+
 ```
 sudo systemctl enable iptables
 sudo systemctl start iptables
 ```
 
-They can also be reloaded with: 
+They can also be reloaded after changing the IP table with: 
 ```
 sudo systemctl restart iptables
+```
 
-4. A complete list of airvpn ip addresses can be found using
+A complete list of airvpn ip addresses can be found using
 ```
 dig ANY ch.all.vpn.airdns.org @dns1.airvpn.org +short
 ```
 
 These all could be added to the IP tables allowed addresses somehow, I tried and it didn't work.
 
-Disable PC Speaker (BEEP)
+## Disable PC Speaker (BEEP)
 
 Disable the kernal module and prevent it from being reloaded
+
 ```
 sudo rmmod pcspkr
 sudo bash -c 'echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf'
 ```
-VIRTUAL MACHINE
+
+## Wine
+
+Before installing Wine, the [multilib](https://wiki.archlinux.org/index.php/Official_repositories#multilib) package needs to be enabled.
+
+Uncomment the following in `/etc/pacman.conf`:
+
+```
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+```
+
+Perform a system upgrade to get the multilib repositories:
+
+```
+sudo pacman -Syu
+```
+
+Install Wine:
+```
+sudo pacman -S wine
+```
+
+## Virtual Machines
 
 Create a new directory forVm stuff, and shared folder
 
@@ -391,13 +609,6 @@ Change video adapter settings (64Mb ram, 2D accleration)
 
 Disable the mini-bar and status-bar in user interface tab.
 
-RANGER
-
-generate the config file with 
-```
-ranger --copy-config=all
-```
-inside the config file ~/.config/ranger/rc.conf set the preview_images flag to true
 
 SSH
 
