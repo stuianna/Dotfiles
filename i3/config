@@ -209,7 +209,7 @@ exec --no-startup-id xrandr --output ${RESOLUTION_TARGET} --mode ${RESOLUTION_V}
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+Delete exec sudo pkill openvpn; exec i3-msg exit
+bindsym $mod+Shift+Delete exec i3-msg exit
 
 for_window [class="^.*"] border pixel 2
 gaps inner 5
