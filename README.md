@@ -1,35 +1,45 @@
 
 # Arch Linux Install
 
+## Prereq Notes
+
+- Need to boot into EFI mode.
+- On some PCs / Laptops, 'nomodeset' may need to be added to boot by pressing 'e' in the GRUB menu and booting.
+
 ## Installing OS
 
-Might need to add nomodeset by pressing 'e' in the GRUB menu, this might also need to be done when booting the actual arch system.
+### Initial Preperation
 
-This is an EFI install, so need to boot from EFI, not Legacy 
-1. Verify boot mode
+Verify boot mode, this should spit out a bunch of files, if not, reboot with EFI enabled.
 ```
 # ls /sys/firmware/efi/efivars
 ```
-2. Connect and check internet
+Connect to the internet.
 ```
 wifi-menu
 ping www.google.com
 ```
-3. Sync system clock
+Sync system clock
 ```
 timedatectl set-ntp true
 ```
-4. Disk partitioning
+### Disk Setup
+
+Determine the device name of the physical disk
 ```
 fdisk -l
 ```
+Launch `fdisk /dev/sdx` with the correct physical disk. Perform the following
+
+ - 
  - Delete all partitions
  - Create boot partition, type EFI, size +550M (sda1)
  - Create swap partition, size +1x RAM (sda2)
- - Create root partition, size +10-25G (sda3)
+ - Create root partition, size +15-50G (sda3)
  - Create home partition, remaining size (sda4)
 
-5. Make file systems
+
+Make file systems:
 ```
 mkfs.fat -F32 /dev/sda1
 mkswap /dev/sda2
@@ -113,7 +123,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 21. Install network manager and acitvate it
 ```
 pacman -S networkmanager
-systemctl enable NetworkManager
+systumctl enable NetworkManager
 ```
 24. Done, restart
 ```
@@ -216,7 +226,7 @@ Grab my dotfiles for instant configuration as well as usefull template. The fina
 
 ```
 yay -S dotfiles
-git clone https://github.com/stuiann/Dotfiles.git
+git clone https://github.com/stuianna/Dotfiles.git
 dotfiles -s
 ```
 
@@ -240,7 +250,7 @@ Enable subpixel hinting mode by editing `/etc/profile.d/freetype2.sh` and uncomm
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 ```
 
-For application consistent fonts create a new file in `etc/fonts/local.conf`, with the following:
+For application consistent fonts create a new file in `/etc/fonts/local.conf`, with the following:
 ```
   <?xml version="1.0"?>
   <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
@@ -275,7 +285,7 @@ The bulk of the packages get installed here.
 There are lot of packages here which I use for 'everyday use'. I simply add to this list as I see fit. This list usually takes at least an hour to get through.
 
 ```
-yay -S st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcurse transmission-qt pdfarranger geoip nmap dnsutils networkmanager-openvpn mdadm samba vlc
+yay -S --answerdiff N --noremovemake --sudoloop --answerclean N st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcurse transmission-qt pdfarranger geoip nmap dnsutils networkmanager-openvpn mdadm samba vlc xorg-xprop
 ```
 ### Academic Packages
 
@@ -350,8 +360,10 @@ $ sudo pacman -Sg | grep blackarch
 
 If the new machine is a Virtualbox guest, install guest additions from within the guest with:
 ```
-pacman -S virtualbox-guest-utils
+sudo pacman -S virtualbox-guest-utils
 ```
+
+Be sure to choose **virtualbox-guest-module-arch** or Arch will stop booting. If this happens, boot with the arch.iso, mount all partions and reinstall grub and the grub config.
 
 ### Compton Issues
 
@@ -375,8 +387,6 @@ export RESOLUTION_V=1920
 export RESOLUTION_H=1080
 export RESOLUTION_TARGET="HDMI-0"
 ```
-
-
 ## Vim
 
 Vundle is used as a package manager for Vim. Vimrc files were included with the dotfiles.
@@ -632,6 +642,14 @@ The default port and other things can be changed:
 ```
 #/etc/ssh/sshd_config
 Port 22
+```
+
+## Changing Usernamse
+
+To change the user name you cannot be logged in as that user. First logout and login as root.
+
+```
+# usermod -l newname oldname
 ```
 
 ## RAID
