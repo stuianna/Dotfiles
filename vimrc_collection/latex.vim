@@ -83,15 +83,15 @@ inoremap ;sk \subsection{<++>}<Enter><++><Esc>gg/<++><Enter>"_c4l
 inoremap ;sm \subsubsection{<++>}<Enter><++><Esc>gg/<++><Enter>"_c4l
 
 "tables my style
-inoremap ;2t \begin{table}[H]<Enter>\centering<Enter>\begin{tabular}{l l}<Enter>\hline<Enter><++> & <++> \\<Enter>\hline<Enter><++> & <++> \\<Enter>\hline<Enter>\end{tabular}<Enter>\label{tab:<++>}<Enter>\caption{<++>}<Enter>\end{table}<Enter><++><Esc>gg/<++><Enter>"_c4l
+inoremap ;2t \begin{table}[H]<Enter>\centering<Enter>\begin{tabular}{l l}<Enter>\hline<Enter><++> & <++> \\<Enter>\hline<Enter><++> & <++> \\<Enter>\hline<Enter>\end{tabular}<Enter>\caption{<++>}<Enter>\label{tab:<++>}<Enter>\end{table}<Enter><++><Esc>gg/<++><Enter>"_c4l
 inoremap ;2n <Esc>o<++> & <++> \\<Esc>gg/<++><Enter>"_c4l
-inoremap ;3t \begin{table}[H]<Enter>\centering<Enter>\begin{tabular}{l l l}<Enter>\hline<Enter><++> & <++> & <++> \\<Enter>\hline<Enter><++> & <++> & <++> \\<Enter>\hline<Enter>\end{tabular}<Enter>\label{tab:<++>}<Enter>\caption{<++>}<Enter>\end{table}<Enter><++><Esc>gg/<++><Enter>"_c4l
+inoremap ;3t \begin{table}[H]<Enter>\centering<Enter>\begin{tabular}{l l l}<Enter>\hline<Enter><++> & <++> & <++> \\<Enter>\hline<Enter><++> & <++> & <++> \\<Enter>\hline<Enter>\end{tabular}<Enter>\caption{<++>}<Enter>\label{tab:<++>}<Enter>\end{table}<Enter><++><Esc>gg/<++><Enter>"_c4l
 inoremap ;3n <Esc>o<++> & <++> & <++> \\<Esc>gg/<++><Enter>"_c4l
-inoremap ;4t \begin{table}[H]<Enter>\centering<Enter>\begin{tabular}{l l l l}<Enter>\hline<Enter><++> & <++> & <++> & <++> \\<Enter>\hline<Enter><++> & <++> & <++> & <++> \\<Enter>\hline<Enter>\end{tabular}<Enter>\label{tab:<++>}<Enter>\caption{<++>}<Enter>\end{table}<Enter><++><Esc>gg/<++><Enter>"_c4l
+inoremap ;4t \begin{table}[H]<Enter>\centering<Enter>\begin{tabular}{l l l l}<Enter>\hline<Enter><++> & <++> & <++> & <++> \\<Enter>\hline<Enter><++> & <++> & <++> & <++> \\<Enter>\hline<Enter>\end{tabular}<Enter>\caption{<++>}<Enter>\label{tab:<++>}<Enter>\end{table}<Enter><++><Esc>gg/<++><Enter>"_c4l
 inoremap ;4n <Esc>o<++> & <++> & <++> &<++> \\<Esc>gg/<++><Enter>"_c4l
-inoremap ;5t \begin{table}[H]<Enter>\centering<Enter>\begin{tabular}{l l l l l}<Enter>\hline<Enter><++> & <++> & <++> & <++> & <++> \\<Enter>\hline<Enter><++> & <++> & <++> & <++> & <++> \\<Enter>\hline<Enter>\end{tabular}<Enter>\label{tab:<++>}<Enter>\caption{<++>}<Enter>\end{table}<Enter><++><Esc>gg/<++><Enter>"_c4l
+inoremap ;5t \begin{table}[H]<Enter>\centering<Enter>\begin{tabular}{l l l l l}<Enter>\hline<Enter><++> & <++> & <++> & <++> & <++> \\<Enter>\hline<Enter><++> & <++> & <++> & <++> & <++> \\<Enter>\hline<Enter>\end{tabular}<Enter>\caption{<++>}<Enter>\label{tab:<++>}<Enter>\end{table}<Enter><++><Esc>gg/<++><Enter>"_c4l
 inoremap ;5n <Esc>o<++> & <++> & <++> &<++> & <++> \\<Esc>gg/<++><Enter>"_c4l
-inoremap ;6t \begin{table}[H]<Enter>\centering<Enter>\begin{tabular}{l l l l l l}<Enter>\hline<Enter><++> & <++> & <++> & <++> & <++> & <++> \\<Enter>\hline<Enter><++> & <++> & <++> & <++> & <++> & <++> \\<Enter>\hline<Enter>\end{tabular}<Enter>\label{tab:<++>}<Enter>\caption{<++>}<Enter>\end{table}<Enter><++><Esc>gg/<++><Enter>"_c4l
+inoremap ;6t \begin{table}[H]<Enter>\centering<Enter>\begin{tabular}{l l l l l l}<Enter>\hline<Enter><++> & <++> & <++> & <++> & <++> & <++> \\<Enter>\hline<Enter><++> & <++> & <++> & <++> & <++> & <++> \\<Enter>\hline<Enter>\end{tabular}<Enter>\caption{<++>}<Enter>\label{tab:<++>}<Enter>\end{table}<Enter><++><Esc>gg/<++><Enter>"_c4l
 inoremap ;6n <Esc>o<++> & <++> & <++> & <++> &<++> & <++> \\<Esc>gg/<++><Enter>"_c4l
 
 "Tables IAP Style
