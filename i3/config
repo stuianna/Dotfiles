@@ -83,6 +83,9 @@ for_window [instance="cal"] resize set 800 600
 for_window [instance="cal"] move scratchpad
 for_window [instance="cal"] border pixel 5
 
+#Floating matlab figure windows
+for_window[class="MATLAB R2017a - student use" title="Figure*"] floating enable
+
 #Spare terminal
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] resize set 625 400
