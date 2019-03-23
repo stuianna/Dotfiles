@@ -4,6 +4,7 @@
 set nocompatible
 filetype plugin on
 syntax on
+colo desert
 
 "Toggles line numbers or relative line numbers
 "set number "absolute
