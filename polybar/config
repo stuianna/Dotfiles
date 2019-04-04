@@ -57,7 +57,7 @@ font-2 = "Wuncon Siji:pixelsize=14;1"
 
 modules-left = i3
 modules-center = spotify
-modules-right = filesystem memory cpu location wlan eth battery temperature date 
+modules-right = filesystem memory cpu crypto wlan eth battery temperature date 
 
 tray-position = right
 tray-padding = 2
@@ -175,7 +175,14 @@ format-underline = #1db954
 type = custom/script
 exec = ~/.polybar/myloc.sh
 tail = true
-interval = 30
+interval = 300
+format-underline = #1db954
+
+[module/crypto]
+type = custom/script
+exec = ~/.polybar/crypto.py
+tail = true
+interval = 60
 format-underline = #1db954
 
 [module/cpu]
