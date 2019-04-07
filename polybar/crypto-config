@@ -1,0 +1,15 @@
+[general]
+base_currency = AUD
+display = both
+mode = cyclic
+ticker = ethereum
+
+[bitcoin]
+icon = BTC
+
+[ethereum]
+icon = ETH
+
+[litecoin]
+icon = LTC
+
