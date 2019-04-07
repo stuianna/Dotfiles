@@ -10,3 +10,5 @@ icon = BTC
 [ethereum]
 icon = ETH
 
+[litecoin]
+icon = LTC
