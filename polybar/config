@@ -181,7 +181,7 @@ format-underline = #1db954
 [module/crypto]
 type = custom/script
 exec = /home/stuart/.polybar/crypto.py 
-tail = true
+tail = false
 interval = 60
 format-underline = #1db954
 
