@@ -230,7 +230,7 @@ git clone https://github.com/stuianna/Dotfiles.git
 dotfiles -s
 ```
 
-### Fonts
+### Fonts - Pending
 
 Install some fonts:
 
@@ -285,7 +285,7 @@ The bulk of the packages get installed here.
 There are lot of packages here which I use for 'everyday use'. I simply add to this list as I see fit. This list usually takes at least an hour to get through.
 
 ```
-yay -S --answerdiff N --noremovemake --sudoloop --answerclean N st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcurse transmission-qt pdfarranger geoip nmap dnsutils networkmanager-openvpn mdadm samba vlc xorg-xprop
+yay -S --answerdiff N --noremovemake --sudoloop --answerclean N st ranger ffmpegthumbnailer highlight libcaca mediainfo atool transmission-cli odt2txt poppler openssh udiskie network-manager-applet deepin-screenshot compton feh unzip p7zip polybar dropbox alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth pasystray spotify playerctl dotfiles shotwell unclutter conky zathura zathura-pdf-poppler chromium mimeo xdg-utils-mimeo i3lock-wrapper wget zip bluez bluez-utils brightnessctl mons htop tree tlp pinta openvpn openvpn-update-systemd-resolved fuse-exfat exfat-utils virtualbox-host-modules-arch virtualbox virtualbox-guest-iso w3m evince caffeine-ng xautolock nmap sshfs xdotool translate-shell libreoffice-fresh calcurse transmission-qt pdfarranger geoip nmap dnsutils networkmanager-openvpn mdadm samba vlc xorg-xprop cherrytree vim-anywhere otf-overpass python-pywal sqlitebrowser
 ```
 ### Academic Packages
 
@@ -299,7 +299,7 @@ yay -S texlive-most mendeleydesktop-bundled webplotdigitizer-bin coin-or drawio-
 These packages have are more related to engineering / developement:
 
 ```
-yay -S jupyter-notebook python-numpy python-matplotlib python-pulp eagle qtcreator pyinstaller python-pyqt5 tk python-dash python-dash-core-components python-scipy python-grip
+yay -S jupyter-notebook python-numpy python-matplotlib python-pulp eagle qtcreator pyinstaller python-pyqt5 tk python-dash python-dash-core-components python-scipy python-grip python-bottle python-bottle-cork python-pycrypto python-beaker python-scrypt
 ```
 ### Custom Scripts / Non-AUR Programs
 
