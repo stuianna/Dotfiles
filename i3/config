@@ -31,6 +31,9 @@ exec --no-startup-id mons -a -x /home/$USER/.i3/monitor.sh
 bindsym $mod+b fullscreen disable; floating enable; resize set 35 ppt 35 ppt; sticky enable; move window to position 805 42
 bindsym $mod+n fullscreen disable; floating disable
 
+# Floating PDF
+bindsym $mod+g fullscreen disable; floating enable; resize set 55 ppt 95 ppt; move window to position 307 32
+
 #Lock screen
 bindsym $mod+Shift+x exec --no-startup-id i3lock-wrapper 
 
