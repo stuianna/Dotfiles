@@ -20,6 +20,7 @@ exec --no-startup-id blueman-applet #bluetooth control tray
 exec --no-startup-id xautolock -time 5 -locker /usr/bin/i3lock-wrapper #Auto screen lock
 exec --no-startup-id caffeine  #No sleep task bar icon
 exec --no-startup-id i3-msg 'workspace email; exec $BROWSER --app=https://www.protonmail.com/login'
+exec --no-startup-id xfce4-clipman
 
 #Change the keyboard repreat rate
 exec --no-startup-id xset r rate 250 35
@@ -159,7 +160,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle; resize set 700 500; move position center
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -201,9 +202,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-#exec --no-startup-id exec sudo openvpn /home/stuart/.airvpn_config_all.ovpn #VPN
-
-#bindsym $mod+Shift+v workspace vpn; exec sudo eddie-ui #VPN
 bindsym $mod+Shift+s workspace spotify; exec spotify #SPOTIFY
 
 #open VM
@@ -213,6 +211,7 @@ exec --no-startup-id xrandr --output ${RESOLUTION_TARGET} --mode ${RESOLUTION_V}
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+Delete exec i3-msg exit
