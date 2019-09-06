@@ -2,7 +2,7 @@
 base_currency = AUD
 display = both
 mode = cyclic
-ticker = ethereum
+ticker = bitcoin
 
 [bitcoin]
 icon = BTC
@@ -12,3 +12,4 @@ icon = ETH
 
 [litecoin]
 icon = LTC
+
