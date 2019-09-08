@@ -19,9 +19,9 @@ main() {
     ad="Advertisement"
     num=$(pactl list | grep -E '(^Sink Input)|(media.name = \"Spotify\"$)' | awk '/Spotify/ {print a} {a = $0}' | cut -c 13-)
 
-    if [ $title == $ad ]
+    if [ $title = $ad ]
     then
-        echo "Ad Blocked"
+        echo "Ad Block - Muted" 
         pactl set-sink-input-mute $num yes
         exit
     else

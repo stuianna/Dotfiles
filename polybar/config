@@ -68,8 +68,8 @@ tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 modules-left = i3
-modules-center = spotify
-modules-right = crypto cpu temperature memory 
+modules-center = spotify previous playpause next
+modules-right = cpu temperature memory 
 override-redirect = false
 
 [module/filesystem]
@@ -93,7 +93,7 @@ pin-workspaces = true
 label-mode-padding = 3
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
-label-focused = %index%
+label-focused = %name%
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 2
@@ -110,9 +110,41 @@ label-separator =
 [module/spotify]
 type = custom/script
 exec = ~/.bin/spotify.sh %artist% - %title%
+exec-if = "pgrep spotify"
 tail = true
 interval = 2
 format-underline = #1db954
+
+[module/previous]
+type = custom/script
+interval = 86400
+format = "%{T3}<label>"
+format-padding = 1
+exec = echo ""
+exec-if = "pgrep spotify"
+format-underline = #1db954
+line-size = 1
+click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+
+[module/next]
+type = custom/script
+interval = 86400
+format = "%{T3}<label>"
+format-padding = 1
+exec = echo ""
+exec-if = "pgrep spotify"
+format-underline = #1db954
+line-size = 1
+click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+
+[module/playpause]
+type = custom/script
+exec = echo " / "
+exec-if = "pgrep spotify"
+;hook-2 = echo ""
+format-underline = #1db954
+line-size = 1
+click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 
 [module/location]
 type = custom/script
@@ -125,7 +157,7 @@ format-underline = #1db954
 type = custom/script
 exec = ~/.bin/crypto.py 
 tail = false
-interval = 60
+interval = 300
 format-underline = #1db954
 
 [module/cpu]
@@ -240,3 +272,4 @@ format-warn = <label-warn>
 label =  %temperature-c% 
 label-warn =  %temperature-c%
 label-warn-foreground = #f00
+
