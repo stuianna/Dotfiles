@@ -24,13 +24,14 @@ exec --no-startup-id launch_polybar.sh                                          
 exec --no-startup-id blueman-applet                                                                     # Bluetooth applet (Taskbar)
 exec --no-startup-id xautolock -time 5 -locker "/usr/bin/blurlock"                                      # Auto screen lock
 exec --no-startup-id caffeine                                                                           # No sleep function (Taskbar)\
-exec --no-startup-id i3-msg 'workspace email; exec brave https://www.protonmail.com/login'        # Email workspace with protonmail
+exec --no-startup-id i3-msg 'workspace email; exec brave https://www.protonmail.com/login'              # Email workspace with protonmail
 exec --no-startup-id conky -c ~/.conky                                                                  # Conky
 exec --no-startup-id ~/.bin/wallpaper.sh &                                                              # Desktop backgroud ranomizer
 exec --no-startup-id pasystray                                                                          # Audio control tray
 exec --no-startup-id xfce4-clipman                                                                      # Tray for copy/paste
-exec --no-startup-id sleep 1 && docked
+exec --no-startup-id sleep 1.5 && docked
 exec --no-startup-id wal -R
+exec --no-startup-id xfce4-power-manager
 
 # Catagorical menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -56,11 +57,11 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 #Brightness
-#bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set +10%
-#bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 10%-
 
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+#bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+#bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 #Disable mouse focus
 focus_follows_mouse no
@@ -86,7 +87,7 @@ for_window [instance="matlabterm"] border pixel 5
 exec --no-startup-id vocabBuilder-cli ~/Dropbox/words/current.csv -q 5 -t 15
 
 #calandar 
-exec --no-startup-id urxvt -name cal -f mono:pixelsize=16 -e calcurse /home/stuart/Dropbox/Other/calcurse
+exec --no-startup-id urxvt -name cal -e calcurse 
 bindsym $mod+y [instance="cal"] scratchpad show; [instance="cal"] move position center
 for_window [instance="cal"] floating enable
 for_window [instance="cal"] resize set 800 600
@@ -108,8 +109,8 @@ for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 5
-exec --no-startup-id $term -n dropdown 
 bindsym $mod+u [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+exec --no-startup-id urxvt -name dropdown 
 
 #open terminal left and right
 bindsym $mod+bracketright split horizontal ;; exec --no-startup-id $term
@@ -158,6 +159,8 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
+for_window [title="Bluetooth Devices"] floating enable border normal 
+for_window [title="Bluetooth Devices"] resize set 500 650
 
 # Compon
 exec --no-startup-id compton --config .compton/config

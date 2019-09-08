@@ -117,7 +117,7 @@ format-underline = #1db954
 
 [module/previous]
 type = custom/script
-interval = 86400
+interval = 2
 format = "%{T3}<label>"
 format-padding = 1
 exec = echo ""
@@ -128,7 +128,7 @@ click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org
 
 [module/next]
 type = custom/script
-interval = 86400
+interval = 2
 format = "%{T3}<label>"
 format-padding = 1
 exec = echo ""
@@ -139,6 +139,7 @@ click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org
 
 [module/playpause]
 type = custom/script
+interval = 2
 exec = echo " / "
 exec-if = "pgrep spotify"
 ;hook-2 = echo ""
@@ -198,7 +199,7 @@ label-font = 3
 [module/battery1]
 type = internal/battery
 full-at = 98
-battery = BAT0
+battery = BAT1
 adapter = AC
 poll-interval = 5
 time-format = %H:%M
@@ -230,7 +231,7 @@ animation-discharging-framerate = 500
 [module/battery2]
 type = internal/battery
 full-at = 98
-battery = BAT1
+battery = BAT0
 adapter = AC
 poll-interval = 5
 time-format = %H:%M
