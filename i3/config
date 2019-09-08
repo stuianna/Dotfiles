@@ -24,7 +24,6 @@ exec --no-startup-id launch_polybar.sh                                          
 exec --no-startup-id blueman-applet                                                                     # Bluetooth applet (Taskbar)
 exec --no-startup-id xautolock -time 5 -locker "/usr/bin/blurlock"                                      # Auto screen lock
 exec --no-startup-id caffeine                                                                           # No sleep function (Taskbar)\
-exec --no-startup-id i3-msg 'workspace email; exec brave https://www.protonmail.com/login'              # Email workspace with protonmail
 exec --no-startup-id conky -c ~/.conky                                                                  # Conky
 exec --no-startup-id ~/.bin/wallpaper.sh &                                                              # Desktop backgroud ranomizer
 exec --no-startup-id pasystray                                                                          # Audio control tray
@@ -32,11 +31,11 @@ exec --no-startup-id xfce4-clipman                                              
 exec --no-startup-id sleep 1.5 && docked
 exec --no-startup-id wal -R
 exec --no-startup-id xfce4-power-manager
+exec --no-startup-id "brave --app=https://www.protonmail.com/login"                                     # Email in workspace (defined below)
 
 # Catagorical menu
 bindsym $mod+z exec --no-startup-id morc_menu
 bindsym $mod+Ctrl+b exec urxvt -e 'bmenu'
-
 
 #Some Floating windows for videos
 bindsym $mod+b fullscreen disable; floating enable; resize set 35 ppt 35 ppt; sticky enable; move window to position 805 42
@@ -71,7 +70,7 @@ bindsym $mod+grave  workspace prev
 bindsym $mod+BackSpace  workspace next
 
 #Programs
-bindsym $mod+w exec --no-startup-id $browser
+bindsym $mod+w exec --no-startup-id brave 
 bindsym $mod+s exec --no-startup-id $term -e ranger -r ~/.ranger
 
 #Matlab
@@ -161,6 +160,7 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [title="Bluetooth Devices"] floating enable border normal 
 for_window [title="Bluetooth Devices"] resize set 500 650
+for_window [instance="www.protonmail.com__login"] move container to workspace email
 
 # Compon
 exec --no-startup-id compton --config .compton/config
