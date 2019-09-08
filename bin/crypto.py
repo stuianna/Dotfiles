@@ -6,7 +6,7 @@ import requests
 from decimal import Decimal
 
 #Change this to the full path of your crypto-config file if necessary
-configFile = '/home/stuart/Dotfiles/polybar/crypto-config'
+configFile = '/home/stuart/.bin/crypto-config'
 
 config = configparser.ConfigParser()
 

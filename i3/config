@@ -1,37 +1,43 @@
-#Mod key
+#Set modifier
 set $mod Mod4
-set $term $TERMINAL
-set $browser $BROWSER
+set $term urxvt                                                                                         # Load terminal from .xprofile
+set $browser brave                                                                                      # Load browser from .xprofile
+set $shutdown sudo shutdown -h now
+set $reboot sudo reboot
+set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
+set $hibernate sudo systemctl suspend
+
+### Set floating window location
 set $float_x 400
 set $float_y 600
-
-
-#Startup programs
-#exec --no-startup-id docked
-exec --no-startup-id i3-msg 'workspace cherry; exec cherrytree'
-exec --no-startup-id "unclutter -root -idle 1"    #hide mouse
-exec --no-startup-id dropbox start  #dropbox
-exec --no-startup-id nm-applet      #Network manager
-exec --no-startup-id udiskie  --no-notify --tray --use-udisks2 #disk automount
-exec --no-startup-id polybar -r -c ~/.polybar/config example #polyar
-#exec --no-startup-id launch_polybar #polyar
-exec --no-startup-id ~/.wallpaper/wallpaper.sh & #Desktop backgroud ranomizer
-exec --no-startup-id pasystray #Audo control trag
-exec --no-startup-id blueman-applet #bluetooth control tray
-exec --no-startup-id xautolock -time 5 -locker "/usr/bin/i3lock -f -c 000000" #Auto screen lock
-exec --no-startup-id xautolock -time 7 -locker "systemctl suspend" &
-exec --no-startup-id caffeine  #No sleep task bar icon
-exec --no-startup-id i3-msg 'workspace email; exec $BROWSER --app=https://www.protonmail.com/login'
-exec --no-startup-id xfce4-clipman
-exec --no-startup-id conky
 
 #Change the keyboard repreat rate
 exec --no-startup-id xset r rate 250 35
 
-#Monitor monitors, change output if external connected
-exec --no-startup-id mons -a -x /home/$USER/.i3/monitor.sh
+### Startup programs
+exec --no-startup-id i3-msg 'workspace cherry; exec cherrytree'                                         # Launch Cherrytree on its own workspace
+exec --no-startup-id "unclutter -root -idle 1"                                                          # Hide mouse after one minute idle
+exec --no-startup-id dropbox start                                                                      # Start Dropbox (Taskbar)
+exec --no-startup-id nm-applet                                                                          # Network manager (Taskbar)
+exec --no-startup-id udiskie  --no-notify --tray --use-udisks2                                          # Disk automount (Taskbar)
+exec --no-startup-id launch_polybar.sh                                                                  # Launch polybar on all workspaces
+exec --no-startup-id blueman-applet                                                                     # Bluetooth applet (Taskbar)
+exec --no-startup-id xautolock -time 5 -locker "/usr/bin/blurlock"                                      # Auto screen lock
+exec --no-startup-id caffeine                                                                           # No sleep function (Taskbar)\
+exec --no-startup-id i3-msg 'workspace email; exec brave https://www.protonmail.com/login'        # Email workspace with protonmail
+exec --no-startup-id conky -c ~/.conky                                                                  # Conky
+exec --no-startup-id ~/.bin/wallpaper.sh &                                                              # Desktop backgroud ranomizer
+exec --no-startup-id pasystray                                                                          # Audio control tray
+exec --no-startup-id xfce4-clipman                                                                      # Tray for copy/paste
+exec --no-startup-id sleep 1 && docked
+exec --no-startup-id wal -R
 
-#Some floating windows
+# Catagorical menu
+bindsym $mod+z exec --no-startup-id morc_menu
+bindsym $mod+Ctrl+b exec urxvt -e 'bmenu'
+
+
+#Some Floating windows for videos
 bindsym $mod+b fullscreen disable; floating enable; resize set 35 ppt 35 ppt; sticky enable; move window to position 805 42
 bindsym $mod+n fullscreen disable; floating disable
 
@@ -39,7 +45,7 @@ bindsym $mod+n fullscreen disable; floating disable
 bindsym $mod+g fullscreen disable; floating enable; resize set 55 ppt 95 ppt; move window to position 307 32
 
 #Lock screen
-bindsym $mod+Shift+x exec --no-startup-id i3lock -f -c 000000
+bindsym $mod+Shift+x exec --no-startup-id blurlock
 
 #Audio control
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+ unmute
@@ -50,8 +56,11 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 #Brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set +10%
-bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 10%-
+#bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set +10%
+#bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 10%-
+
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 #Disable mouse focus
 focus_follows_mouse no
@@ -60,20 +69,14 @@ focus_follows_mouse no
 bindsym $mod+grave  workspace prev
 bindsym $mod+BackSpace  workspace next
 
-#system commands
-set $shutdown sudo shutdown -h now
-set $reboot sudo reboot
-set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
-set $hibernate sudo systemctl suspend
-
 #Programs
 bindsym $mod+w exec --no-startup-id $browser
 bindsym $mod+s exec --no-startup-id $term -e ranger -r ~/.ranger
 
 #Matlab
-exec --no-startup-id st -n matlabterm -e matlab -nodesktop  -nosplash -softwareopengl
+exec --no-startup-id urxvt -name matlabterm -e matlab -nodesktop  -nosplash -softwareopengl
 bindsym $mod+a [instance="matlabterm"] scratchpad show; [instance="matlabterm"] move position center
-bindsym $mod+x exec st -e matlab -nodesktop -nosplash -softwareopengl
+bindsym $mod+x exec urxvt -e matlab -nodesktop -nosplash -softwareopengl
 for_window [instance="matlabterm"] floating enable
 for_window [instance="matlabterm"] resize set 800 400
 for_window [instance="matlabterm"] move scratchpad
@@ -83,7 +86,7 @@ for_window [instance="matlabterm"] border pixel 5
 exec --no-startup-id vocabBuilder-cli ~/Dropbox/words/current.csv -q 5 -t 15
 
 #calandar 
-exec --no-startup-id st -n cal -f mono:pixelsize=16 -e calcurse /home/stuart/Dropbox/Other/calcurse
+exec --no-startup-id urxvt -name cal -f mono:pixelsize=16 -e calcurse /home/stuart/Dropbox/Other/calcurse
 bindsym $mod+y [instance="cal"] scratchpad show; [instance="cal"] move position center
 for_window [instance="cal"] floating enable
 for_window [instance="cal"] resize set 800 600
@@ -94,11 +97,11 @@ for_window [instance="cal"] border pixel 5
 for_window[class="MATLAB R2017a - student use" title="Figure*"] floating enable
 
 # Devel term used by QT, make it floating
-for_window[class="develTerm"] floating enable
+for_window[instance="develTerm"] floating enable
 
 #Floating window for laptop multiple monitor setup
-for_window[class="term10"] floating enable move to position 40 40 
-for_window[class="term10"] resize set 680 510
+for_window[instance="term10"] floating enable move to position 40 40 
+for_window[instance="term10"] resize set 680 510
 
 #Spare terminal
 for_window [instance="dropdown"] floating enable
@@ -128,6 +131,33 @@ bindsym --release $mod+p exec --no-startup-id deepin-screenshot -s ~/Pictures
 bindsym --release $mod+Shift+p exec --no-startup-id shutter --full
 
 #bindsym $mod+Shift+a [class=client.focused] floating enable; [class=client.focused] resize set 10 ppt 95ppt; [class=client.focused] move position center
+#
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="calamares"] floating enable border normal
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="GParted"] floating enable border normal
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lightdm-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Manjaro-hello"] floating enable
+for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Oblogout"] fullscreen enable
+for_window [class="octopi"] floating enable
+for_window [title="About Pale Moon"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Skype"] floating enable border normal
+for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="Xfburn"] floating enable
 
 # Compon
 exec --no-startup-id compton --config .compton/config
@@ -215,9 +245,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 bindsym $mod+Shift+s workspace spotify; exec spotify #SPOTIFY
 
 #open VM
-bindsym $mod+z  exec vboxmanage startvm windown -E fullscreen setvideomodehint ${RESOLUTION_V} ${RESOLUTION_H} 32
+#bindsym $mod+z  exec vboxmanage startvm windown -E fullscreen setvideomodehint ${RESOLUTION_V} ${RESOLUTION_H} 32
 #bindsym $mod+z exec --no-startup-id i3-msg 'workspace win10; exec virtualbox --startvm win10 --fullscreen'
-exec --no-startup-id xrandr --output ${RESOLUTION_TARGET} --mode ${RESOLUTION_V}x${RESOLUTION_H}
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
