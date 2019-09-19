@@ -11,9 +11,10 @@ then
     # set the right monitor 
     xrandr --output DP2-3 --mode 1920x1080 --right-of DP2-2 --rotate normal --primary
 
-    i3-msg [workspace=10] move workspace to output eDP1 
+    urxvt -name term10 &
     i3-msg [workspace=cherry] move workspace to output eDP1 
     i3-msg [workspace=email] move workspace to output eDP1 
+    i3-msg [workspace=calendar] move workspace to output eDP1 
     i3-msg [workspace=1] move workspace to output DP2-2 
     i3-msg [workspace=2] move workspace to output DP2-3 
     i3-msg [workspace=3] move workspace to output DP2-2 
@@ -23,6 +24,7 @@ then
     i3-msg [workspace=7] move workspace to output DP2-2 
     i3-msg [workspace=8] move workspace to output DP2-3 
     i3-msg [workspace=9] move workspace to output DP2-2 
+    i3-msg [workspace=10] move workspace to output eDP1 
     
 elif [ $MONS == 1 ]
 then
@@ -47,10 +49,11 @@ then
     i3-msg [workspace=cherry] move workspace to output eDP1 
     i3-msg [workspace=email] move workspace to output eDP1 
     i3-msg [workspace=spotify] move workspace to output eDP1 
+    i3-msg [workspace=calendar] move workspace to output eDP1 
 fi
 
 #Update polybar
-sleep 0.5
+sleep 0.3
 launch_polybar.sh
 
 #set background

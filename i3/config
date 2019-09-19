@@ -32,6 +32,7 @@ exec --no-startup-id sleep 1.5 && docked
 exec --no-startup-id wal -R
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id "brave --app=https://www.protonmail.com/login"                                     # Email in workspace (defined below)
+exec --no-startup-id "brave --incognito https://calendar.google.com --start-fullscreen"                 # Calendar in workspace (defined below)
 
 # Catagorical menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -102,6 +103,7 @@ for_window[instance="develTerm"] floating enable
 #Floating window for laptop multiple monitor setup
 for_window[instance="term10"] floating enable move to position 40 40 
 for_window[instance="term10"] resize set 680 510
+for_window[instance="term10"] move container to workspace 10
 
 #Spare terminal
 for_window [instance="dropdown"] floating enable
@@ -161,6 +163,7 @@ for_window [class="Xfburn"] floating enable
 for_window [title="Bluetooth Devices"] floating enable border normal 
 for_window [title="Bluetooth Devices"] resize set 500 650
 for_window [instance="www.protonmail.com__login"] move container to workspace email
+for_window [title="Google Calendar - Sign in to Access & Edit Your Schedule - Brave"] move container to workspace calendar
 
 # Compon
 exec --no-startup-id compton --config .compton/config
