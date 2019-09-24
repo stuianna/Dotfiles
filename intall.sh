@@ -111,6 +111,7 @@ ln -s /run/media/stuart ~/media									                                    # Li
 sudo cp ~/Dotfiles/Misc/sleeplock.service /etc/systemd/system/sleeplock.service	                    # Lock screen on sleep service
 echo '(cat ~/.cache/wal/sequences &)' >> ~/.bashrc						                            # Make Wal work on new terminals
 echo 'source ~/.profile' >> ~/.bashrc						                                        # source .profile from bashrc
+echo 'PATH=$PATH:~/bin' >> ~/.bashrc						                                        # add ~/bin to path
 
 
 ### Services
