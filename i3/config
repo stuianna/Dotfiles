@@ -28,7 +28,7 @@ exec --no-startup-id conky -c ~/.conky                                          
 exec --no-startup-id ~/.bin/wallpaper.sh &                                                              # Desktop backgroud ranomizer
 exec --no-startup-id pasystray                                                                          # Audio control tray
 exec --no-startup-id xfce4-clipman                                                                      # Tray for copy/paste
-exec --no-startup-id sleep 1.5 && docked
+exec --no-startup-id sleep 2.5 && docked
 exec --no-startup-id wal -R
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id "brave --app=https://www.protonmail.com/login"                                     # Email in workspace (defined below)
