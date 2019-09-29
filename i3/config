@@ -22,7 +22,7 @@ exec --no-startup-id nm-applet                                                  
 exec --no-startup-id udiskie  --no-notify --tray --use-udisks2                                          # Disk automount (Taskbar)
 exec --no-startup-id launch_polybar.sh                                                                  # Launch polybar on all workspaces
 exec --no-startup-id blueman-applet                                                                     # Bluetooth applet (Taskbar)
-exec --no-startup-id xautolock -time 5 -locker "/usr/bin/blurlock"                                      # Auto screen lock
+exec --no-startup-id xautolock -time 5 -locker "/usr/bin/i3lock -c 000000"                              # Auto screen lock
 exec --no-startup-id caffeine                                                                           # No sleep function (Taskbar)\
 exec --no-startup-id conky -c ~/.conky                                                                  # Conky
 exec --no-startup-id ~/.bin/wallpaper.sh &                                                              # Desktop backgroud ranomizer
