@@ -19,7 +19,7 @@ exec --no-startup-id i3-msg 'workspace cherry; exec cherrytree'                 
 exec --no-startup-id "unclutter -root -idle 1"                                                          # Hide mouse after one minute idle
 exec --no-startup-id dropbox start                                                                      # Start Dropbox (Taskbar)
 exec --no-startup-id nm-applet                                                                          # Network manager (Taskbar)
-exec --no-startup-id udiskie  --no-notify --tray --use-udisks2                                          # Disk automount (Taskbar)
+exec --no-startup-id udiskie --tray --use-udisks2                                                       # Disk automount (Taskbar)
 exec --no-startup-id launch_polybar.sh                                                                  # Launch polybar on all workspaces
 exec --no-startup-id blueman-applet                                                                     # Bluetooth applet (Taskbar)
 exec --no-startup-id xautolock -time 5 -locker "/usr/bin/i3lock -c 000000"                              # Auto screen lock
