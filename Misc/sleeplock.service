@@ -6,7 +6,7 @@ Before=sleep.target
 User=stuart
 Type=forking
 Environment=DISPLAY=:0
-ExecStart=/usr/bin/blurlock
+ExecStart=/usr/bin/i3lock -c 000000
 
 [Install]
 WantedBy=sleep.target
