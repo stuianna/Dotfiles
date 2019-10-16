@@ -73,6 +73,7 @@ python-grip 											                                            `# View markd
 python-bottle 											                                            `# Python web microframework` \
 python-pycrypto 										                                            `# Python kit for encrypting strings` \
 eagle  												                                                `# PCB design software` \
+inotify-tools                                                                                       `# Perform events on file updates` \
 qtcreator 											                                                `# For C++ GUI development` \
 openocd 											                                                `# On-chip debugger for MCU` \
 arm-none-eabi-gdb 										                                            `# ARM cross compilation` \
@@ -87,6 +88,8 @@ bluez 										                                                        `# Bluet
 skype 										                                                        `# Skype` \
 npm 										                                                        `# npm package manager` \
 stm32cubemx 										                                                `# stm32 cube for makefile generation` \
+sublime-merge 										                                                `# Git commit and GUI tool` \
+otti 										                                                        `# Power supply / analyser software (for work)` \
 steam           										                                            `# game service`
 
 
@@ -123,15 +126,13 @@ sudo systemctl enable sshd									                                        # Ena
 sudo systemctl start sshd									                                        # Start ssh
 sudo systemctl enable sleeplock.service								                                # Enable sleeplock
 
-## Power management handling
-#sudo sed -i 's/#HandleLidSwitch=suspend.*/HandleLidSwitch=suspend/' /etc/systemd/logind.conf	    # Suspend on lid close
-#sudo sed -i 's/#HandlePowerKey=po.*/HandlePowerKey=poweroff/' /etc/systemd/logind.conf		        # Suspend on lid close
 
 ### VIM Setup
 rm -rf ~/.vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim			            # Clone Repository
 vim +PluginInstall +qall                                                                            # Install Vim plugins
 
+### Setup color theme
 wal -i ~/.wallpaper/old/boats_lake_scenery-wallpaper-2560x1440.jpg -a 85                            # Use Wal to set a color scheme
 sudo chown stuart /run/media/stuart                                                                 # Change mount directory ownship for RW persmissions
 
