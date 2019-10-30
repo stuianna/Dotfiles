@@ -44,6 +44,7 @@ gedit  												                                                `# Simple tex
 caffeine-ng 											                                            `# For preventing PC sleep` \
 sshfs  												                                                `# For mounting file systems over ssh` \
 libreoffice-fresh  										                                            `# Libreoffice suite` \
+cmake                                                                                               `# Build system for cross platform make` \
 calcurse 											                                                `# Terminal based calendar application` \
 pdfarranger 											                                            `# For edditing PDF document page orders` \
 geoip  												                                                `# Determining the GEO location of an IP address` \
@@ -86,10 +87,12 @@ arm-none-eabi-newlib 										                                        `# ARM cr
 brightnessctl 										                                                `# For brightness control` \
 bluez 										                                                        `# Bluetooth library` \
 skype 										                                                        `# Skype` \
+doxygen 									                                                        `# Document generation from source code.` \
 npm 										                                                        `# npm package manager` \
 stm32cubemx 										                                                `# stm32 cube for makefile generation` \
 sublime-merge 										                                                `# Git commit and GUI tool` \
 otti 										                                                        `# Power supply / analyser software (for work)` \
+gqrx 										                                                        `# RF analyser graphical interface` \
 steam           										                                            `# game service`
 
 
@@ -142,6 +145,7 @@ xpm install --global @gnu-mcu-eclipse/arm-none-eabi-gcc                         
 
 ### Setup permissions for STLink
 echo 'ATTRS{idVendor}=="0483",ATTRS{idProduct}=="3748",MODE="0666"' | sudo tee -a /etc/udev/rules.d/99-stlink.rules
+echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", MODE:="0666"' | sudo tee -a /etc/udev/rules.d/49-stlink2-1.rules
 sudo udevadm control --reload-rules
 sudo gpasswd -a stuart uucp
 
