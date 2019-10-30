@@ -134,6 +134,7 @@ sudo systemctl enable sleeplock.service								                                #
 rm -rf ~/.vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim			            # Clone Repository
 vim +PluginInstall +qall                                                                            # Install Vim plugins
+.vim/bundle/YouCompleteMe/install.py                                                                # Install you complete me
 
 ### Setup color theme
 wal -i ~/.wallpaper/old/boats_lake_scenery-wallpaper-2560x1440.jpg -a 85                            # Use Wal to set a color scheme

@@ -4,19 +4,16 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 "let g:ycm_server_python_interpreter = '/usr/bin/python'
-let g:ycm_server_python_interpreter = '/home/stuart/anaconda3/bin/python'
+"let g:ycm_server_python_interpreter = '/home/stuart/anaconda3/bin/python'
 call vundle#begin()
 
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 "Plugin 'lervag/vimtex'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'VOoM'
 Plugin 'phongvcao/vim-stardict'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Ben201310/online-thesaurus-vim'
-Plugin 'JamshedVesuna/vim-markdown-preview' 
 "Plugin 'SirVer/ultisnips'
 "jPlugin 'honza/vim-snippets'
 "Plugin 'sudar/vim-arduino-snippets'
@@ -50,3 +47,5 @@ let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 
 let vim_markdown_preview_github=1
+
+let g:ycm_confirm_extra_conf = 0
