@@ -7,7 +7,7 @@ then
     # Set the T450 Display
     xrandr --output eDP1 --mode 1600x900 --pos 0x0 --rotate normal
     # Set the middle monitor display
-    xrandr --output DP2-3 --mode 1920x1080 --right-of eDP1 --rotate normal --primary
+    xrandr --output DP2-3 --mode 1920x1080 --pos -1200x-1080 --rotate normal --primary
     # set the right monitor 
     xrandr --output DP2-2 --mode 1920x1080 --right-of DP2-3 --rotate normal --primary
 
