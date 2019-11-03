@@ -32,7 +32,7 @@ exec --no-startup-id sleep 2.5 && docked
 exec --no-startup-id wal -R
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id "brave --app=https://www.protonmail.com/login"                                     # Email in workspace (defined below)
-exec --no-startup-id "brave --incognito https://calendar.google.com"                 # Calendar in workspace (defined below)
+#exec --no-startup-id "brave --incognito https://calendar.google.com"                 # Calendar in workspace (defined below)
 
 # Catagorical menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -182,8 +182,8 @@ bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left move workspace to output left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
+bindsym $mod+Down move workspace to output down
+bindsym $mod+Up move workspace to output up
 bindsym $mod+Right move workspace to output right
 
 # move focused window
