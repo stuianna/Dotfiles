@@ -93,6 +93,8 @@ stm32cubemx 										                                                `# stm32 c
 sublime-merge 										                                                `# Git commit and GUI tool` \
 otti 										                                                        `# Power supply / analyser software (for work)` \
 gqrx 										                                                        `# RF analyser graphical interface` \
+graphviz 										                                                    `# Packages for drawing graphs in Dot language (doxygen)` \
+cutecom 										                                                    `# Serial terminal interface.` \
 steam           										                                            `# game service`
 
 
