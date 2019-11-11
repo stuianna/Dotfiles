@@ -43,7 +43,6 @@ evince 												                                                `# Fuller fea
 gedit  												                                                `# Simple text editor` \
 caffeine-ng 											                                            `# For preventing PC sleep` \
 sshfs  												                                                `# For mounting file systems over ssh` \
-libreoffice-fresh  										                                            `# Libreoffice suite` \
 cmake                                                                                               `# Build system for cross platform make` \
 calcurse 											                                                `# Terminal based calendar application` \
 pdfarranger 											                                            `# For edditing PDF document page orders` \
