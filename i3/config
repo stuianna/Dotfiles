@@ -31,6 +31,7 @@ exec --no-startup-id xfce4-clipman                                              
 exec --no-startup-id sleep 2.5 && docked
 exec --no-startup-id wal -R
 exec --no-startup-id xfce4-power-manager
+exec --no-startup-id /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki viss.ctd     # Auto-commits for wiki folder
 exec --no-startup-id "brave --app=https://www.protonmail.com/login"                                     # Email in workspace (defined below)
 #exec --no-startup-id "brave --incognito https://calendar.google.com"                 # Calendar in workspace (defined below)
 
