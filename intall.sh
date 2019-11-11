@@ -91,7 +91,7 @@ doxygen 									                                                        `# Docu
 npm 										                                                        `# npm package manager` \
 stm32cubemx 										                                                `# stm32 cube for makefile generation` \
 sublime-merge 										                                                `# Git commit and GUI tool` \
-otti 										                                                        `# Power supply / analyser software (for work)` \
+otii 										                                                        `# Power supply / analyser software (for work)` \
 gqrx 										                                                        `# RF analyser graphical interface` \
 graphviz 										                                                    `# Packages for drawing graphs in Dot language (doxygen)` \
 cutecom 										                                                    `# Serial terminal interface.` \
