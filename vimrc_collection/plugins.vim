@@ -226,3 +226,6 @@ let g:airline#extensions#tabline#fnamemod=':t'
 " let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#vimtex#left = ""
 let g:airline#extensions#vimtex#right = ""
+
+nnoremap J gt
+nnoremap K gT
