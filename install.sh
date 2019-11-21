@@ -125,6 +125,13 @@ echo 'powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
 . /usr/share/powerline/bindings/bash/powerline.sh' >> ~/.bashrc						                            # Powerline fonts configuration
+echo 'if [ "$LOCATION" == "HOME" ]
+then
+	cat ~/.i3/config_base ~/.i3/config_home > ~/.i3/config
+elif [ "$LOCATION" == "WORK" ]
+then
+	cat ~/.i3/config_base ~/.i3/config_work > ~/.i3/config
+fi' >> ~/.profile																																				# Switch between home and work profiles
 
 
 ### Services

@@ -1,0 +1,23 @@
+
+exec --no-startup-id dropbox start                                                                      # Start Dropbox (Taskbar)
+exec --no-startup-id sleep 2.5 && docked
+exec --no-startup-id /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki viss.ctd     # Auto-commits for wiki folder
+exec --no-startup-id "brave --app=https://www.protonmail.com/login"                                     # Email in workspace (defined below)
+#exec --no-startup-id "brave --incognito https://calendar.google.com"                 # Calendar in workspace (defined below)
+exec --no-startup-id xautolock -time 5 -locker "/usr/bin/i3lock -c 000000"                              # Auto screen lock
+
+#calandar 
+exec --no-startup-id urxvt -name cal -e calcurse 
+bindsym $mod+y [instance="cal"] scratchpad show; [instance="cal"] move position center
+for_window [instance="cal"] floating enable
+for_window [instance="cal"] resize set 800 600
+for_window [instance="cal"] move scratchpad
+for_window [instance="cal"] border pixel 5
+
+#vocabBuilder
+exec --no-startup-id vocabBuilder-cli ~/Dropbox/words/current.csv -q 5 -t 15
+
+#Floating window for laptop multiple monitor setup
+for_window[instance="term10"] floating enable move to position 40 40 
+for_window[instance="term10"] resize set 680 510
+for_window[instance="term10"] move container to workspace 10

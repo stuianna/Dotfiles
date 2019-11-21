@@ -1,0 +1,2 @@
+exec --no-startup-id /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/wiki viss.ctd     # Auto-commits for wiki folder
+exec --no-startup-id xautolock -time 10 -locker "/usr/bin/i3lock -c 000000"                              # Auto screen lock
