@@ -214,15 +214,11 @@ inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 
 
 
-"-------------------------------------------------------------
-" AIRLINE
-" ------------------------------------------------------------
-
 " enable powerline fonts
 let g:airline_powerline_fonts = 1
 " enable tabline
 let g:airline#extensions#tabline#enabled = 1
-" show tab number in tabline
+" show tab number in tabline 
 let g:airline#extensions#tabline#tab_nr_type = 1
 " make the filename in buffer shorter, not the full path
 let g:airline#extensions#tabline#fnamemod=':t'
@@ -230,27 +226,3 @@ let g:airline#extensions#tabline#fnamemod=':t'
 " let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#vimtex#left = ""
 let g:airline#extensions#vimtex#right = ""
-
-"  airline symbols dictionary
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-"" unicode symbols, for multiple definitions choose one
-""let g:airline_left_sep = '»'
-"let g:airline_left_sep = '▶'
-""let g:airline_right_sep = '«'
-"let g:airline_right_sep = '◀'
-"let g:airline_symbols.crypt = '🔒'
-""let g:airline_symbols.linenr = '☰'
-""let g:airline_symbols.linenr = '␊'
-"let g:airline_symbols.linenr = '␤'
-""let g:airline_symbols.linenr = '¶'
-"let g:airline_symbols.maxlinenr = ''
-""let g:airline_symbols.maxlinenr = '㏑'
-"let g:airline_symbols.branch = '⎇'
-"let g:airline_symbols.paste = 'ρ'
-""let g:airline_symbols.paste = 'Þ'
-""let g:airline_symbols.paste = '∥'
-"let g:airline_symbols.spell = 'Ꞩ'
-"let g:airline_symbols.notexists = 'Ɇ'
-"let g:airline_symbols.whitespace = 'Ξ'

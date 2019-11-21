@@ -94,6 +94,8 @@ otii 										                                                        `# Power 
 gqrx 										                                                        `# RF analyser graphical interface` \
 graphviz 										                                                    `# Packages for drawing graphs in Dot language (doxygen)` \
 cutecom 										                                                    `# Serial terminal interface.` \
+powerline 										                                                    `# Powerline font server.` \
+powerline-fonts-git 										                                         `# Powerline fonts.` \
 steam           										                                            `# game service`
 
 
@@ -119,6 +121,10 @@ sudo cp ~/Dotfiles/Misc/sleeplock.service /etc/systemd/system/sleeplock.service	
 echo '(cat ~/.cache/wal/sequences &)' >> ~/.bashrc						                            # Make Wal work on new terminals
 echo 'source ~/.profile' >> ~/.bashrc						                                        # source .profile from bashrc
 echo 'PATH=$PATH:~/bin' >> ~/.bashrc						                                        # add ~/bin to path
+echo 'powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. /usr/share/powerline/bindings/bash/powerline.sh' >> ~/.bashrc						                            # Powerline fonts configuration
 
 
 ### Services
