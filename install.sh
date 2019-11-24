@@ -93,7 +93,11 @@ sublime-merge 										                                                `# Git c
 otii 										                                                        `# Power supply / analyser software (for work)` \
 gqrx 										                                                        `# RF analyser graphical interface` \
 graphviz 										                                                    `# Packages for drawing graphs in Dot language (doxygen)` \
+lib32-libpulse 										                                                    `# Sound for wine` \
+lib32-openal 										                                                    `# Sound for wine` \
 cutecom 										                                                    `# Serial terminal interface.` \
+univeral-ctags 										                                                    `# Source code tag system for vim.` \
+galculator 										                                                    `# GTK calculator.` \
 powerline 										                                                    `# Powerline font server.` \
 powerline-fonts-git 										                                         `# Powerline fonts.` \
 steam           										                                            `# game service`
