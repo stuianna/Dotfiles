@@ -96,7 +96,7 @@ graphviz 										                                                    `# Packag
 lib32-libpulse 										                                                    `# Sound for wine` \
 lib32-openal 										                                                    `# Sound for wine` \
 cutecom 										                                                    `# Serial terminal interface.` \
-univeral-ctags 										                                                    `# Source code tag system for vim.` \
+universal-ctags 										                                                    `# Source code tag system for vim.` \
 galculator 										                                                    `# GTK calculator.` \
 powerline 										                                                    `# Powerline font server.` \
 powerline-fonts-git 										                                         `# Powerline fonts.` \

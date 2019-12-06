@@ -19,7 +19,7 @@ exec --no-startup-id i3-msg 'workspace cherry; exec cherrytree'                 
 exec --no-startup-id "unclutter -root -idle 1"                                                          # Hide mouse after one minute idle
 exec --no-startup-id nm-applet                                                                          # Network manager (Taskbar)
 exec --no-startup-id udiskie --tray --use-udisks2                                                       # Disk automount (Taskbar)
-exec --no-startup-id launch_polybar.sh                                                                  # Launch polybar on all workspaces
+exec --no-startup-id sleep 1 && launch_polybar.sh                                                                  # Launch polybar on all workspaces
 exec --no-startup-id blueman-applet                                                                     # Bluetooth applet (Taskbar)
 exec --no-startup-id caffeine                                                                           # No sleep function (Taskbar)\
 exec --no-startup-id ~/.bin/wallpaper.sh &                                                              # Desktop backgroud ranomizer
@@ -33,7 +33,6 @@ bindsym $mod+z exec --no-startup-id morc_menu
 bindsym $mod+Ctrl+b exec urxvt -e 'bmenu'
 
 #Some Floating windows for videos
-bindsym $mod+b fullscreen disable; floating enable; resize set 35 ppt 35 ppt; sticky enable; move window to position 805 42
 bindsym $mod+n fullscreen disable; floating disable
 
 # Floating PDF

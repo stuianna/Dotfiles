@@ -245,8 +245,8 @@ let g:airline#extensions#tabline#fnamemod=':t'
 let g:airline#extensions#vimtex#left = ""
 let g:airline#extensions#vimtex#right = ""
 
-nnoremap J gt
-nnoremap K gT
+nnoremap K gt
+nnoremap J gT
 
 "auto close {
 function! s:CloseBracket()
@@ -262,11 +262,11 @@ function! s:CloseBracket()
 endfunction
 inoremap <expr> {<Enter> <SID>CloseBracket()
 
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
+""inoremap " ""<left>
+"inoremap ' ''<left>
+"inoremap ( ()<left>
+"inoremap [ []<left>
+"inoremap { {}<left>
 
 "inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O"
+""inoremap {;<CR> {<CR>};<ESC>O"

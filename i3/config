@@ -17,35 +17,28 @@ exec --no-startup-id xset r rate 250 35
 ### Startup programs
 exec --no-startup-id i3-msg 'workspace cherry; exec cherrytree'                                         # Launch Cherrytree on its own workspace
 exec --no-startup-id "unclutter -root -idle 1"                                                          # Hide mouse after one minute idle
-exec --no-startup-id dropbox start                                                                      # Start Dropbox (Taskbar)
 exec --no-startup-id nm-applet                                                                          # Network manager (Taskbar)
 exec --no-startup-id udiskie --tray --use-udisks2                                                       # Disk automount (Taskbar)
-exec --no-startup-id launch_polybar.sh                                                                  # Launch polybar on all workspaces
+exec --no-startup-id sleep 1 && launch_polybar.sh                                                                  # Launch polybar on all workspaces
 exec --no-startup-id blueman-applet                                                                     # Bluetooth applet (Taskbar)
-exec --no-startup-id xautolock -time 5 -locker "/usr/bin/i3lock -c 000000"                              # Auto screen lock
 exec --no-startup-id caffeine                                                                           # No sleep function (Taskbar)\
-exec --no-startup-id conky -c ~/.conky                                                                  # Conky
 exec --no-startup-id ~/.bin/wallpaper.sh &                                                              # Desktop backgroud ranomizer
 exec --no-startup-id pasystray                                                                          # Audio control tray
 exec --no-startup-id xfce4-clipman                                                                      # Tray for copy/paste
-exec --no-startup-id sleep 2.5 && docked
 exec --no-startup-id wal -R
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki viss.ctd     # Auto-commits for wiki folder
-exec --no-startup-id "brave --app=https://www.protonmail.com/login"                                     # Email in workspace (defined below)
-#exec --no-startup-id "brave --incognito https://calendar.google.com"                 # Calendar in workspace (defined below)
 
 # Catagorical menu
 bindsym $mod+z exec --no-startup-id morc_menu
 bindsym $mod+Ctrl+b exec urxvt -e 'bmenu'
 
 #Some Floating windows for videos
-bindsym $mod+b fullscreen disable; floating enable; resize set 35 ppt 35 ppt; sticky enable; move window to position 805 42
 bindsym $mod+n fullscreen disable; floating disable
 
 # Floating PDF
-bindsym $mod+g fullscreen disable; floating enable; resize set 55 ppt 95 ppt; move window to position 307 32
+#bindsym $mod+g fullscreen disable; floating enable; resize set 55 ppt 95 ppt; move window to position 307 32
 
+bindsym $mod+g exec --no-startup-id galculator
 #Lock screen
 bindsym $mod+Shift+x exec --no-startup-id blurlock
 
@@ -84,27 +77,11 @@ for_window [instance="matlabterm"] resize set 800 400
 for_window [instance="matlabterm"] move scratchpad
 for_window [instance="matlabterm"] border pixel 5
 
-#vocabBuilder
-exec --no-startup-id vocabBuilder-cli ~/Dropbox/words/current.csv -q 5 -t 15
-
-#calandar 
-exec --no-startup-id urxvt -name cal -e calcurse 
-bindsym $mod+y [instance="cal"] scratchpad show; [instance="cal"] move position center
-for_window [instance="cal"] floating enable
-for_window [instance="cal"] resize set 800 600
-for_window [instance="cal"] move scratchpad
-for_window [instance="cal"] border pixel 5
-
 #Floating matlab figure windows
 for_window[class="MATLAB R2017a - student use" title="Figure*"] floating enable
 
 # Devel term used by QT, make it floating
 for_window[instance="develTerm"] floating enable
-
-#Floating window for laptop multiple monitor setup
-for_window[instance="term10"] floating enable move to position 40 40 
-for_window[instance="term10"] resize set 680 510
-for_window[instance="term10"] move container to workspace 10
 
 #Spare terminal
 for_window [instance="dropdown"] floating enable
@@ -285,3 +262,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+exec --no-startup-id sleep 5 && /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/wiki viss.ctd     # Auto-commits for wiki folder
+exec --no-startup-id xautolock -time 10 -locker "/usr/bin/i3lock -c 000000"                              # Auto screen lock
+bindsym $mod+b exec --no-startup-id dolphin
