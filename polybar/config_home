@@ -37,7 +37,7 @@ font-3 = DejaVuSans:size=10
 font-4 = DejaVuSansMono:size=10
 cursor-click = pointer
 cursor-scroll = ns-resize
-modules-left = battery1 battery2
+modules-left = battery1 battery2 power
 modules-center = crypto
 modules-right = wlan date
 override-redirect = false
@@ -152,6 +152,13 @@ type = custom/script
 exec = ~/.bin/myloc.sh
 tail = true
 interval = 30
+format-underline = #1db954
+
+[module/power]
+type = custom/script
+exec = ~/.bin/powerUsage.sh
+tail = true
+interval = 1
 format-underline = #1db954
 
 [module/crypto]
