@@ -34,6 +34,7 @@ bindsym $mod+Ctrl+b exec $term -e 'bmenu'
 
 #Some Floating windows for videos
 bindsym $mod+n fullscreen disable; floating disable
+bindsym $mod+b fullscreen disable; floating enable; resize set 35 ppt 35 ppt; sticky enable; move window to position 805 42
 
 #Lock screen
 bindsym $mod+Shift+x exec --no-startup-id blurlock
