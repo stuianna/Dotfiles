@@ -1,6 +1,6 @@
 #Set modifier
 set $mod Mod4
-set $term urxvt                                                                                         # Load terminal from .xprofile
+set $term termite                                                                                         # Load terminal from .xprofile
 set $browser brave                                                                                      # Load browser from .xprofile
 set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
@@ -30,7 +30,7 @@ exec --no-startup-id xfce4-power-manager
 
 # Catagorical menu
 bindsym $mod+z exec --no-startup-id morc_menu
-bindsym $mod+Ctrl+b exec urxvt -e 'bmenu'
+bindsym $mod+Ctrl+b exec $term -e 'bmenu'
 
 #Some Floating windows for videos
 bindsym $mod+n fullscreen disable; floating disable
@@ -62,19 +62,19 @@ bindsym $mod+BackSpace  workspace next
 
 #Programs
 bindsym $mod+w exec --no-startup-id brave 
-bindsym $mod+s exec --no-startup-id $term -e ranger -r ~/.ranger
+bindsym $mod+s exec --no-startup-id termite -e ranger -r ~/.ranger
 
 #Matlab
-exec --no-startup-id urxvt -name matlabterm -e matlab -nodesktop  -nosplash -softwareopengl
+exec --no-startup-id termite --name matlabterm -e matlab -nodesktop  -nosplash -softwareopengl
 bindsym $mod+a [instance="matlabterm"] scratchpad show; [instance="matlabterm"] move position center
-bindsym $mod+x exec urxvt -e matlab -nodesktop -nosplash -softwareopengl
+bindsym $mod+x exec termite -e matlab -nodesktop -nosplash -softwareopengl
 for_window [instance="matlabterm"] floating enable
 for_window [instance="matlabterm"] resize set 800 400
 for_window [instance="matlabterm"] move scratchpad
 for_window [instance="matlabterm"] border pixel 5
 
 # Calculator
-exec_always --no-startup-id galculator
+exec--no-startup-id galculator
 bindsym $mod+g [instance="galculator"] scratchpad show;
 for_window [instance="galculator"] floating enable
 for_window [instance="galculator"] resize set 300 200
@@ -92,7 +92,7 @@ for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 5
 bindsym $mod+u [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
-exec --no-startup-id urxvt -name dropdown 
+exec_always --no-startup-id termite --name dropdown 
 
 #open terminal left and right
 bindsym $mod+bracketright split horizontal ;; exec --no-startup-id $term

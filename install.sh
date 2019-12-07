@@ -30,6 +30,7 @@ udiskie  											                                                `# For autom
 deepin-screenshot 										                                            `# Screenshot tool` \
 unzip 												                                                `# For zip files` \
 p7zip  												                                                `# For zip files` \
+termite  												                                                `# Terminal emulator (current)` \
 dropbox 											                                                `# Dropbox` \
 unclutter  											                                                `# Hide the mouse when ile` \
 zathura  											                                                `# PDF viewer` \
@@ -82,6 +83,8 @@ arm-none-eabi-binutils 										                                        `# ARM 
 arm-none-eabi-newlib 										                                        `# ARM cross compilation` \
 ttf-font-awesome-4 										                                            `# Fonts for icons` \
 ttf-font-awesome 										                                            `# Fonts for icons` \
+nerd-fonts-complete 										                                            `# Fonts for icons` \
+font-manager 										                                            `# Graphical font manager` \
 arm-none-eabi-newlib 										                                        `# ARM cross compilation` \
 brightnessctl 										                                                `# For brightness control` \
 bluez 										                                                        `# Bluetooth library` \
@@ -117,6 +120,8 @@ sed -i 's/export EDITOR.*/export EDITOR\=\/usr\/bin\/vim/' ~/.profile		         
 sed -i 's/export BROWSER.*/export BROWSER\=\/usr\/bin\/brave/' ~/.profile		                    # Change default browser to brave
 mkdir -p ~/bin											                                            # Binary directory
 echo 'export PATH=$PATH:~/Dotfiles/bin' >> ~/.profile						                        # Add Dotfiles bin directory to path
+mkdir -p ~/.config/termite									                                        # Make termite config directory
+ln -sf ~/.config/termite/config ~/.config/termite/config														# Link dotfiles stored config to termite's search location
 mkdir -p ~/.config/zathura									                                        # Make zathura config directory
 ln -sf ~/.zathurarc ~/.config/zathura/zathurarc							                            # Link config file to ranger
 sudo mkdir -p /run/media/stuart									                                    # Manually make media mounting directory
@@ -155,7 +160,7 @@ vim +PluginInstall +qall                                                        
 .vim/bundle/YouCompleteMe/install.py                                                                # Install you complete me
 
 ### Setup color theme
-wal -i ~/.wallpaper/old/boats_lake_scenery-wallpaper-2560x1440.jpg -a 85                            # Use Wal to set a color scheme
+wal -i ~/.wallpaper/old/boats_lake_scenery-wallpaper-2560x1440.jpg                             # Use Wal to set a color scheme
 sudo chown stuart /run/media/stuart                                                                 # Change mount directory ownship for RW persmissions
 
 ### Additional libraries for embedded development
