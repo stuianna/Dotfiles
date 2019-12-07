@@ -35,9 +35,6 @@ bindsym $mod+Ctrl+b exec urxvt -e 'bmenu'
 #Some Floating windows for videos
 bindsym $mod+n fullscreen disable; floating disable
 
-# Floating PDF
-bindsym $mod+g fullscreen disable; floating enable; resize set 55 ppt 95 ppt; move window to position 307 32
-
 #Lock screen
 bindsym $mod+Shift+x exec --no-startup-id blurlock
 
@@ -75,6 +72,13 @@ for_window [instance="matlabterm"] floating enable
 for_window [instance="matlabterm"] resize set 800 400
 for_window [instance="matlabterm"] move scratchpad
 for_window [instance="matlabterm"] border pixel 5
+
+# Calculator
+exec_always --no-startup-id galculator
+bindsym $mod+g [instance="galculator"] scratchpad show;
+for_window [instance="galculator"] floating enable
+for_window [instance="galculator"] resize set 300 200
+for_window [instance="galculator"] move scratchpad
 
 #Floating matlab figure windows
 for_window[class="MATLAB R2017a - student use" title="Figure*"] floating enable
