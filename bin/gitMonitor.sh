@@ -9,4 +9,4 @@ fi
 
 # Start up the monitor
 cd $1
-inotifywait -m -e modify --format="git pull && git add $2 && git commit -m 'auto commit' && git push origin master" $2 | bash
+inotifywait -m -e modify --format="git fetch && git pull && git add $2 && git commit -m 'auto commit' && git push origin master" $2 | bash
