@@ -93,6 +93,7 @@ doxygen 									                                                        `# Docu
 npm 										                                                        `# npm package manager` \
 stm32cubemx 										                                                `# stm32 cube for makefile generation` \
 sublime-merge 										                                                `# Git commit and GUI tool` \
+ripgrep 										                                                `# Fast tool for line searching file, used in VIM` \
 otii 										                                                        `# Power supply / analyser software (for work)` \
 gqrx 										                                                        `# RF analyser graphical interface` \
 graphviz 										                                                    `# Packages for drawing graphs in Dot language (doxygen)` \
@@ -130,6 +131,9 @@ sudo cp ~/Dotfiles/Misc/sleeplock.service /etc/systemd/system/sleeplock.service	
 echo '(cat ~/.cache/wal/sequences &)' >> ~/.bashrc						                            # Make Wal work on new terminals
 echo 'source ~/.profile' >> ~/.bashrc						                                        # source .profile from bashrc
 echo 'PATH=$PATH:~/bin' >> ~/.bashrc						                                        # add ~/bin to path
+echo 'source /usr/share/fzf/key-bindings.bash' >> ~/.bashrc															# Fuzzy finder hotkeys
+echo 'source /usr/share/fzf/completion.bash' >> ~/.bashrc																# Fuzzy finder hotkeys
+echo 'complete -o bashdefault -o default -F _fzf_path_completion zathura' >> ~/.bashrc
 echo 'powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1

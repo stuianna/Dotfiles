@@ -14,7 +14,11 @@ Plugin 'majutsushi/tagbar'																						" Tagbar
 Plugin 'tpope/vim-fugitive'																						" Git wrapper for git inside of vim
 Plugin 'airblade/vim-gitgutter'																				" Show git status in numbers line
 Plugin 'ludovicchabant/vim-gutentags'																	" Use tags to zip through source files.
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 call vundle#end()   
+
+
 
 """"""""""	General Vim Settings	
 set relativenumber																										" Set relative line numbers
@@ -45,6 +49,9 @@ set nostartofline																											" Don't automatically jump to the st
 map <silent> <leader><Space> :noh<cr>																	" Disable highlight with leader key
 nnoremap K gt																													" Use K to move to next tab
 nnoremap J gT																													" Use J to more to previous tab
+" move among buffers with CTRL
+nnoremap L :bnext<CR>
+nnoremap H :bprev<CR>
 
 " Go to the file's last edited position when opening
 autocmd BufReadPost *
@@ -111,6 +118,14 @@ function! s:CloseBracket()
     endif
 endfunction
 inoremap <expr> {<Enter> <SID>CloseBracket()
+
+""""""""""	Plugin 'FZF' Settings
+
+" RIPGREP preview window
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 """"""""""	Plugin 'Tagbar' Settings
 nmap <F8> :TagbarToggle<CR>
