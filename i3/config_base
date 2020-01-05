@@ -190,10 +190,10 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle; resize set 700 500; move position center
+bindsym $mod+Shift+space floating toggle; resize set 58 ppt 94 ppt; move window to position center
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+space layout tabbed
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
