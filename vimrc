@@ -44,6 +44,9 @@ set si
 set wrap																															" Line wrapping
 set nostartofline																											" Don't automatically jump to the start of the line during some commands
 
+""""""""" Clang Format
+map <C-K> :pyf /home/stuart/bin/vim-clang-format.py<cr>
+
 """"""""""	General Vim snippits
 
 map <silent> <leader><Space> :noh<cr>																	" Disable highlight with leader key
