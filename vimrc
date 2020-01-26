@@ -5,8 +5,9 @@ set rtp+=~/.vim/bundle/Vundle.vim																			" set the runtime path to in
 call vundle#begin()
 Plugin 'LaTeX-Box-Team/LaTeX-Box'																			" For latex compile
 Plugin 'xuhdev/vim-latex-live-preview'																" For latex live preview
-Plugin 'Valloric/YouCompleteMe'																				" Code completion engine.
+"Plugin 'Valloric/YouCompleteMe'																				" Code completion engine.
 Plugin 'scrooloose/nerdtree'																					" Vim file browser
+Plugin 'jistr/vim-nerdtree-tabs'																			" Better tab handling for nerd-tree
 Plugin 'Xuyuanp/nerdtree-git-plugin'																	" Show git status in nerdtree
 Plugin 'vim-airline/vim-airline'																			" Status line and tag line
 Plugin 'scrooloose/nerdcommenter'																			" Commenting plugin
@@ -16,6 +17,7 @@ Plugin 'airblade/vim-gitgutter'																				" Show git status in numbers 
 Plugin 'ludovicchabant/vim-gutentags'																	" Use tags to zip through source files.
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'skywind3000/asyncrun.vim'																			" Background task handling
 call vundle#end()   
 
 
@@ -135,11 +137,29 @@ let g:ycm_confirm_extra_conf = 0
 set hidden																														" Hide the preiview window buffer when exiting insert mode.
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif 							" Automatically cose the popup window when finished editing.
 
-""""""""""	Plugin 'Nerd Tree' Settings	
-autocmd BufWinEnter * NERDTreeMirror
-nnoremap <silent> <Leader>v :NERDTreeFind<CR>
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"""""""""" 	Plugin asyncrun settings
+let g:asyncrun_status = "stopped"
+augroup QuickfixStatus
+	au! BufWinEnter quickfix setlocal 
+		\ statusline=%t\ [%{g:asyncrun_status}]\ %{exists('w:quickfix_title')?\ '\ '.w:quickfix_title\ :\ ''}\ %=%-15(%l,%c%V%)\ %P
+augroup END
+:noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
+
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+
+:command -nargs=* Make AsyncRun make 
+
+autocmd User AsyncRunStart :copen
+autocmd User AsyncRunStop :call ClosePreviewOnSuccess()
+
+func! ClosePreviewOnSuccess()
+	if g:asyncrun_code == 0
+			:cclose
+	endif
+endfunc
+
+""""""""""	Plugin 'Nerd Tree Tabs' Settings	
+let g:nerdtree_tabs_open_on_console_startup=1
 
 """"""""""	Latex Settings
 function! TexFunction()
