@@ -46,6 +46,9 @@ set si
 set wrap																															" Line wrapping
 set nostartofline																											" Don't automatically jump to the start of the line during some commands
 
+packadd termdebug
+let termdebugger = "./startDebug.sh"
+
 """"""""" Clang Format
 map <C-K> :pyf /home/stuart/bin/vim-clang-format.py<cr>
 
