@@ -47,7 +47,30 @@ set wrap																															" Line wrapping
 set nostartofline																											" Don't automatically jump to the start of the line during some commands
 
 packadd termdebug
-let termdebugger = "./startDebug.sh"
+let termdebugger = "startDebug.sh"
+
+"map <C-D> :set splitright<CR> :90 vsplit gdb.txt<CR>:set autoread<CR>:au CursorHold * checktime<CR> :set norelativenumber<CR> <C-W>h :Termdebug<CR> <C-W>j <C-W>j :bd! a?<CR> <C-W>k b main <CR> c <CR> set logging redirect on<CR>set logging on<CR><C-w><C-r> <C-W>k :resize 55 <CR>
+map <C-D> :Termdebug<CR> <C-W>j <C-W>j :bd! a?<CR> <C-W>k b main <CR> c <CR> <C-w><C-r> <C-W>k :resize 55 <CR>
+
+execute "set <M-j>=\ej"
+execute "set <M-l>=\el"
+execute "set <M-r>=\er"
+execute "set <M-f>=\ef"
+execute "set <M-b>=\eb"
+execute "set <M-c>=\ec"
+execute "set <M-i>=\ei"
+execute "set <M-s>=\es"
+execute "set <M-x>=\ex"
+noremap <M-j> :call TermDebugSendCommand('s')<CR>
+noremap <M-l> :call TermDebugSendCommand('n')<CR>
+noremap <M-r> :call TermDebugSendCommand('monitor reset halt')<CR> :call TermDebugSendCommand('c')<CR>
+noremap <M-f> :call TermDebugSendCommand('monitor reset')<CR>:call TermDebugSendCommand('q')<CR> :call TermDebugSendCommand('y')<CR>
+noremap <M-b> :Break<CR>
+noremap <M-c> :Clear<CR>
+noremap <M-s> :Continue<CR>
+noremap <M-x> :Stop<CR>
+
+set timeoutlen=1
 
 """"""""" Clang Format
 map <C-K> :pyf /home/stuart/bin/vim-clang-format.py<cr>
