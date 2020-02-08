@@ -62,16 +62,48 @@ function configure_environment {
 		cat ~/.i3/config_base ~/.i3/config_work > ~/.i3/config
 	fi'  ~/.profile																																								# Switch between home and work profiles
 
+	sudo cp ~/Dotfiles/Misc/xorg.conf /etc/X11/
 	sudo chown stuart /run/media/stuart                                                            	# Change mount directory ownship for RW persmissions
 	wal -i ~/.wallpaper/old/boats_lake_scenery-wallpaper-2560x1440.jpg                             	# Use Wal to set a color scheme
 	mkdir -p ~/bin																																									# Make a directory for binaries
 	mkdir -p ~/.config/termite									                                        						# Make termite config directory
-	ln -sf ~/.termite	~/.config/termite/config																											# Link dotfiles stored config to termite's search location
+	ln -sf ~/.termite/config	~/.config/termite/config																											# Link dotfiles stored config to termite's search location
 	mkdir -p ~/.config/zathura									                                        						# Make zathura config directory
-	ln -sf ~/.zathurarc ~/.config/zathura/zathurarc							                            				# Link config file to ranger
+	ln -sf ~/.zathurarc ~/.config/zathura/zathurarc							                            				# Link config file to zathura
+	ln -sf ~/.ranger/rc.conf ~/.config/ranger/rc.conf						                            				# Link config file to ranger
 	sudo mkdir -p /run/media/stuart									                                    						# Manually make media mounting directory
 	ln -s /run/media/stuart ~/media									                                    						# Link manual and media directory shortcut
 	sudo cp ~/Dotfiles/Misc/sleeplock.service /etc/systemd/system/sleeplock.service	                # Lock screen on sleep service
+}
+
+function install_initial {
+
+	sudo pacman -Syu --noconfirm
+	sudo pacman -S git --noconfirm
+	git clone https://aur.archlinux.org/yay.git
+	cd yay
+	makepkg -si --noconfirm
+	cd ..
+	rmdir -rf yay
+	install_package "xorg-server"							# To organise dotfiles
+	install_package "xorg-xinit"							# To organise dotfiles
+	install_package "i3-gaps"							# To organise dotfiles
+	install_package "i3status"							# To organise dotfiles
+	install_package "termite"							# To organise dotfiles
+	install_package "dmenu"							# To organise dotfiles
+	install_package "vim"							# To organise dotfiles
+	install_package "vi"							# To organise dotfiles
+	install_package "dotfiles"							# To organise dotfiles
+	git clone https://github.com/stuianna/Dotfiles.git
+	cd Dotfiles
+	git checkout newarch
+	cd ..
+	dotfiles -s
+}
+
+function install_inpiron {
+	install_package "wd719x-firmware"
+	install_package "aic94xx-firmware"
 }
 
 function enable_services {
@@ -111,13 +143,15 @@ function install_environment {
 	install_package "python-pywal"							# For setting colour schemes globally
 	install_package "ttf-font-awesome-4"							# Fonts for icons
 	install_package "ttf-font-awesome"							# Fonts for icons
+	install_package "ttf-inconsolata"							# Fonts for icons
+	install_package "ttf-indic-otf"							# Fonts for icons
 	install_package "nerd-fonts-complete"							# Fonts for icons
 	install_package "font-manager"							# Graphical font manager
 	install_package "bluez"							# Bluetooth library
 	install_package "bluez-utils"							# Bluetooth library utilites
 	install_package "galculator"							# GTK calculator
 	install_package "powerline"							# Powerline font server
-	install_package "powerline-fonts-git"							# Powerline fonts
+	install_package "powerline-fonts-git"							# Patched fonts
 	install_package "awesome-terminal-fonts"							# Terminal fonts
 	install_package "terminus-font"							# More fonts
 	install_package "viewnior"							# Image viewwer
@@ -129,6 +163,7 @@ function install_environment {
 	install_package "clipit"							# Clipboard manager
 	install_package "arandr"							# Graphical front end for xradr
 	install_package "arc-gtk-theme"				# Gtk themes use lxappearance to modify
+	install_package "compton"				# Compton
 	install_package "arc-icon-theme"				# Gtk icon use lxappearance to modify
 }
 
@@ -187,6 +222,7 @@ function install_utilities {
 	install_package "universal-ctags"							# Source code tag system for vim
 	install_package "cpulimit"							# Limit CPU usage for processes
 	install_package "kvantum-qt5"							# QT5 theme
+	install_package "man"							# Manual pages
 
 }
 
@@ -320,12 +356,14 @@ function install_wine {
 	install_package "lib32-openal"							# Sound for wine
 }
 
-#install_audio
-#install_environment
-#install_utilities
-#install_documents
+#install_initial
+install_audio
+install_environment
+install_utilities
+install_documents
 #configure_vim
 configure_environment
-#enable_services
+enable_services
+
 cleanup
 
