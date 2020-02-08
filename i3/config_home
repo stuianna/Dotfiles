@@ -23,3 +23,6 @@ exec --no-startup-id vocabBuilder-cli ~/Dropbox/words/current.csv -q 5 -t 15
 for_window[instance="term10"] floating enable move to position 40 40 
 for_window[instance="term10"] resize set 680 510
 for_window[instance="term10"] move container to workspace 10
+
+exec --no-startup-id feh --bg-fill ~/.wallpaper/camino_cross_dark.jpg
+

@@ -124,6 +124,7 @@ function install_environment {
 	install_package "network-manager-applet"							# Network manager taskbar
 	install_package "networkmanager-openvpn"							# Network manage openvpn stuff
 	install_package "lightdm"							# Login screen
+	install_package "lightdm-gtk-greeter"							# Login screen
 	install_package "dolphin"							# Graphical file manager
 	install_package "clipit"							# Clipboard manager
 	install_package "arandr"							# Graphical front end for xradr
