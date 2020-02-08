@@ -85,7 +85,7 @@ function install_initial {
 		cd yay
 		makepkg -si --noconfirm
 		cd ../
-		rmdir -rf yay
+		rm -rf yay
 	fi
 	install_package "xorg-server"							# To organise dotfiles
 	install_package "xorg-xinit"							# To organise dotfiles
@@ -395,9 +395,9 @@ if [ "$1" == "initial" ]; then
 	USER_PASS=$(dialog --stdout --passwordbox "Enter user password" 0 0) || exit 1 : ${USER_PASS:?"User password cannot be empty"}
 	ROOT_PASS=$(dialog --stdout --passwordbox "Enter root password" 0 0) || exit 1 : ${ROOT_PASS:?"Root password cannot be empty"}
 	pacstrap /mnt base linux linux-firmware networkmanager amd-ucode intel-ucode base-devel grub efibootmgr vim wget git
-	genfstab -u /mnt >> /mnt/etc/fstab
+	genfstab -U /mnt >> /mnt/etc/fstab
 	echo "${HOST_NAME}" >> /mnt/etc/hostname
-	arch-chroot /mnt useradd -mU -g wheel "${USER_NAME}"
+	arch-chroot /mnt useradd -m -g wheel "${USER_NAME}"
 	echo "$USER_NAME:$USER_PASS" | chpasswd --root /mnt
 	echo "root:$ROOT_PASS" | chpasswd --root /mnt
 	ln -sf /mnt/usr/share/zoneinfo/${REGION}/${CITY} /mnt/etc/localtime
@@ -409,7 +409,7 @@ if [ "$1" == "initial" ]; then
 	echo "127.0.0.1    localhost" >> /mnt/etc/hosts
 	echo "::1    			 localhost" >> /mnt/etc/hosts
 	arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=efi --bootloader-id=GRUB
-	arch-chroot /mnt grub-mkconfig -o /mnt/boot/grub/grub.cfg
+	arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 	arch-chroot /mnt systemctl enable NetworkManager
 	sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /mnt/etc/sudoers
 	cp install.sh /mnt/home/${USER_NAME}/install.sh
@@ -417,7 +417,8 @@ if [ "$1" == "initial" ]; then
 	echo "Done, exit and reboot, login as new user and run install.sh 'setup'"
 	exit
 else
-	LOCATION=$(dialog --stdout --inputbox "Enter pc location (WORK/HOME)" 0 0) || exit 1 : ${PC_LOCATION:?"Location cannot be empty"}
+	echo "Enter location (WORK/HOME)"
+	read LOCATION
 fi
 
 install_initial
