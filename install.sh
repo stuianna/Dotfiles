@@ -1,7 +1,6 @@
 
 LOCATION=HOME
 
-
 set -uo pipefail
 trap 's=$?; echo "$@: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
@@ -72,19 +71,22 @@ function configure_environment {
 	ln -sf ~/.zathurarc ~/.config/zathura/zathurarc							                            				# Link config file to zathura
 	ln -sf ~/.ranger/rc.conf ~/.config/ranger/rc.conf						                            				# Link config file to ranger
 	sudo mkdir -p /run/media/stuart									                                    						# Manually make media mounting directory
-	ln -s /run/media/stuart ~/media									                                    						# Link manual and media directory shortcut
+	ln -sf /run/media/stuart ~/media									                                    						# Link manual and media directory shortcut
 	sudo cp ~/Dotfiles/Misc/sleeplock.service /etc/systemd/system/sleeplock.service	                # Lock screen on sleep service
 }
 
 function install_initial {
 
 	sudo pacman -Syu --noconfirm
-	sudo pacman -S git --noconfirm
-	git clone https://aur.archlinux.org/yay.git
-	cd yay
-	makepkg -si --noconfirm
-	cd ..
-	rmdir -rf yay
+	if pacman -Qs yay > /dev/null; then 
+		:
+	else
+		git clone https://aur.archlinux.org/yay.git
+		cd yay
+		makepkg -si --noconfirm
+		cd ../
+		rmdir -rf yay
+	fi
 	install_package "xorg-server"							# To organise dotfiles
 	install_package "xorg-xinit"							# To organise dotfiles
 	install_package "i3-gaps"							# To organise dotfiles
@@ -94,11 +96,17 @@ function install_initial {
 	install_package "vim"							# To organise dotfiles
 	install_package "vi"							# To organise dotfiles
 	install_package "dotfiles"							# To organise dotfiles
-	git clone https://github.com/stuianna/Dotfiles.git
-	cd Dotfiles
-	git checkout newarch
-	cd ..
-	dotfiles -s
+	install_package "dialog"							# Get user input in terminal
+
+	if ls ~/Dotfiles 2> /dev/null; then
+		:
+	else
+		git clone https://github.com/stuianna/Dotfiles.git
+		cd Dotfiles
+		git checkout newarch
+		cd ../
+		dotfiles -s
+	fi
 }
 
 function install_inpiron {
@@ -165,6 +173,7 @@ function install_environment {
 	install_package "arc-gtk-theme"				# Gtk themes use lxappearance to modify
 	install_package "compton"				# Compton
 	install_package "arc-icon-theme"				# Gtk icon use lxappearance to modify
+	install_package "i3lock"				# Gtk icon use lxappearance to modify
 }
 
 function install_utilities {
@@ -356,14 +365,68 @@ function install_wine {
 	install_package "lib32-openal"							# Sound for wine
 }
 
-#install_initial
+HOST_NAME=''
+USER_NAME=''
+USER_PASS=''
+ROOT_PASS=''
+PC_LOCATION=''
+REGION=''
+CITY=''
+DEVICE=''
+
+if [ $# == 0 ]; then
+	echo "Valid argments 'initial'"
+	echo "Valid argments 'setup'"
+	exit
+else
+	:
+fi
+
+if [ "$1" == "initial" ]; then
+	echo "Before running, disks should be formatted and mounted correctly ( to /mnt.. ). Mirrors should be selected from /etc/pacman.d/mirrorlist"
+	echo "OK? (y/n)"
+	read -s reply
+	[[ "$reply" == "y" ]] || (echo "Exiting"; exit;)
+	HOST_NAME=$(dialog --stdout --inputbox "Enter hostname" 0 0) || exit 1 : ${HOST_NAME:?"Hostname cannot be empty"}
+	USER_NAME=$(dialog --stdout --inputbox "Enter username" 0 0) || exit 1 : ${USER_NAME:?"Username cannot be empty"}
+	PC_LOCATION=$(dialog --stdout --inputbox "Enter pc location (WORK/HOME)" 0 0) || exit 1 : ${PC_LOCATION:?"Location cannot be empty"}
+	REGION=$(dialog --stdout --inputbox "Enter region (Europe/Australia)" 0 0) || exit 1 : ${REGION:?"Region cannot be empty"}
+	CITY=$(dialog --stdout --inputbox "Enter city (Riga/Sydney)" 0 0) || exit 1 : ${CITY:?"City cannot be empty"}
+	USER_PASS=$(dialog --stdout --passwordbox "Enter user password" 0 0) || exit 1 : ${USER_PASS:?"User password cannot be empty"}
+	ROOT_PASS=$(dialog --stdout --passwordbox "Enter root password" 0 0) || exit 1 : ${ROOT_PASS:?"Root password cannot be empty"}
+	pacstrap /mnt base linux linux-firmware networkmanager amd-ucode intel-ucode base-devel grub efibootmgr vim wget git
+	genfstab -u /mnt >> /mnt/etc/fstab
+	echo "${HOST_NAME}" >> /mnt/etc/hostname
+	arch-chroot /mnt useradd -mU -g wheel "${USER_NAME}"
+	echo "$USER_NAME:$USER_PASS" | chpasswd --root /mnt
+	echo "root:$ROOT_PASS" | chpasswd --root /mnt
+	ln -sf /mnt/usr/share/zoneinfo/${REGION}/${CITY} /mnt/etc/localtime
+	arch-chroot /mnt hwclock --systohc
+	sed -i "s/#en_AU.UTF-8 UTF-8/en_AU.UTF-8 UTF-8/" /mnt/etc/locale.gen
+	sed -i "s/#lv_LV.UTF-8 UTF-8/lv_LV.UTF-8 UTF-8/" /mnt/etc/locale.gen
+	arch-chroot /mnt locale-gen
+	echo "LANG=en_AU.UTF-8" > /mnt/etc/locale.conf
+	echo "127.0.0.1    localhost" >> /mnt/etc/hosts
+	echo "::1    			 localhost" >> /mnt/etc/hosts
+	arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=efi --bootloader-id=GRUB
+	arch-chroot /mnt grub-mkconfig -o /mnt/boot/grub/grub.cfg
+	arch-chroot /mnt systemctl enable NetworkManager
+	sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /mnt/etc/sudoers
+	cp install.sh /mnt/home/${USER_NAME}/install.sh
+	chmod +x /mnt/home/${USER_NAME}/install.sh
+	echo "Done, exit and reboot, login as new user and run install.sh 'setup'"
+	exit
+else
+	LOCATION=$(dialog --stdout --inputbox "Enter pc location (WORK/HOME)" 0 0) || exit 1 : ${PC_LOCATION:?"Location cannot be empty"}
+fi
+
+install_initial
 install_audio
 install_environment
 install_utilities
 install_documents
-#configure_vim
-configure_environment
 enable_services
-
+configure_environment
+configure_vim
 cleanup
 

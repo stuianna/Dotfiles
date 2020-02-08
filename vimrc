@@ -219,7 +219,7 @@ augroup QuickfixStatus
 augroup END
 :noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
 
-let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+"let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
 :command -nargs=* Make AsyncRun make 
 
