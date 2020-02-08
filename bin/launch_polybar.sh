@@ -1,5 +1,7 @@
 pkill polybar
 
+echo $LOCATION
+
 if [ "$LOCATION" == "HOME" ]
 then
 	if type "xrandr"; then

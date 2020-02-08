@@ -9,19 +9,22 @@ Plugin 'Valloric/YouCompleteMe'																				" Code completion engine.
 Plugin 'scrooloose/nerdtree'																					" Vim file browser
 Plugin 'jistr/vim-nerdtree-tabs'																			" Better tab handling for nerd-tree
 Plugin 'Xuyuanp/nerdtree-git-plugin'																	" Show git status in nerdtree
+Plugin 'jistr/vim-nerdtree-tabs'																			" Better tab handling for nerd-tree
 Plugin 'vim-airline/vim-airline'																			" Status line and tag line
+Plugin 'ryanoasis/vim-webdevicons'																		" Icons for vim
 Plugin 'scrooloose/nerdcommenter'																			" Commenting plugin
 Plugin 'majutsushi/tagbar'																						" Tagbar
 Plugin 'tpope/vim-fugitive'																						" Git wrapper for git inside of vim
 Plugin 'airblade/vim-gitgutter'																				" Show git status in numbers line
 Plugin 'ludovicchabant/vim-gutentags'																	" Use tags to zip through source files.
-Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf'																									" Fuzzy search plugin
 Plugin 'junegunn/fzf.vim'
 Plugin 'skywind3000/asyncrun.vim'																			" Background task handling
 Plugin 'vim-syntastic/syntastic'																			" Background task handling
 Plugin 'iamcco/markdown-preview.nvim'
 call vundle#end()   
 
+set encoding=utf8
 
 
 """"""""""	General Vim Settings	
@@ -191,6 +194,9 @@ let g:gutentags_exclude_project_root = ['usr/local','/home/stuart','/home/stuart
 
 """"""""""	Plugin 'Tagbar' Settings
 nmap <F8> :TagbarToggle<CR>
+
+""""""""""	Plugin 'Airline' Settings
+let g:airline_powerline_fonts = 1
 
 """""""""" 	Plugin 'You Complete Me' Settings
 "let g:ycm_confirm_extra_conf = 0

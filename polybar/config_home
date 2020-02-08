@@ -182,7 +182,7 @@ label =   %gb_used%
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = wlp1s0
 interval = 2.0
 unknown-as-up = true
 format-connected = <label-connected>
