@@ -5,7 +5,7 @@ set rtp+=~/.vim/bundle/Vundle.vim																			" set the runtime path to in
 call vundle#begin()
 Plugin 'LaTeX-Box-Team/LaTeX-Box'																			" For latex compile
 Plugin 'xuhdev/vim-latex-live-preview'																" For latex live preview
-"Plugin 'Valloric/YouCompleteMe'																				" Code completion engine.
+Plugin 'Valloric/YouCompleteMe'																				" Code completion engine.
 Plugin 'scrooloose/nerdtree'																					" Vim file browser
 Plugin 'jistr/vim-nerdtree-tabs'																			" Better tab handling for nerd-tree
 Plugin 'Xuyuanp/nerdtree-git-plugin'																	" Show git status in nerdtree
@@ -18,6 +18,7 @@ Plugin 'ludovicchabant/vim-gutentags'																	" Use tags to zip through 
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'skywind3000/asyncrun.vim'																			" Background task handling
+Plugin 'vim-syntastic/syntastic'																			" Background task handling
 call vundle#end()   
 
 
@@ -46,31 +47,6 @@ set si
 set wrap																															" Line wrapping
 set nostartofline																											" Don't automatically jump to the start of the line during some commands
 
-packadd termdebug
-let termdebugger = "startDebug.sh"
-
-"map <C-D> :set splitright<CR> :90 vsplit gdb.txt<CR>:set autoread<CR>:au CursorHold * checktime<CR> :set norelativenumber<CR> <C-W>h :Termdebug<CR> <C-W>j <C-W>j :bd! a?<CR> <C-W>k b main <CR> c <CR> set logging redirect on<CR>set logging on<CR><C-w><C-r> <C-W>k :resize 55 <CR>
-map <C-D> :Termdebug<CR> <C-W>j <C-W>j :bd! a?<CR> <C-W>k b main <CR> c <CR> <C-w><C-r> <C-W>k :resize 55 <CR>
-
-execute "set <M-j>=\ej"
-execute "set <M-l>=\el"
-execute "set <M-r>=\er"
-execute "set <M-f>=\ef"
-execute "set <M-b>=\eb"
-execute "set <M-c>=\ec"
-execute "set <M-i>=\ei"
-execute "set <M-s>=\es"
-execute "set <M-x>=\ex"
-noremap <M-j> :call TermDebugSendCommand('s')<CR>
-noremap <M-l> :call TermDebugSendCommand('n')<CR>
-noremap <M-r> :call TermDebugSendCommand('monitor reset halt')<CR> :call TermDebugSendCommand('c')<CR>
-noremap <M-f> :call TermDebugSendCommand('monitor reset')<CR>:call TermDebugSendCommand('q')<CR> :call TermDebugSendCommand('y')<CR>
-noremap <M-b> :Break<CR>
-noremap <M-c> :Clear<CR>
-noremap <M-s> :Continue<CR>
-noremap <M-x> :Stop<CR>
-
-set timeoutlen=1
 
 """"""""" Clang Format
 map <C-K> :pyf /home/stuart/bin/vim-clang-format.py<cr>
@@ -150,6 +126,52 @@ function! s:CloseBracket()
 endfunction
 inoremap <expr> {<Enter> <SID>CloseBracket()
 
+""""""""""	Vim Debug Settings
+
+packadd termdebug
+let termdebugger = "startDebug.sh"
+
+function! ToggleDebugMode()
+	if !exists('b:debug')
+		let b:debug=1
+		noremap <Space>j :call TermDebugSendCommand('s')<CR> 
+		noremap <Space>f :call TermDebugSendCommand('monitor reset')<CR>:call TermDebugSendCommand('q')<CR> :call TermDebugSendCommand('y')<CR> :noremap K gt <CR> :cal ToggleDebugMode()<CR>
+		noremap <Space>l :call TermDebugSendCommand('n')<CR>
+		noremap <Space>r :call TermDebugSendCommand('monitor reset halt')<CR> :call TermDebugSendCommand('c')<CR>
+		noremap <Space>b :Break<CR>
+		noremap <Space>c :Clear<CR>
+		noremap <Space>s :Continue<CR>
+		noremap <Space>x :Stop<CR>
+	else
+		unlet b:debug
+		noumap <Space>j
+		noumap <Space>f
+		noumap <Space>l
+		noumap <Space>r
+		noumap <Space>b
+		noumap <Space>c
+		noumap <Space>s
+		noumap <Space>x
+	endif
+	return ""
+endfunction
+
+
+map <C-D> :Termdebug<CR> <C-W>j <C-W>j :bd! a?<CR> <C-W>k b main <CR> c <CR> <C-w><C-r> <C-W>k :resize 55 <CR> :call ToggleDebugMode() <CR>
+
+""""""""""	Plugin 'Vim - Syntastic' Settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_w = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_cpp_checkers = ['clang_tidy']
+let g:syntastic_cpp_clang_tidy_post_args = ""
+
 """"""""""	Plugin 'FZF' Settings
 
 " RIPGREP preview window
@@ -158,11 +180,18 @@ command! -bang -nargs=* Rg
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
+""""""""""	Plugin 'Gutentag' Settings
+let g:gutentags_exclude_project_root = ['usr/local','~/','~/Dotfiles']
+
 """"""""""	Plugin 'Tagbar' Settings
 nmap <F8> :TagbarToggle<CR>
 
 """""""""" 	Plugin 'You Complete Me' Settings
-let g:ycm_confirm_extra_conf = 0
+"let g:ycm_confirm_extra_conf = 0
+let g:ycm_use_clangd=0
+let g:ycm_auto_trigger = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_global_ycm_extra_conf = "/home/stuart/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
 set hidden																														" Hide the preiview window buffer when exiting insert mode.
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif 							" Automatically cose the popup window when finished editing.
 
