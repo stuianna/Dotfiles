@@ -181,7 +181,7 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview(), <bang>0)
 
 """"""""""	Plugin 'Gutentag' Settings
-let g:gutentags_exclude_project_root = ['usr/local','~/','~/Dotfiles']
+let g:gutentags_exclude_project_root = ['usr/local','/home/stuart','/home/stuart/Dotfiles']
 
 """"""""""	Plugin 'Tagbar' Settings
 nmap <F8> :TagbarToggle<CR>
@@ -208,7 +208,7 @@ let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status
 :command -nargs=* Make AsyncRun make 
 
 autocmd User AsyncRunStart :copen
-autocmd User AsyncRunStop :call ClosePreviewOnSuccess()
+"autocmd User AsyncRunStop :call ClosePreviewOnSuccess()
 
 func! ClosePreviewOnSuccess()
 	if g:asyncrun_code == 0
