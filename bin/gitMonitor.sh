@@ -3,8 +3,18 @@
 # Check the correct number of arguments
 if [ $# != 2 ]
 then
-    echo "Correct useage is ./gitMonitor.sh path/to/directory filename"
-    exit 0
+	echo "Correct useage is ./gitMonitor.sh path/to/directory filename [update]"
+	exit 0
+fi
+
+# Update the repository
+if [ "$2" == "update" ]
+then
+	cd $1
+	git stash
+	git fetch && git pull
+	git stash pop
+	exit 0
 fi
 
 # Start up the monitor

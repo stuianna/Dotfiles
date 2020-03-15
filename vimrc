@@ -19,6 +19,7 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'skywind3000/asyncrun.vim'																			" Background task handling
 Plugin 'vim-syntastic/syntastic'																			" Background task handling
+Plugin 'iamcco/markdown-preview.nvim'
 call vundle#end()   
 
 
@@ -159,6 +160,10 @@ endfunction
 
 map <C-D> :Termdebug<CR> <C-W>j <C-W>j :bd! a?<CR> <C-W>k b main <CR> c <CR> <C-w><C-r> <C-W>k :resize 55 <CR> :call ToggleDebugMode() <CR>
 
+""""""""""	Plugin 'Markdown Preview' Settings
+let g:mkdp_browser = 'brave'
+
+
 """"""""""	Plugin 'Vim - Syntastic' Settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -169,6 +174,7 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_w = 1
 let g:syntastic_loc_list_height = 5
+let g:syntastic_enable_highlighting=0
 let g:syntastic_cpp_checkers = ['clang_tidy']
 let g:syntastic_cpp_clang_tidy_post_args = ""
 
@@ -188,6 +194,10 @@ nmap <F8> :TagbarToggle<CR>
 
 """""""""" 	Plugin 'You Complete Me' Settings
 "let g:ycm_confirm_extra_conf = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_always_populate_location_list = 1
+let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_use_clangd=0
 let g:ycm_auto_trigger = 1
 let g:ycm_collect_identifiers_from_tags_files = 1

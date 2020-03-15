@@ -1,10 +1,12 @@
 
 exec --no-startup-id dropbox start                                                                      # Start Dropbox (Taskbar)
 exec --no-startup-id sleep 2.5 && docked
-exec --no-startup-id /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki viss.ctd     # Auto-commits for wiki folder
+exec --no-startup-id sleep 5 && /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki viss.ctd     # Auto-commits for wiki folder
 exec --no-startup-id "brave --app=https://www.protonmail.com/login"                                     # Email in workspace (defined below)
 #exec --no-startup-id "brave --incognito https://calendar.google.com"                 # Calendar in workspace (defined below)
-exec --no-startup-id xautolock -time 5 -locker "/usr/bin/i3lock -c 000000"                              # Auto screen lock
+exec --no-startup-id xautolock -time 5 -locker "/usr/bin/i3lock -c 000000 -f -n && sleep 5 && /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki update"                              # Auto screen lock
+#Lock screen
+bindsym $mod+Shift+x exec --no-startup-id "/usr/bin/i3lock -c 000000 -f -n && sleep 5 && /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki update"
 
 #calandar 
 exec --no-startup-id urxvt -name cal -e calcurse 
