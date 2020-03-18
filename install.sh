@@ -21,6 +21,7 @@ function install_package {
 function cleanup {
 	if [ "$FAILED" != '' ]; then
 		echo "The following packages couldn't be installed: $FAILED"
+		echo "The following packages couldn't be installed: $FAILED" > failedInstallLog
 	else
 		:
 	fi
@@ -122,12 +123,15 @@ function enable_services {
 	sudo systemctl start sshd									                                        							# Start ssh
 	sudo systemctl enable sleeplock.service								                                					# Enable sleeplock
 	sudo systemctl enable lightdm.service																														# Login screen
+	sudo systemctl enable bluetooth.service																													# Bluetooth
+	sudo systemctl start bluetooth.service																													# Bluetooth
 }
 
 function configure_vim {
 	rm -rf ~/.vim																																									 	# Remove any exiting configuration
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim			           	# Clone Repository
 	vim +PluginInstall +qall                                                                       	# Install Vim plugins
+	python3 ~/.vim/bundle/YouCompleteMe/install.py
 }
 
 function install_audio {
@@ -173,7 +177,13 @@ function install_environment {
 	install_package "arc-gtk-theme"				# Gtk themes use lxappearance to modify
 	install_package "compton"				# Compton
 	install_package "arc-icon-theme"				# Gtk icon use lxappearance to modify
-	install_package "i3lock"				# Gtk icon use lxappearance to modify
+	install_package "i3lock"				# lock screen
+	install_package "breeze"				# qt5 theme
+	install_package "breeze-gtk"				# gtk theme
+	install_package "xfce4-power-manager"				# Power managemnet and taskbar
+	install_package "man"				# Linux manual pages
+	install_package "libreoffice"				# Document editing
+	install_package "gimp"				# image editing
 }
 
 function install_utilities {
@@ -232,6 +242,8 @@ function install_utilities {
 	install_package "cpulimit"							# Limit CPU usage for processes
 	install_package "kvantum-qt5"							# QT5 theme
 	install_package "man"							# Manual pages
+	install_package "os-prober"							# Detect other operating systems for grub
+	install_package "bear"							# Use with make to make compilation databases
 
 }
 
@@ -244,7 +256,7 @@ function install_maybe {
 function install_thinkpad {
 
 	install_package "tp_smapi-dkms"							# Kernal bus communication
-	install_package "tpapci-bat"							# Kernal bus communication (Battery)
+	install_package "tpacpi-batt"							# Kernal bus communication (Battery)
 	install_package "linux-intel-undervolt-tool"							# Undervolt tools
 	install_package "intel-undervolt"							# Undervolt tools
 
@@ -330,6 +342,10 @@ function install_32Bit {
 	install_package "lib32-libva-vdpau-driver"			# 
 	install_package "lib32-mesa-demos"			# 
 	install_package "lib32-mesa-vdpau"			# 
+	install_package "lib32-gst-plugins-base"			# 
+	install_package "lib32-gst-plugins-good"			# 
+
+	install_package "mpt123"			# 
 
 }
 
@@ -356,7 +372,8 @@ function install_dev {
 	install_package "graphviz"							# Packages for drawing graphs in Dot language (doxygen
 	install_package "cutecom"							# Serial terminal interface
 	install_package "valgrind"							# Check programs for memeory leaks
-	install_package "python-intexhex"							# Check programs for memeory leaks
+	install_package "python-intelhex"							# Check programs for memeory leaks
+	install_package "jlink"							# Programming interface Jlink Segger
 }
 
 function install_wine {

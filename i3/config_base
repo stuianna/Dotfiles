@@ -15,7 +15,7 @@ set $float_y 600
 exec --no-startup-id xset r rate 250 35
 
 ### Startup programs
-#exec --no-startup-id i3-msg 'workspace cherry; exec cherrytree'                                         # Launch Cherrytree on its own workspace
+exec --no-startup-id i3-msg 'workspace cherry; exec cherrytree'                                         # Launch Cherrytree on its own workspace
 exec --no-startup-id "unclutter -root -idle 1"                                                          # Hide mouse after one minute idle
 exec --no-startup-id nm-applet                                                                          # Network manager (Taskbar)
 exec --no-startup-id udiskie --tray --use-udisks2                                                       # Disk automount (Taskbar)
@@ -113,8 +113,10 @@ bindsym --release $mod+Shift+p exec --no-startup-id shutter --full
 
 #bindsym $mod+Shift+a [class=client.focused] floating enable; [class=client.focused] resize set 10 ppt 95ppt; [class=client.focused] move position center
 #
+# Find these with xProp, title = WM_NAME
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
+for_window [title="Network Connections"] floating enable resize set 600 750
 for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [class="Galculator"] floating enable border pixel 1
@@ -250,10 +252,10 @@ smart_gaps on
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 1 px or 1 ppt
+        bindsym j resize grow height 1 px or 1 ppt
+        bindsym k resize shrink height 1 px or 1 ppt
+        bindsym l resize grow width 1 px or 1 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"

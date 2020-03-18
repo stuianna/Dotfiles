@@ -5,26 +5,25 @@ MONS="$(xrandr -q | grep ' connected' | wc -l)"
 if [ $MONS == 3 ]
 then
     # Set the T450 Display
-    xrandr --output eDP1 --mode 1600x900 --pos 0x0 --rotate normal
+    xrandr --output eDP-1 --mode 1600x900 --pos 0x0 --rotate normal
     # Set the middle monitor display
-    xrandr --output DP2-3 --mode 1920x1080 --pos -1200x-1080 --rotate normal --primary
+    xrandr --output DP-2-3 --mode 1920x1080 --pos -1200x-1080 --rotate normal --primary
     # set the right monitor 
-    xrandr --output DP2-2 --mode 1920x1080 --right-of DP2-3 --rotate normal --primary
+    xrandr --output DP-2-2 --mode 1920x1080 --right-of DP-2-3 --rotate normal --primary
 
-    urxvt -name term10 &
-    i3-msg [workspace=cherry] move workspace to output eDP1 
-    i3-msg [workspace=email] move workspace to output eDP1 
-    i3-msg [workspace=calendar] move workspace to output eDP1 
-    i3-msg [workspace=1] move workspace to output DP2-2 
-    i3-msg [workspace=2] move workspace to output DP2-3 
-    i3-msg [workspace=3] move workspace to output DP2-2 
-    i3-msg [workspace=4] move workspace to output DP2-3 
-    i3-msg [workspace=5] move workspace to output DP2-2 
-    i3-msg [workspace=6] move workspace to output DP2-3 
-    i3-msg [workspace=7] move workspace to output DP2-2 
-    i3-msg [workspace=8] move workspace to output DP2-3 
-    i3-msg [workspace=9] move workspace to output DP2-2 
-    i3-msg [workspace=10] move workspace to output eDP1 
+    i3-msg [workspace=cherry] move workspace to output eDP-1 
+    i3-msg [workspace=email] move workspace to output eDP-1 
+    i3-msg [workspace=calendar] move workspace to output eDP-1 
+    i3-msg [workspace=1] move workspace to output DP-2-2 
+    i3-msg [workspace=2] move workspace to output DP-2-3 
+    i3-msg [workspace=3] move workspace to output DP-2-2 
+    i3-msg [workspace=4] move workspace to output DP-2-3 
+    i3-msg [workspace=5] move workspace to output DP-2-2 
+    i3-msg [workspace=6] move workspace to output DP-2-3 
+    i3-msg [workspace=7] move workspace to output DP-2-2 
+    i3-msg [workspace=8] move workspace to output DP-2-3 
+    i3-msg [workspace=9] move workspace to output DP-2-2 
+    i3-msg [workspace=10] move workspace to output DP-2-3 
     
 elif [ $MONS == 1 ]
 then
@@ -36,20 +35,20 @@ then
     #xrandr --output DP2-3 --off
 
     #Move all windows to the laptop screen
-    i3-msg [workspace=1] move workspace to output eDP1 
-    i3-msg [workspace=2] move workspace to output eDP1 
-    i3-msg [workspace=3] move workspace to output eDP1 
-    i3-msg [workspace=4] move workspace to output eDP1 
-    i3-msg [workspace=5] move workspace to output eDP1 
-    i3-msg [workspace=6] move workspace to output eDP1 
-    i3-msg [workspace=7] move workspace to output eDP1 
-    i3-msg [workspace=8] move workspace to output eDP1 
-    i3-msg [workspace=9] move workspace to output eDP1 
-    i3-msg [workspace=10] move workspace to output eDP1 
-    i3-msg [workspace=cherry] move workspace to output eDP1 
-    i3-msg [workspace=email] move workspace to output eDP1 
-    i3-msg [workspace=spotify] move workspace to output eDP1 
-    i3-msg [workspace=calendar] move workspace to output eDP1 
+    i3-msg [workspace=1] move workspace to output eDP-1 
+    i3-msg [workspace=2] move workspace to output eDP-1 
+    i3-msg [workspace=3] move workspace to output eDP-1 
+    i3-msg [workspace=4] move workspace to output eDP-1 
+    i3-msg [workspace=5] move workspace to output eDP-1 
+    i3-msg [workspace=6] move workspace to output eDP-1 
+    i3-msg [workspace=7] move workspace to output eDP-1 
+    i3-msg [workspace=8] move workspace to output eDP-1 
+    i3-msg [workspace=9] move workspace to output eDP-1 
+    i3-msg [workspace=10] move workspace to output eDP-1 
+    i3-msg [workspace=cherry] move workspace to output eDP-1 
+    i3-msg [workspace=email] move workspace to output eDP-1 
+    i3-msg [workspace=spotify] move workspace to output eDP-1 
+    i3-msg [workspace=calendar] move workspace to output eDP-1 
 fi
 
 #Update polybar

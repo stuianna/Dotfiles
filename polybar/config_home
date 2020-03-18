@@ -68,20 +68,19 @@ tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 modules-left = i3
-modules-center = spotify previous playpause next
-modules-right = cpu temperature memory 
+modules-center = 
+modules-right = cpu temperature memory filesystem
 override-redirect = false
 
 [module/filesystem]
 type = internal/fs
 mount-0 = /
-mount-1 = /home
-interval = 10
+interval = 30
 fixed-values = true
 spacing = 3
 format-mounted = <label-mounted>
 format-unmounted = <label-unmounted>
-label-mounted = %mountpoint%: %free%
+label-mounted = HDD: %free%
 label-unmounted = %mountpoint%: not mounted
 
 [module/i3]
@@ -158,7 +157,7 @@ format-underline = #1db954
 type = custom/script
 exec = ~/.bin/powerUsage.sh
 tail = true
-interval = 1
+interval = 2
 format-underline = #1db954
 
 [module/crypto]
@@ -170,19 +169,19 @@ format-underline = #1db954
 
 [module/cpu]
 type = internal/cpu
-interval = 1
+interval = 2
 format = <label>
 label =  %percentage:02%%
 
 [module/memory]
 type = internal/memory
-interval = 3
+interval = 2
 format = <label> 
 label =   %gb_used%
 
 [module/wlan]
 type = internal/network
-interface = wlp1s0
+interface = wlp3s0
 interval = 2.0
 unknown-as-up = true
 format-connected = <label-connected>
@@ -194,7 +193,7 @@ label-disconnected-foreground = #66ffffff
 
 [module/date]
 type = internal/date
-interval = 1.0
+interval = 9.0
 date = %Y-%m-%d%
 time = %H:%M
 date-alt = %A, %d %B %Y
@@ -208,7 +207,7 @@ type = internal/battery
 full-at = 98
 battery = BAT1
 adapter = AC
-poll-interval = 5
+poll-interval = 20 
 time-format = %H:%M
 format-charging =  <label-charging>
 format-discharging = <label-discharging>
@@ -240,7 +239,7 @@ type = internal/battery
 full-at = 98
 battery = BAT0
 adapter = AC
-poll-interval = 5
+poll-interval = 20
 time-format = %H:%M
 format-charging =  <label-charging>
 format-discharging =  <label-discharging>
@@ -269,9 +268,9 @@ animation-discharging-framerate = 500
 
 [module/temperature]
 type = internal/temperature
-interval = 1
+interval = 2
 thermal-zone = acpitz
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input
 base-temperature = 20
 warn-temperature = 70
 units = true

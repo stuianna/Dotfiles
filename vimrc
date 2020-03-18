@@ -1,4 +1,4 @@
-
+let g:pymode_python = 'python3'
 """"""""""	Plugins
 set rtp+=~/.vim/bundle/Vundle.vim																			" set the runtime path to include Vundle and initialize
 
@@ -9,7 +9,6 @@ Plugin 'Valloric/YouCompleteMe'																				" Code completion engine.
 Plugin 'scrooloose/nerdtree'																					" Vim file browser
 Plugin 'jistr/vim-nerdtree-tabs'																			" Better tab handling for nerd-tree
 Plugin 'Xuyuanp/nerdtree-git-plugin'																	" Show git status in nerdtree
-Plugin 'jistr/vim-nerdtree-tabs'																			" Better tab handling for nerd-tree
 Plugin 'vim-airline/vim-airline'																			" Status line and tag line
 Plugin 'ryanoasis/vim-webdevicons'																		" Icons for vim
 Plugin 'scrooloose/nerdcommenter'																			" Commenting plugin
@@ -53,7 +52,7 @@ set nostartofline																											" Don't automatically jump to the st
 
 
 """"""""" Clang Format
-map <C-K> :pyf /home/stuart/bin/vim-clang-format.py<cr>
+map <C-K> :py3f /home/stuart/.bin/clang-format.py<cr>
 
 """"""""""	General Vim snippits
 
@@ -201,7 +200,7 @@ let g:airline_powerline_fonts = 1
 """""""""" 	Plugin 'You Complete Me' Settings
 "let g:ycm_confirm_extra_conf = 0
 let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_show_diagnostics_ui = 1
 let g:ycm_always_populate_location_list = 1
 let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_use_clangd=0
@@ -233,6 +232,9 @@ func! ClosePreviewOnSuccess()
 endfunc
 
 """"""""""	Plugin 'Nerd Tree Tabs' Settings	
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:nerdtree_tabs_open_on_console_startup=1
 
 """"""""""	Latex Settings

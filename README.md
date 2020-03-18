@@ -1,3 +1,80 @@
+# Additions after install script
+
+
+# System Setup with Only Arch Linux (No dual boot, no encryption)
+
+
+# System Setup with Encryption
+
+# Additional Setup for Dual Boot
+
+These steps are not complete.
+```
+# Detect other operating systems
+sudo os-prober
+```
+
+
+## Multilib
+
+A few packages will fail as multilib isn't enabled, enable it and install them (this can be scripted into the install script)
+```
+/etc/pacman.conf
+# Uncomment these lines
+#[multilib]
+#Include = /etc/pacman.d/mirrorlist
+```
+
+## Battery Thresholds
+Edit `/etc/tlp.conf' and uncomment the following (to bo scripted)
+
+# Main / Internal battery (values in %)
+# Default: <none>
+
+START_CHARGE_THRESH_BAT0=75
+STOP_CHARGE_THRESH_BAT0=80
+
+# Ultrabay / Slice / Replaceable battery (values in %)
+# Default: <none>
+
+START_CHARGE_THRESH_BAT1=75
+STOP_CHARGE_THRESH_BAT1=80
+```
+
+## Lid Switch / Power settings
+
+Edit `/etc/systemd/logind.conf`
+```
+[Login]
+#NAutoVTs=6
+#ReserveVT=6
+#KillUserProcesses=no
+#KillOnlyUsers=
+#KillExcludeUsers=root
+#InhibitDelayMaxSec=5
+#HandlePowerKey=poweroff
+#HandleSuspendKey=suspend
+#HandleHibernateKey=hibernate
+HandleLidSwitch=suspend
+HandleLidSwitchExternalPower=suspend
+HandleLidSwitchDocked=suspend
+#PowerKeyIgnoreInhibited=no
+#SuspendKeyIgnoreInhibited=no
+#HibernateKeyIgnoreInhibited=no
+LidSwitchIgnoreInhibited=no
+#HoldoffTimeoutSec=30s
+#IdleAction=suspend
+#IdleActionSec=10min
+#RuntimeDirectorySize=10%
+#RemoveIPC=yes
+#InhibitorsMax=8192
+#SessionsMax=8192
+```
+
+
+
+
+
 
 # Arch Linux Install
 
