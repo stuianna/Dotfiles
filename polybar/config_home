@@ -162,8 +162,8 @@ format-underline = #1db954
 
 [module/crypto]
 type = custom/script
-exec = ~/.bin/crypto.py 
-tail = false
+exec = ~/.bin/crypto
+tail = true
 interval = 300
 format-underline = #1db954
 

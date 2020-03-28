@@ -1,4 +1,5 @@
 
+exec --no-startup-id CMCLogger
 exec --no-startup-id dropbox start                                                                      # Start Dropbox (Taskbar)
 exec --no-startup-id sleep 2.5 && docked
 exec --no-startup-id sleep 5 && /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki viss.ctd     # Auto-commits for wiki folder

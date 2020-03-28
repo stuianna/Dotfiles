@@ -20,7 +20,7 @@ Plugin 'junegunn/fzf'																									" Fuzzy search plugin
 Plugin 'junegunn/fzf.vim'
 Plugin 'skywind3000/asyncrun.vim'																			" Background task handling
 Plugin 'vim-syntastic/syntastic'																			" Background task handling
-Plugin 'iamcco/markdown-preview.nvim'
+Plugin 'iamcco/markdown-preview.nvim',  { 'do': { -> mkdp#util#install() } }
 call vundle#end()   
 
 set encoding=utf8

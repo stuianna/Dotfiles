@@ -24,6 +24,16 @@ then
     i3-msg [workspace=8] move workspace to output DP-2-3 
     i3-msg [workspace=9] move workspace to output DP-2-2 
     i3-msg [workspace=10] move workspace to output DP-2-3 
+
+elif [ $MONS == 2 ]
+then
+    xrandr --output DP-2 --mode 1920x1080 --rotate normal --right-of eDP-1
+    # set the right monitor 
+
+    # turn off the monitors
+    #xrandr --output DP2-2 --off
+    #xrandr --output DP2-3 --off
+    #Move all windows to the laptop screen
     
 elif [ $MONS == 1 ]
 then
@@ -52,7 +62,7 @@ then
 fi
 
 #Update polybar
-sleep 0.3
+sleep 0.5
 launch_polybar.sh
 
 #set background

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+queryArray=("BTC" "LTC" "ETH")
+
+TEMPFILE="/tmp/tmp.CMCLOGGER"
+source $TEMPFILE 2> /dev/null
+
+function getNextSymbol {
+	position=0
+	for symbol in ${queryArray[@]}; do
+		((position++))
+		if [[ "$symbol" == "$LAST_SYMBOL" ]]; then
+			size=${#queryArray[@]}
+			position=$((position%size))
+			CURRENT_SYMBOL=${queryArray[$position]}
+			break
+		fi
+		CURRENT_SYMBOL=${queryArray[0]}
+	done
+	echo "LAST_SYMBOL=$CURRENT_SYMBOL" > $TEMPFILE
+}
+
+getNextSymbol
+CMCLogger -q $CURRENT_SYMBOL
+
+
+
+
+

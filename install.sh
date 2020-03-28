@@ -43,6 +43,7 @@ function configure_environment {
 	add_config "export LOCATION='$LOCATION'" ~/.profile																								# Set device location
 	add_config 'export PATH=$PATH:~/Dotfiles/bin' ~/.profile						                   							# Add repo binary to path
 	add_config 'export QT_QPA_PLATFORMTHEME=qt5ct' ~/.profile						                   							# Set qt theme 
+	add_config 'export PYTHONPATH=$PYTHONPATH:/home/$USER/Dropbox/pythonLib' ~/.profile						     # Add custom python library path to sys.path
 	add_config 'PATH=$PATH:~/bin' ~/.bashrc						                                        				# add ~/bin to path
 	add_config 'source /usr/share/fzf/key-bindings.bash' ~/.bashrc																			# Fuzzy finder hotkeys
 	add_config 'source /usr/share/fzf/completion.bash' ~/.bashrc																				# Fuzzy finder hotkeys
@@ -303,6 +304,7 @@ function install_python {
 	install_package "python-scipy"							# Python for scientific computing
 	install_package "python-bottle"							# Python web microframework
 	install_package "python-pycrypto"							# Python kit for encrypting strings
+	install_package "python-virtualenv"							# Python virtual environments
 }
 
 function install_optimisation {
