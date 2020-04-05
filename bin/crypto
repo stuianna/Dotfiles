@@ -20,7 +20,18 @@ function getNextSymbol {
 	echo "LAST_SYMBOL=$CURRENT_SYMBOL" > $TEMPFILE
 }
 
+function checkStatus {
+	jsonStatus=$(CMCLogger -js 2> /dev/null)
+	lastCall=$(echo "$jsonStatus" | jq -r '.last_call')
+
+	if (( $lastCall > 10 )); then
+		echo ''
+		exit
+	fi
+}
+
 getNextSymbol
+checkStatus
 CMCLogger -q $CURRENT_SYMBOL
 
 

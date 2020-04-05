@@ -75,6 +75,7 @@ function configure_environment {
 	sudo mkdir -p /run/media/stuart									                                    						# Manually make media mounting directory
 	ln -sf /run/media/stuart ~/media									                                    						# Link manual and media directory shortcut
 	sudo cp ~/Dotfiles/Misc/sleeplock.service /etc/systemd/system/sleeplock.service	                # Lock screen on sleep service
+	sudo chown stuart /sys/class/backlight/intel_backlight/brightness																# Allow user to change backlight brightness
 }
 
 function install_initial {
@@ -185,6 +186,8 @@ function install_environment {
 	install_package "man"				# Linux manual pages
 	install_package "libreoffice"				# Document editing
 	install_package "gimp"				# image editing
+	install_package "gedit"				# text editor
+	install_package "alsa-utils"				# Tools for audio control
 }
 
 function install_utilities {
