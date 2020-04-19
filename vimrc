@@ -20,6 +20,11 @@ Plugin 'junegunn/fzf'																									" Fuzzy search plugin
 Plugin 'junegunn/fzf.vim'
 Plugin 'skywind3000/asyncrun.vim'																			" Background task handling
 Plugin 'vim-syntastic/syntastic'																			" Background task handling
+Plugin 'michaeljsmith/vim-indent-object'														  " Indent text object selection
+Plugin 'tpope/vim-surround'														  							" Suround text editing
+Plugin 'tpope/vim-repeat'														  								" Repeat plugin based command
+Plugin 'Vimjas/vim-python-pep8-indent'														 		" Python indentation compliant with PEP8
+
 Plugin 'iamcco/markdown-preview.nvim',  { 'do': { -> mkdp#util#install() } }
 call vundle#end()   
 
@@ -27,6 +32,7 @@ set encoding=utf8
 
 
 """"""""""	General Vim Settings	
+set number
 set relativenumber																										" Set relative line numbers
 colo desert																														" Colorscheme
 set nocompatible
