@@ -42,6 +42,7 @@ function configure_environment {
 	add_config "export BROWSER=/usr/bin/brave" ~/.profile																							# Set browser
 	add_config "export LOCATION='$LOCATION'" ~/.profile																								# Set device location
 	add_config 'export PATH=$PATH:~/Dotfiles/bin' ~/.profile						                   							# Add repo binary to path
+	add_config 'export PATH=$PATH:~/.local/bin' ~/.profile						                   							# Path where python local scripts are installed
 	add_config 'export QT_QPA_PLATFORMTHEME=qt5ct' ~/.profile						                   							# Set qt theme 
 	add_config 'export PYTHONPATH=$PYTHONPATH:/home/$USER/Dropbox/pythonLib' ~/.profile						     # Add custom python library path to sys.path
 	add_config 'PATH=$PATH:~/bin' ~/.bashrc						                                        				# add ~/bin to path
@@ -76,6 +77,7 @@ function configure_environment {
 	ln -sf /run/media/stuart ~/media									                                    						# Link manual and media directory shortcut
 	sudo cp ~/Dotfiles/Misc/sleeplock.service /etc/systemd/system/sleeplock.service	                # Lock screen on sleep service
 	sudo chown stuart /sys/class/backlight/intel_backlight/brightness																# Allow user to change backlight brightness
+	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 }
 
 function install_initial {
@@ -248,6 +250,9 @@ function install_utilities {
 	install_package "man"							# Manual pages
 	install_package "os-prober"							# Detect other operating systems for grub
 	install_package "bear"							# Use with make to make compilation databases
+	install_package "tree"							# Command line tool for graphical directory structures
+	install_package "diff-so-fancy"							# Better git-diff output
+
 
 }
 
