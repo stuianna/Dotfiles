@@ -1,34 +1,34 @@
 let g:pymode_python = 'python3'
 """"""""""	Plugins
-set rtp+=~/.vim/bundle/Vundle.vim																			" set the runtime path to include Vundle and initialize
 
-call vundle#begin()
-Plugin 'LaTeX-Box-Team/LaTeX-Box'																			" For latex compile
-Plugin 'xuhdev/vim-latex-live-preview'																" For latex live preview
-Plugin 'Valloric/YouCompleteMe'																				" Code completion engine.
-Plugin 'scrooloose/nerdtree'																					" Vim file browser
-Plugin 'jistr/vim-nerdtree-tabs'																			" Better tab handling for nerd-tree
-Plugin 'Xuyuanp/nerdtree-git-plugin'																	" Show git status in nerdtree
-Plugin 'vim-airline/vim-airline'																			" Status line and tag line
-Plugin 'ryanoasis/vim-webdevicons'																		" Icons for vim
-Plugin 'scrooloose/nerdcommenter'																			" Commenting plugin
-Plugin 'majutsushi/tagbar'																						" Tagbar
-Plugin 'tpope/vim-fugitive'																						" Git wrapper for git inside of vim
-Plugin 'airblade/vim-gitgutter'																				" Show git status in numbers line
-Plugin 'ludovicchabant/vim-gutentags'																	" Use tags to zip through source files.
-Plugin 'junegunn/fzf'																									" Fuzzy search plugin
-Plugin 'junegunn/fzf.vim'
-Plugin 'skywind3000/asyncrun.vim'																			" Background task handling
-Plugin 'vim-syntastic/syntastic'																			" Background task handling
-Plugin 'michaeljsmith/vim-indent-object'														  " Indent text object selection
-Plugin 'tpope/vim-surround'														  							" Suround text editing
-Plugin 'tpope/vim-repeat'														  								" Repeat plugin based command
-Plugin 'Vimjas/vim-python-pep8-indent'														 		" Python indentation compliant with PEP8
+call plug#begin('~/.vim/plugger')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'LaTeX-Box-Team/LaTeX-Box'																			" For latex compile
+Plug 'xuhdev/vim-latex-live-preview'																" For latex live preview
+Plug 'scrooloose/nerdtree'																					" Vim file browser
+Plug 'jistr/vim-nerdtree-tabs'																			" Better tab handling for nerd-tree
+Plug 'Xuyuanp/nerdtree-git-plugin'																	" Show git status in nerdtree
+Plug 'vim-airline/vim-airline'																			" Status line and tag line
+Plug 'ryanoasis/vim-webdevicons'																		" Icons for vim
+Plug 'scrooloose/nerdcommenter'																			" Commenting plugin
+Plug 'majutsushi/tagbar'																						" Tagbar
+Plug 'tpope/vim-fugitive'																						" Git wrapper for git inside of vim
+Plug 'airblade/vim-gitgutter'																				" Show git status in numbers line
+Plug 'ludovicchabant/vim-gutentags'																	" Use tags to zip through source files.
+Plug 'junegunn/fzf'																									" Fuzzy search plugin
+Plug 'junegunn/fzf.vim'
+Plug 'skywind3000/asyncrun.vim'																			" Background task handling
+Plug 'vim-syntastic/syntastic'																			" Background task handling
+Plug 'michaeljsmith/vim-indent-object'														  " Indent text object selection
+Plug 'tpope/vim-surround'														  							" Suround text editing
+Plug 'tpope/vim-repeat'														  								" Repeat plugin based command
+Plug 'Vimjas/vim-python-pep8-indent'														 		" Python indentation compliant with PEP8
 
-Plugin 'iamcco/markdown-preview.nvim',  { 'do': { -> mkdp#util#install() } }
-call vundle#end()   
+Plug 'iamcco/markdown-preview.nvim',  { 'do': { -> mkdp#util#install() } }
+call plug#end()   
 
 set encoding=utf8
+
 
 
 """"""""""	General Vim Settings	
@@ -55,7 +55,135 @@ set ai																																" Autoindent uses the same indent as the p
 set si
 set wrap																															" Line wrapping
 set nostartofline																											" Don't automatically jump to the start of the line during some commands
+highligh clear SignColumn
 
+" Fix sign priorities
+let g:gitgutter_sign_priority =  8
+let g:syntastic_sign_priority = 19
+
+
+""""""""" COC
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=1
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 """"""""" Clang Format
 map <C-K> :py3f /home/stuart/.bin/clang-format.py<cr>
@@ -180,9 +308,9 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_w = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_enable_highlighting=0
+let g:syntastic_check_on_wq = 0
+"let g:syntastic_loc_list_height = 5
+let g:syntastic_enable_highlighting=1
 let g:syntastic_cpp_checkers = ['clang_tidy']
 let g:syntastic_cpp_clang_tidy_post_args = ""
 
@@ -194,8 +322,12 @@ command! -bang -nargs=* Rg
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
+
+nnoremap <C-F> :Files <CR>
+
 """"""""""	Plugin 'Gutentag' Settings
 let g:gutentags_exclude_project_root = ['usr/local','/home/stuart','/home/stuart/Dotfiles']
+let g:gutentags_ctags_extra_args = ['--fields=+l']
 
 """"""""""	Plugin 'Tagbar' Settings
 nmap <F8> :TagbarToggle<CR>
@@ -205,16 +337,17 @@ let g:airline_powerline_fonts = 1
 
 """""""""" 	Plugin 'You Complete Me' Settings
 "let g:ycm_confirm_extra_conf = 0
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_always_populate_location_list = 1
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_use_clangd=0
-let g:ycm_auto_trigger = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_global_ycm_extra_conf = "/home/stuart/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
-set hidden																														" Hide the preiview window buffer when exiting insert mode.
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif 							" Automatically cose the popup window when finished editing.
+" Below was enabled
+"let g:ycm_enable_diagnostic_highlighting = 0
+"let g:ycm_show_diagnostics_ui = 1
+"let g:ycm_always_populate_location_list = 1
+"let g:ycm_enable_diagnostic_signs = 1
+"let g:ycm_use_clangd=1
+"let g:ycm_auto_trigger = 1
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_global_ycm_extra_conf = "/home/stuart/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
+"set hidden																														" Hide the preiview window buffer when exiting insert mode.
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif 							" Automatically cose the popup window when finished editing.
 
 """""""""" 	Plugin asyncrun settings
 let g:asyncrun_status = "stopped"
@@ -238,10 +371,10 @@ func! ClosePreviewOnSuccess()
 endfunc
 
 """"""""""	Plugin 'Nerd Tree Tabs' Settings	
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:nerdtree_tabs_open_on_console_startup=1
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"let g:nerdtree_tabs_open_on_console_startup=1
 
 """"""""""	Latex Settings
 function! TexFunction()

@@ -173,6 +173,7 @@ function install_environment {
 	install_package "viewnior"							# Image viewwer
 	install_package "network-manager-applet"							# Network manager taskbar
 	install_package "networkmanager-openvpn"							# Network manage openvpn stuff
+	install_package "networkmanager-vpnc"							# Network manager extra for SAF VPN
 	install_package "lightdm"							# Login screen
 	install_package "lightdm-gtk-greeter"							# Login screen
 	install_package "dolphin"							# Graphical file manager
@@ -190,6 +191,8 @@ function install_environment {
 	install_package "gimp"				# image editing
 	install_package "gedit"				# text editor
 	install_package "alsa-utils"				# Tools for audio control
+	install_package "vim-plug"				# vim plugin manager
+	install_package "ccls"				# Code copleting for c / c++
 }
 
 function install_utilities {
@@ -252,6 +255,7 @@ function install_utilities {
 	install_package "bear"							# Use with make to make compilation databases
 	install_package "tree"							# Command line tool for graphical directory structures
 	install_package "diff-so-fancy"							# Better git-diff output
+	install_package "brightnessctl"							# Better git-diff output
 
 
 }
@@ -292,6 +296,7 @@ function install_virtualbox {
 
 	install_package "virtualbox"							# Virtualbox
 	install_package "virtualbox-guest-iso"							# Virtualbox guest additions
+	install_package "virtualbox-ext-oracle"							# Virtualbox extensions
 }
 
 function install_latex {
@@ -313,6 +318,7 @@ function install_python {
 	install_package "python-bottle"							# Python web microframework
 	install_package "python-pycrypto"							# Python kit for encrypting strings
 	install_package "python-virtualenv"							# Python virtual environments
+	install_package "python-pip"							# Python package manager
 }
 
 function install_optimisation {
@@ -373,6 +379,7 @@ function install_dev {
 	install_package "openocd"							# On-chip debugger for MCU
 	install_package "eclipse"							# Eclipse
 	install_package "arm-none-eabi-gdb"							# ARM cross compilation
+	install_package "arm-none-eabi-gcc"							# ARM cross compilation
 	install_package "arm-none-eabi-binutils"							# ARM cross compilation
 	install_package "arm-none-eabi-newlib"							# ARM cross compilation
 	install_package "doxygen"							# Document generation from source code
@@ -453,8 +460,18 @@ install_audio
 install_environment
 install_utilities
 install_documents
-enable_services
-configure_environment
-configure_vim
-cleanup
+#enable_services
+#configure_environment
+#configure_vim
+install_dev
+install_pcb
+install_other
+install_optimisation
+install_python
+install_32Bit
+install_documents
+install_latex
+install_thinkpad
+install_intel
+
 
