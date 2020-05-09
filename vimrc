@@ -115,7 +115,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -394,17 +394,21 @@ endfunc
 """"""""""	Plugin 'Nerd Tree Tabs' Settings	
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "let g:nerdtree_tabs_open_on_console_startup=1
+"nmap <silent> <F7> :if nerd_tree_enable == 1 \| NERDTreeToggle \| let nerd_tree_enable=0 \| else \| NERDTreeToggle \| let nerd_tree_enable=1 \| endif <CR>
+nmap <F7> :NERDTreeTabsToggle <CR>
 
+let g:livepreview_previewer = 'zathura'																" Preview used for autocompile
 """"""""""	Latex Settings
 function! TexFunction()
 
 	let g:Tex_DefaultTargetFormat='pdf'																		" Build format for tex files
 	let g:Tex_MultipleCompileFormats='pdf,bibtex,pdf'	
 
-	let g:livepreview_previewer = 'zathura'																" Preview used for autocompile
 	autocmd Filetype tex setl updatetime=500															" How quickly to update the autocompile
+
+  inoremap <Space>` <Esc>gg/<++><Enter>"_c4l
 
 	"Autocompile
 	map <F3> <Esc> :LL<Enter>
