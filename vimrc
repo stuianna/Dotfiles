@@ -18,11 +18,13 @@ Plug 'ludovicchabant/vim-gutentags'																	" Use tags to zip through so
 Plug 'junegunn/fzf'																									" Fuzzy search plugin
 Plug 'junegunn/fzf.vim'
 Plug 'skywind3000/asyncrun.vim'																			" Background task handling
-Plug 'vim-syntastic/syntastic'																			" Background task handling
+"Plug 'vim-syntastic/syntastic'																			" Background task handling
+Plug 'dense-analysis/ale' 																					" Linting 
 Plug 'michaeljsmith/vim-indent-object'														  " Indent text object selection
 Plug 'tpope/vim-surround'														  							" Suround text editing
 Plug 'tpope/vim-repeat'														  								" Repeat plugin based command
-Plug 'Vimjas/vim-python-pep8-indent'														 		" Python indentation compliant with PEP8
+Plug 'Konfekt/vim-alias'														  							" Command line vim aliases
+"Plug 'Vimjas/vim-python-pep8-indent'														 		" Python indentation compliant with PEP8
 
 Plug 'iamcco/markdown-preview.nvim',  { 'do': { -> mkdp#util#install() } }
 call plug#end()   
@@ -50,6 +52,7 @@ set showmatch																													" Show matching brackets when cursor i
 set mat=2																															" Flash on matching brackets TODO
 set smarttab																													" Use spaces instead of tabs
 set shiftwidth=2																											" The width used when >> is pressen
+set expandtab
 set tabstop=2																													" The width of a tab
 set ai																																" Autoindent uses the same indent as the previous line
 set si
@@ -59,7 +62,6 @@ highligh clear SignColumn
 
 " Fix sign priorities
 let g:gitgutter_sign_priority =  8
-let g:syntastic_sign_priority = 19
 
 
 """"""""" COC
@@ -188,6 +190,22 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 """"""""" Clang Format
 map <C-K> :py3f /home/stuart/.bin/clang-format.py<cr>
 
+""""""""" Format json files
+map <C-J> :%!python -m json.tool <CR>
+
+""""""""" ALE
+let g:ale_linters = {
+  \ 'python': ['flake8']
+  \}
+
+let g:ale_fixers = {
+  \ 'python': ['yapf'],
+  \ 'cpp': ['clang-format'],
+  \ 'c': ['clang-format'],
+  \}
+
+nmap <F10> :ALEFix<CR>
+
 """"""""""	General Vim snippits
 
 map <silent> <leader><Space> :noh<cr>																	" Disable highlight with leader key
@@ -301,18 +319,18 @@ let g:mkdp_browser = 'brave'
 
 
 """"""""""	Plugin 'Vim - Syntastic' Settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-"let g:syntastic_loc_list_height = 5
-let g:syntastic_enable_highlighting=1
-let g:syntastic_cpp_checkers = ['clang_tidy']
-let g:syntastic_cpp_clang_tidy_post_args = ""
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+""let g:syntastic_loc_list_height = 5
+"let g:syntastic_enable_highlighting=1
+"let g:syntastic_cpp_checkers = ['clang_tidy']
+"let g:syntastic_cpp_clang_tidy_post_args = ""
 
 """"""""""	Plugin 'FZF' Settings
 
@@ -357,16 +375,19 @@ augroup QuickfixStatus
 augroup END
 :noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
 
-"let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
-:command -nargs=* Make AsyncRun make 
+cnoreabbrev ; AsyncRun
 
-autocmd User AsyncRunStart :copen
-"autocmd User AsyncRunStop :call ClosePreviewOnSuccess()
+":command -nargs=* Make AsyncRun make *
+
+"autocmd User AsyncRunStart :copen
+autocmd User AsyncRunStop :call ClosePreviewOnSuccess()
+
 
 func! ClosePreviewOnSuccess()
-	if g:asyncrun_code == 0
-			:cclose
+	if g:asyncrun_code != 0
+			:copen
 	endif
 endfunc
 

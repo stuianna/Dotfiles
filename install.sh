@@ -133,9 +133,8 @@ function enable_services {
 
 function configure_vim {
 	rm -rf ~/.vim																																									 	# Remove any exiting configuration
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim			           	# Clone Repository
-	vim +PluginInstall +qall                                                                       	# Install Vim plugins
-	python3 ~/.vim/bundle/YouCompleteMe/install.py
+	vim +PlugInstall +qall                                                                       	# Install Vim plugins
+	vim +'CocInstall coc-clangd' +qall
 }
 
 function install_audio {
@@ -193,11 +192,14 @@ function install_environment {
 	install_package "alsa-utils"				# Tools for audio control
 	install_package "vim-plug"				# vim plugin manager
 	install_package "ccls"				# Code copleting for c / c++
+	install_package "flake8"				# Python linting
+	install_package "yapf"				# Python auto formatting (like clang-format)
 }
 
 function install_utilities {
 
 	install_package "xfce4-clipman-plugin"							# For image copy paste
+	install_package "blueman"							# For bluetooth applet
 	install_package "htop"							# Graphical TOP
 	install_package "xfce4-power-manager"							# Power management
 	install_package "xdotool"							# Automated key presses
@@ -256,8 +258,9 @@ function install_utilities {
 	install_package "tree"							# Command line tool for graphical directory structures
 	install_package "diff-so-fancy"							# Better git-diff output
 	install_package "brightnessctl"							# Better git-diff output
-
-
+	install_package "jq"							# Javascript parsing in bash
+	install_package "grafana"							# Service for web based dashboards
+	install_package "libc++"							# C++ standard library headers for clang
 }
 
 function install_maybe {
@@ -391,6 +394,7 @@ function install_dev {
 	install_package "valgrind"							# Check programs for memeory leaks
 	install_package "python-intelhex"							# Check programs for memeory leaks
 	install_package "jlink"							# Programming interface Jlink Segger
+	install_package "ccstudio"							# Code composer studio
 }
 
 function install_wine {
