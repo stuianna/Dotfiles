@@ -199,9 +199,9 @@ let g:ale_linters = {
   \}
 
 let g:ale_fixers = {
-  \ 'python': ['yapf'],
-  \ 'cpp': ['clang-format'],
-  \ 'c': ['clang-format'],
+  \ 'python': ['yapf', 'remove_trailing_lines', 'trim_whitespace'],
+  \ 'cpp': ['clang-format', 'remove_trailing_lines', 'trim_whitespace'],
+  \ 'c': ['clang-format', 'remove_trailing_lines', 'trim_whitespace'],
   \}
 
 nmap <F10> :ALEFix<CR>

@@ -10,12 +10,19 @@ exec --no-startup-id xautolock -time 5 -locker "/usr/bin/i3lock -c 000000 -f -n 
 bindsym $mod+Shift+x exec --no-startup-id "/usr/bin/i3lock -c 000000 -f -n && sleep 5 && /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki update"
 
 #calandar 
-exec --no-startup-id urxvt -name cal -e calcurse 
-bindsym $mod+y [instance="cal"] scratchpad show; [instance="cal"] move position center
-for_window [instance="cal"] floating enable
-for_window [instance="cal"] resize set 800 600
-for_window [instance="cal"] move scratchpad
-for_window [instance="cal"] border pixel 5
+#exec --no-startup-id urxvt -name cal -e calcurse 
+#bindsym $mod+y [instance="cal"] scratchpad show; [instance="cal"] move position center
+#for_window [instance="cal"] floating enable
+#for_window [instance="cal"] resize set 800 600
+#for_window [instance="cal"] move scratchpad
+#for_window [instance="cal"] border pixel 5
+
+exec --no-startup-id termite --name whale -e "whaleAlertLogger -o"
+for_window [instance="whale"] floating enable
+for_window [instance="whale"] resize set 825 500
+for_window [instance="whale"] move scratchpad
+for_window [instance="whale"] border pixel 2
+bindsym $mod+y [instance="whale"] scratchpad show; [instance="whale"] move position center
 
 #vocabBuilder
 exec --no-startup-id vocabBuilder-cli ~/Dropbox/words/current.csv -q 5 -t 15

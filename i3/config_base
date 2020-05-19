@@ -87,7 +87,7 @@ for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 5
 bindsym $mod+u [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
-exec_always --no-startup-id termite --name dropdown 
+exec --no-startup-id termite --name dropdown 
 
 #open terminal left and right
 bindsym $mod+bracketright split horizontal ;; exec --no-startup-id $term

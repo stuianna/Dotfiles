@@ -1,6 +1,6 @@
 #!/bin/sh
 
-jsonResponse=$(ssh pi python3 /home/pi/pythonlibs/CMCLogger/CMCLogger.py -js 2> /dev/null)
+jsonResponse=$(ssh pi /home/pi/.local/bin/CMCLogger -js 2> /dev/null)
 
 if [[ "$jsonResponse" == '' ]]; then
 	echo ''
