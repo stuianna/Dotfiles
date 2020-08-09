@@ -132,6 +132,15 @@ function enable_services {
 }
 
 function configure_vim {
+	install_package "vim-plug"				# vim plugin manager
+	install_package "ccls"				# Code copleting for c / c++
+	install_package "flake8"				# Python linting
+	install_package "yapf"				# Python auto formatting (like clang-format)
+	install_package "universal-ctags"							# Source code tag system for vim
+	install_package "cpulimit"							# Limit CPU usage for processes
+	install_package "bear"							# Use with make to make compilation databases
+	install_package "diff-so-fancy"							# Better git-diff output
+	install_package "libc++"							# C++ standard library headers for clang
 	rm -rf ~/.vim																																									 	# Remove any exiting configuration
 	vim +PlugInstall +qall                                                                       	# Install Vim plugins
 	vim +'CocInstall coc-clangd' +qall
@@ -146,13 +155,13 @@ function configure_vim {
 function install_environment {
 
 	#install_package "dotfiles"							# To organise dotfiles
-	install_package "polybar"							# Updated status bar
+	#install_package "polybar"							# Updated status bar
 	#install_package "ranger"							# File browser
 	#install_package "feh"							# For background image
 	#install_package "brave-bin"							# Web browser
 	#install_package "deepin-screenshot"							# Screenshot tool
 	#install_package "termite"							# Terminal emulator (current
-	install_package "unclutter"							# Hide the mouse when ile
+	#install_package "unclutter"							# Hide the mouse when ile
 	#install_package "caffeine-ng"							# For preventing PC sleep
 	#install_package "vlc"							# Media player
 	#install_package "python-pywal"							# For setting colour schemes globally
@@ -165,8 +174,8 @@ function install_environment {
 	#install_package "bluez"							# Bluetooth library
 	#install_package "bluez-utils"							# Bluetooth library utilites
 	install_package "galculator"							# GTK calculator
-	install_package "powerline"							# Powerline font server
-	install_package "powerline-fonts-git"							# Patched fonts
+	#install_package "powerline"							# Powerline font server
+	#install_package "powerline-fonts-git"							# Patched fonts
 	install_package "awesome-terminal-fonts"							# Terminal fonts
 	install_package "terminus-font"							# More fonts
 	install_package "viewnior"							# Image viewwer
@@ -190,11 +199,11 @@ function install_environment {
 	#install_package "gimp"				# image editing
 	#install_package "gedit"				# text editor
 	#install_package "alsa-utils"				# Tools for audio control
-	install_package "vim-plug"				# vim plugin manager
-	install_package "ccls"				# Code copleting for c / c++
-	install_package "flake8"				# Python linting
-	install_package "yapf"				# Python auto formatting (like clang-format)
-	install_package "qxkb"				# Keyboard layout switching
+	#install_package "vim-plug"				# vim plugin manager
+	#install_package "ccls"				# Code copleting for c / c++
+	#install_package "flake8"				# Python linting
+	#install_package "yapf"				# Python auto formatting (like clang-format)
+	#install_package "qxkb"				# Keyboard layout switching
 }
 
 function install_utilities {
@@ -204,7 +213,7 @@ function install_utilities {
 #	install_package "htop"							# Graphical TOP
 #	install_package "xfce4-power-manager"							# Power management
 #	install_package "xdotool"							# Automated key presses
-	install_package "mediainfo"							# Information on multimedia files
+	#install_package "mediainfo"							# Information on multimedia files
 #	install_package "atool"							# Tool for working with all archive types
 	#install_package "transmission-qt"							# Torrent GUI manager
 	#install_package "transmission-cli"							# Torrent CLI manager
@@ -217,8 +226,8 @@ function install_utilities {
 	#install_package "geoip"							# Determining the GEO location of an IP address
 	#install_package "xorg-xprop"							# For getting window properties on click
 	#install_package "battop"							# For viewing battery info
-	install_package "sqlitebrowser"							# For browsing sqlite databases
-	install_package "python-grip"							# View markdown files in webbrowser
+	#install_package "sqlitebrowser"							# For browsing sqlite databases
+	#install_package "python-grip"							# View markdown files in webbrowser
 	#install_package "inotify-tools"							# Perform events on file updates
 	#install_package "ripgrep"							# Fast tool for line searching file, used in VIM
 	#install_package "openssh"							# For SSH
@@ -229,9 +238,9 @@ function install_utilities {
 #	install_package "udiskie"							# For automounting of removable media
 	install_package "xautolock"							# Automatic screen locking
 	install_package "xarchiver"							# Front end for archive files.
-	install_package "tree"							# Terminal tree diagrams
-	install_package "speedtest-cli"							# Internet speed test (CLI)
-	install_package "snapd"							# Package manager for snap packages
+	#install_package "tree"							# Terminal tree diagrams
+	#install_package "speedtest-cli"							# Internet speed test (CLI)
+	#install_package "snapd"							# Package manager for snap packages
 #	install_package "screenfetch"							# terminal system information
 	#install_package "rsync"							# Copy files to network destinations
 	install_package "qt5ct"							# QT environment selector (TODO errors)
@@ -241,7 +250,7 @@ function install_utilities {
 	#install_package "ntp"							# Network time protocol
 	#install_package "ntfs-3g"							# Read and write support for ntfs file systems
 	install_package "ncdu"							# Disk usage analyizer
-	install_package "ngrok"							# Tunnel local port to remote
+	#install_package "ngrok"							# Tunnel local port to remote
 	#install_package "lxinput"							# Small program for keyboard and mouse settings
 	#install_package "lxappearance"							# Small program themeing (TODO errors)
 	#install_package "gvfs-mtp"							# For MTP (Android) file systems
@@ -250,18 +259,18 @@ function install_utilities {
 	#install_package "gvfs-afc"							# For apple file systems
 	#install_package "gparted"							# For apple file systems
 	#install_package "downgrade"							# Tool for downgrading packages
-	install_package "universal-ctags"							# Source code tag system for vim
-	install_package "cpulimit"							# Limit CPU usage for processes
+	#install_package "universal-ctags"							# Source code tag system for vim
+	#install_package "cpulimit"							# Limit CPU usage for processes
 	#install_package "kvantum-qt5"							# QT5 theme
 	#install_package "man"							# Manual pages
 	#install_package "os-prober"							# Detect other operating systems for grub
-	install_package "bear"							# Use with make to make compilation databases
+	#install_package "bear"							# Use with make to make compilation databases
 	#install_package "tree"							# Command line tool for graphical directory structures
-	install_package "diff-so-fancy"							# Better git-diff output
+	#install_package "diff-so-fancy"							# Better git-diff output
 	#install_package "brightnessctl"							# Better git-diff output
 	#install_package "jq"							# Javascript parsing in bash
-	install_package "grafana"							# Service for web based dashboards
-	install_package "libc++"							# C++ standard library headers for clang
+	#install_package "grafana"							# Service for web based dashboards
+	#install_package "libc++"							# C++ standard library headers for clang
 }
 
 #function install_maybe {
@@ -276,8 +285,6 @@ function install_thinkpad {
 	install_package "tpacpi-batt"							# Kernal bus communication (Battery)
 	install_package "linux-intel-undervolt-tool"							# Undervolt tools
 	install_package "intel-undervolt"							# Undervolt tools
-
-
 }
 
 function install_intel {
@@ -395,6 +402,9 @@ function install_dev {
 	install_package "python-intelhex"							# Check programs for memeory leaks
 	install_package "jlink"							# Programming interface Jlink Segger
 	install_package "ccstudio"							# Code composer studio
+	install_package "grafana"							# Service for web based dashboards
+	install_package "sqlitebrowser"							# For browsing sqlite databases
+	install_package "python-grip"							# View markdown files in webbrowser
 }
 
 function install_wine {
@@ -474,6 +484,14 @@ function install_i3 {
 	install_package "dmenu"							# Program launcher
 	install_package "dotfiles"							# To organise dotfiles
 	install_package "feh"							# Backgrounds
+	install_package "powerline"							# Powerline font server
+	install_package "powerline-fonts-git"							# Patched fonts
+	install_package "polybar"							# Updated status bar
+	install_package "unclutter"							# Hide the mouse when ile
+	install_package "mediainfo"							# Information on multimedia files
+	install_package "speedtest-cli"							# Internet speed test (CLI)
+	install_package "snapd"							# Package manager for snap packages
+	install_package "ngrok"							# Tunnel local port to remote
 
   if ls ~/Dotfiles 2> /dev/null; then
     :
@@ -557,9 +575,22 @@ fi
 
 #install_initial
 #install_common
-install_i3
-configure_vim
-configure_environment
+#enable_common_services
+#install_i3
+#configure_vim
+#configure_environment
+install_dev
+install_pcb
+install_thinkpad
+install_intel
+install_optimisation
+install_python
+install_32Bit
+install_documents
+install_latex
+install_work
+install_virtualbox
+install_wine
 
 
 #### OLD List
