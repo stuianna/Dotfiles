@@ -43,40 +43,40 @@ function configure_environment {
 	add_config "export LOCATION='$LOCATION'" ~/.profile																								# Set device location
 	add_config 'export PATH=$PATH:~/Dotfiles/bin' ~/.profile						                   							# Add repo binary to path
 	add_config 'export PATH=$PATH:~/.local/bin' ~/.profile						                   							# Path where python local scripts are installed
-	add_config 'export QT_QPA_PLATFORMTHEME=qt5ct' ~/.profile						                   							# Set qt theme 
-	add_config 'export PYTHONPATH=$PYTHONPATH:/home/$USER/Dropbox/pythonLib' ~/.profile						     # Add custom python library path to sys.path
+	#add_config 'export QT_QPA_PLATFORMTHEME=qt5ct' ~/.profile						                   							# Set qt theme 
+	#add_config 'export PYTHONPATH=$PYTHONPATH:/home/$USER/Dropbox/pythonLib' ~/.profile						     # Add custom python library path to sys.path
 	add_config 'PATH=$PATH:~/bin' ~/.bashrc						                                        				# add ~/bin to path
 	add_config 'source /usr/share/fzf/key-bindings.bash' ~/.bashrc																			# Fuzzy finder hotkeys
 	add_config 'source /usr/share/fzf/completion.bash' ~/.bashrc																				# Fuzzy finder hotkeys
 	add_config 'complete -o bashdefault -o default -F _fzf_path_completion zathura' ~/.bashrc					# Fuzzy finder for pdf
-	add_config '(cat ~/.cache/wal/sequences &)' ~/.bashrc						                            			# Make Wal work on new terminals
+	#add_config '(cat ~/.cache/wal/sequences &)' ~/.bashrc						                            			# Make Wal work on new terminals
 	
 	add_config 'powerline-daemon -q
 	POWERLINE_BASH_CONTINUATION=1
 	POWERLINE_BASH_SELECT=1
 	. /usr/share/powerline/bindings/bash/powerline.sh'  ~/.bashrc						                     	# Powerline fonts configuration
 
-	add_config 'if [ "$LOCATION" == "HOME" ]
-	then
-		cat ~/.i3/config_base ~/.i3/config_home > ~/.i3/config
-	elif [ "$LOCATION" == "WORK" ]
-	then
-		cat ~/.i3/config_base ~/.i3/config_work > ~/.i3/config
-	fi'  ~/.profile																																								# Switch between home and work profiles
+	#add_config 'if [ "$LOCATION" == "HOME" ]
+	#then
+		#cat ~/.i3/config_base ~/.i3/config_home > ~/.i3/config
+	#elif [ "$LOCATION" == "WORK" ]
+	#then
+		#cat ~/.i3/config_base ~/.i3/config_work > ~/.i3/config
+	#fi'  ~/.profile																																								# Switch between home and work profiles
 
-	sudo cp ~/Dotfiles/Misc/xorg.conf /etc/X11/
-	sudo chown stuart /run/media/stuart                                                            	# Change mount directory ownship for RW persmissions
-	wal -i ~/.wallpaper/old/boats_lake_scenery-wallpaper-2560x1440.jpg                             	# Use Wal to set a color scheme
+	#sudo cp ~/Dotfiles/Misc/xorg.conf /etc/X11/
+	#sudo chown stuart /run/media/stuart                                                            	# Change mount directory ownship for RW persmissions
+	#wal -i ~/.wallpaper/old/boats_lake_scenery-wallpaper-2560x1440.jpg                             	# Use Wal to set a color scheme
 	mkdir -p ~/bin																																									# Make a directory for binaries
-	mkdir -p ~/.config/termite									                                        						# Make termite config directory
-	ln -sf ~/.termite/config	~/.config/termite/config																											# Link dotfiles stored config to termite's search location
+	#mkdir -p ~/.config/termite									                                        						# Make termite config directory
+	#ln -sf ~/.termite/config	~/.config/termite/config																											# Link dotfiles stored config to termite's search location
 	mkdir -p ~/.config/zathura									                                        						# Make zathura config directory
 	ln -sf ~/.zathurarc ~/.config/zathura/zathurarc							                            				# Link config file to zathura
 	ln -sf ~/.ranger/rc.conf ~/.config/ranger/rc.conf						                            				# Link config file to ranger
-	sudo mkdir -p /run/media/stuart									                                    						# Manually make media mounting directory
-	ln -sf /run/media/stuart ~/media									                                    						# Link manual and media directory shortcut
-	sudo cp ~/Dotfiles/Misc/sleeplock.service /etc/systemd/system/sleeplock.service	                # Lock screen on sleep service
-	sudo chown stuart /sys/class/backlight/intel_backlight/brightness																# Allow user to change backlight brightness
+	#sudo mkdir -p /run/media/stuart									                                    						# Manually make media mounting directory
+	#ln -sf /run/media/stuart ~/media									                                    						# Link manual and media directory shortcut
+	#sudo cp ~/Dotfiles/Misc/sleeplock.service /etc/systemd/system/sleeplock.service	                # Lock screen on sleep service
+	#sudo chown stuart /sys/class/backlight/intel_backlight/brightness																# Allow user to change backlight brightness
 	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 }
 
@@ -364,7 +364,6 @@ function install_32Bit {
 	install_package "lib32-mesa-vdpau"			# 
 	install_package "lib32-gst-plugins-base"			# 
 	install_package "lib32-gst-plugins-good"			# 
-
 	install_package "mpt123"			# 
 
 }
@@ -559,6 +558,8 @@ fi
 #install_initial
 #install_common
 install_i3
+configure_vim
+configure_environment
 
 
 #### OLD List
