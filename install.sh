@@ -92,26 +92,26 @@ function install_initial {
 		cd ../
 		rm -rf yay
 	fi
-	install_package "xorg-server"							# To organise dotfiles
-	install_package "xorg-xinit"							# To organise dotfiles
-	install_package "i3-gaps"							# To organise dotfiles
-	install_package "i3status"							# To organise dotfiles
-	install_package "termite"							# To organise dotfiles
-	install_package "dmenu"							# To organise dotfiles
-	install_package "vim"							# To organise dotfiles
-	install_package "vi"							# To organise dotfiles
-	install_package "dotfiles"							# To organise dotfiles
-	install_package "dialog"							# Get user input in terminal
+	#install_package "xorg-server"							# To organise dotfiles
+	#install_package "xorg-xinit"							# To organise dotfiles
+	#install_package "i3-gaps"							# To organise dotfiles
+	#install_package "i3status"							# To organise dotfiles
+	#install_package "termite"							# To organise dotfiles
+	#install_package "dmenu"							# To organise dotfiles
+	#install_package "vim"							# To organise dotfiles
+	#install_package "vi"							# To organise dotfiles
+	#install_package "dotfiles"							# To organise dotfiles
+	#install_package "dialog"							# Get user input in terminal
 
-	if ls ~/Dotfiles 2> /dev/null; then
-		:
-	else
-		git clone https://github.com/stuianna/Dotfiles.git
-		cd Dotfiles
-		git checkout newarch
-		cd ../
-		dotfiles -s
-	fi
+	#if ls ~/Dotfiles 2> /dev/null; then
+		#:
+	#else
+		#git clone https://github.com/stuianna/Dotfiles.git
+		#cd Dotfiles
+		#git checkout newarch
+		#cd ../
+		#dotfiles -s
+	#fi
 }
 
 function install_inpiron {
@@ -138,58 +138,58 @@ function configure_vim {
 }
 
 function install_audio {
-	install_package "pulseaudio-alsa"										# For audio
-	install_package "pulseaudio-bluetooth"							# For audio
-	install_package "pasystray"							# For audio tray
+	#install_package "pulseaudio-alsa"										# For audio
+	#install_package "pulseaudio-bluetooth"							# For audio
+	#install_package "pasystray"							# For audio tray
 }
 
 function install_environment {
 
 	install_package "dotfiles"							# To organise dotfiles
 	install_package "polybar"							# Updated status bar
-	install_package "ranger"							# File browser
+	#install_package "ranger"							# File browser
 	install_package "feh"							# For background image
-	install_package "brave-bin"							# Web browser
-	install_package "deepin-screenshot"							# Screenshot tool
-	install_package "termite"							# Terminal emulator (current
+	#install_package "brave-bin"							# Web browser
+	#install_package "deepin-screenshot"							# Screenshot tool
+	#install_package "termite"							# Terminal emulator (current
 	install_package "unclutter"							# Hide the mouse when ile
-	install_package "caffeine-ng"							# For preventing PC sleep
-	install_package "vlc"							# Media player
-	install_package "python-pywal"							# For setting colour schemes globally
+	#install_package "caffeine-ng"							# For preventing PC sleep
+	#install_package "vlc"							# Media player
+	#install_package "python-pywal"							# For setting colour schemes globally
 	install_package "ttf-font-awesome-4"							# Fonts for icons
 	install_package "ttf-font-awesome"							# Fonts for icons
 	install_package "ttf-inconsolata"							# Fonts for icons
 	install_package "ttf-indic-otf"							# Fonts for icons
 	install_package "nerd-fonts-complete"							# Fonts for icons
 	install_package "font-manager"							# Graphical font manager
-	install_package "bluez"							# Bluetooth library
-	install_package "bluez-utils"							# Bluetooth library utilites
+	#install_package "bluez"							# Bluetooth library
+	#install_package "bluez-utils"							# Bluetooth library utilites
 	install_package "galculator"							# GTK calculator
 	install_package "powerline"							# Powerline font server
 	install_package "powerline-fonts-git"							# Patched fonts
 	install_package "awesome-terminal-fonts"							# Terminal fonts
 	install_package "terminus-font"							# More fonts
 	install_package "viewnior"							# Image viewwer
-	install_package "network-manager-applet"							# Network manager taskbar
-	install_package "networkmanager-openvpn"							# Network manage openvpn stuff
-	install_package "networkmanager-vpnc"							# Network manager extra for SAF VPN
-	install_package "lightdm"							# Login screen
-	install_package "lightdm-gtk-greeter"							# Login screen
-	install_package "dolphin"							# Graphical file manager
+	#install_package "network-manager-applet"							# Network manager taskbar
+	#install_package "networkmanager-openvpn"							# Network manage openvpn stuff
+	#install_package "networkmanager-vpnc"							# Network manager extra for SAF VPN
+	#install_package "lightdm"							# Login screen
+	#install_package "lightdm-gtk-greeter"							# Login screen
+	#install_package "dolphin"							# Graphical file manager
 	install_package "clipit"							# Clipboard manager
-	install_package "arandr"							# Graphical front end for xradr
-	install_package "arc-gtk-theme"				# Gtk themes use lxappearance to modify
+	#install_package "arandr"							# Graphical front end for xradr
+	#install_package "arc-gtk-theme"				# Gtk themes use lxappearance to modify
 	install_package "compton"				# Compton
-	install_package "arc-icon-theme"				# Gtk icon use lxappearance to modify
+	#install_package "arc-icon-theme"				# Gtk icon use lxappearance to modify
 	install_package "i3lock"				# lock screen
-	install_package "breeze"				# qt5 theme
-	install_package "breeze-gtk"				# gtk theme
-	install_package "xfce4-power-manager"				# Power managemnet and taskbar
-	install_package "man"				# Linux manual pages
-	install_package "libreoffice"				# Document editing
-	install_package "gimp"				# image editing
-	install_package "gedit"				# text editor
-	install_package "alsa-utils"				# Tools for audio control
+	#install_package "breeze"				# qt5 theme
+	#install_package "breeze-gtk"				# gtk theme
+	#install_package "xfce4-power-manager"				# Power managemnet and taskbar
+#	install_package "man"				# Linux manual pages
+	#install_package "libreoffice"				# Document editing
+	#install_package "gimp"				# image editing
+	#install_package "gedit"				# text editor
+	#install_package "alsa-utils"				# Tools for audio control
 	install_package "vim-plug"				# vim plugin manager
 	install_package "ccls"				# Code copleting for c / c++
 	install_package "flake8"				# Python linting
@@ -201,72 +201,72 @@ function install_utilities {
 
 	install_package "xfce4-clipman-plugin"							# For image copy paste
 	install_package "blueman"							# For bluetooth applet
-	install_package "htop"							# Graphical TOP
-	install_package "xfce4-power-manager"							# Power management
-	install_package "xdotool"							# Automated key presses
+#	install_package "htop"							# Graphical TOP
+#	install_package "xfce4-power-manager"							# Power management
+#	install_package "xdotool"							# Automated key presses
 	install_package "mediainfo"							# Information on multimedia files
-	install_package "atool"							# Tool for working with all archive types
-	install_package "transmission-qt"							# Torrent GUI manager
-	install_package "transmission-cli"							# Torrent CLI manager
-	install_package "unzip"							# For zip files
-	install_package "p7zip"							# For zip files
-	install_package "zip"							# For zip files
-	install_package "dropbox"							# Dropbox
-	install_package "fuse-exfat"							# For FAT file systems
-	install_package "exfat-utils"							# For Fat file systems
-	install_package "geoip"							# Determining the GEO location of an IP address
-	install_package "xorg-xprop"							# For getting window properties on click
-	install_package "battop"							# For viewing battery info
+#	install_package "atool"							# Tool for working with all archive types
+	#install_package "transmission-qt"							# Torrent GUI manager
+	#install_package "transmission-cli"							# Torrent CLI manager
+	#install_package "unzip"							# For zip files
+	#install_package "p7zip"							# For zip files
+	#install_package "zip"							# For zip files
+	#install_package "dropbox"							# Dropbox
+	#install_package "fuse-exfat"							# For FAT file systems
+	#install_package "exfat-utils"							# For Fat file systems
+	#install_package "geoip"							# Determining the GEO location of an IP address
+	#install_package "xorg-xprop"							# For getting window properties on click
+	#install_package "battop"							# For viewing battery info
 	install_package "sqlitebrowser"							# For browsing sqlite databases
 	install_package "python-grip"							# View markdown files in webbrowser
-	install_package "inotify-tools"							# Perform events on file updates
-	install_package "ripgrep"							# Fast tool for line searching file, used in VIM
-	install_package "openssh"							# For SSH
-	install_package "sshfs"							# For mounting file systems over ssh
-	install_package "xorg-xrandr"							# monitor config
-	install_package "tlp"							# Power management
-	install_package "fzf"							# Fuzzy search tool
-	install_package "udiskie"							# For automounting of removable media
+	#install_package "inotify-tools"							# Perform events on file updates
+	#install_package "ripgrep"							# Fast tool for line searching file, used in VIM
+	#install_package "openssh"							# For SSH
+	#install_package "sshfs"							# For mounting file systems over ssh
+	#install_package "xorg-xrandr"							# monitor config
+	#install_package "tlp"							# Power management
+	#install_package "fzf"							# Fuzzy search tool
+#	install_package "udiskie"							# For automounting of removable media
 	install_package "xautolock"							# Automatic screen locking
 	install_package "xarchiver"							# Front end for archive files.
 	install_package "tree"							# Terminal tree diagrams
 	install_package "speedtest-cli"							# Internet speed test (CLI)
 	install_package "snapd"							# Package manager for snap packages
-	install_package "screenfetch"							# terminal system information
-	install_package "rsync"							# Copy files to network destinations
+#	install_package "screenfetch"							# terminal system information
+	#install_package "rsync"							# Copy files to network destinations
 	install_package "qt5ct"							# QT environment selector (TODO errors)
 	install_package "qt5-styleplugins"							# QT environment selector
-	install_package "powertop"							# Power usage analysis
+#	install_package "powertop"							# Power usage analysis
 	install_package "perl-file-mimeinfo"							# Provide information on file-types
-	install_package "ntp"							# Network time protocol
-	install_package "ntfs-3g"							# Read and write support for ntfs file systems
+	#install_package "ntp"							# Network time protocol
+	#install_package "ntfs-3g"							# Read and write support for ntfs file systems
 	install_package "ncdu"							# Disk usage analyizer
 	install_package "ngrok"							# Tunnel local port to remote
-	install_package "lxinput"							# Small program for keyboard and mouse settings
-	install_package "lxappearance"							# Small program themeing (TODO errors)
-	install_package "gvfs-mtp"							# For MTP (Android) file systems
-	install_package "gvfs-smb"							# For windows file systems
-	install_package "gvfs-gphoto2"							# For android file photos
-	install_package "gvfs-afc"							# For apple file systems
-	install_package "gparted"							# For apple file systems
-	install_package "downgrade"							# Tool for downgrading packages
+	#install_package "lxinput"							# Small program for keyboard and mouse settings
+	#install_package "lxappearance"							# Small program themeing (TODO errors)
+	#install_package "gvfs-mtp"							# For MTP (Android) file systems
+	#install_package "gvfs-smb"							# For windows file systems
+	#install_package "gvfs-gphoto2"							# For android file photos
+	#install_package "gvfs-afc"							# For apple file systems
+	#install_package "gparted"							# For apple file systems
+	#install_package "downgrade"							# Tool for downgrading packages
 	install_package "universal-ctags"							# Source code tag system for vim
 	install_package "cpulimit"							# Limit CPU usage for processes
-	install_package "kvantum-qt5"							# QT5 theme
-	install_package "man"							# Manual pages
-	install_package "os-prober"							# Detect other operating systems for grub
+	#install_package "kvantum-qt5"							# QT5 theme
+	#install_package "man"							# Manual pages
+	#install_package "os-prober"							# Detect other operating systems for grub
 	install_package "bear"							# Use with make to make compilation databases
-	install_package "tree"							# Command line tool for graphical directory structures
+	#install_package "tree"							# Command line tool for graphical directory structures
 	install_package "diff-so-fancy"							# Better git-diff output
-	install_package "brightnessctl"							# Better git-diff output
-	install_package "jq"							# Javascript parsing in bash
+	#install_package "brightnessctl"							# Better git-diff output
+	#install_package "jq"							# Javascript parsing in bash
 	install_package "grafana"							# Service for web based dashboards
 	install_package "libc++"							# C++ standard library headers for clang
 }
 
 function install_maybe {
 
-	install_package "matcha-gtk-theme"							# GTK theme
+	#install_package "matcha-gtk-theme"							# GTK theme
 
 }
 
@@ -335,21 +335,21 @@ function install_documents {
 
 	install_package "odt2txt"							# Tool for converting from open office format to text
 	install_package "poppler"							# PDF rendering library
-	install_package "zathura"							# PDF viewer
-	install_package "zathura-pdf-poppler"							# PDF viewer addon
-	install_package "pinta"							# Image editor
-	install_package "evince"							# Fuller featured PDF viewer
-	install_package "gedit"							# Simple text editor
-	install_package "pdfarranger"							# For edditing PDF document page orders
-	install_package "cherrytree"							# Note taking application
+	#install_package "zathura"							# PDF viewer
+	#install_package "zathura-pdf-poppler"							# PDF viewer addon
+	#install_package "pinta"							# Image editor
+	#install_package "evince"							# Fuller featured PDF viewer
+	#install_package "gedit"							# Simple text editor
+	#install_package "pdfarranger"							# For edditing PDF document page orders
+	#install_package "cherrytree"							# Note taking application
 	install_package "drawio-desktop"							# Flowchart graphical package
 }
 
 function install_other {
 
 	install_package "skypeforlinux"							# Skype
-	install_package "steam"							# game 
-	install_package "spotify"							# Music streaming service
+	#install_package "steam"							# game 
+	#install_package "spotify"							# Music streaming service
 }
 
 function install_32Bit {
@@ -404,6 +404,67 @@ function install_wine {
 	install_package "lib32-openal"							# Sound for wine
 }
 
+function install_common {
+	install_package "cherrytree"							# Note taking application
+	install_package "brave-bin"							# Web browser
+	install_package "deepin-screenshot"							# Screenshot tool
+	install_package "caffeine-ng"							# For preventing PC sleep
+	install_package "networkmanager-openvpn"							# Network manage openvpn stuff
+	install_package "networkmanager-vpnc"							# Network manager extra for SAF VPN
+	install_package "libreoffice"				# Document editing
+	install_package "gimp"				# image editing
+	install_package "gedit"				# text editor
+	install_package "pinta"							# Image editor
+	install_package "zathura"							# PDF viewer
+	install_package "zathura-pdf-poppler"							# PDF viewer addon
+	install_package "evince"							# Fuller featured PDF viewer
+	install_package "pdfarranger"							# For edditing PDF document page orders
+	install_package "cherrytree"							# Note taking application
+	install_package "man"				# Linux manual pages
+	install_package "htop"							# Graphical TOP
+	install_package "xdotool"							# Automated key presses
+	install_package "atool"							# Tool for working with all archive types
+	install_package "ktorrent"							# Torrents
+	install_package "unzip"							# For zip files
+	install_package "p7zip"							# For zip files
+	install_package "zip"							# For zip files
+	install_package "dropbox"							# Dropbox
+	install_package "fuse-exfat"							# For FAT file systems
+	install_package "exfat-utils"							# For Fat file systems
+	install_package "geoip"							# Determining the GEO location of an IP address
+	install_package "xorg-xprop"							# For getting window properties on click
+	install_package "battop"							# For viewing battery info
+	install_package "inotify-tools"							# Perform events on file updates
+	install_package "ripgrep"							# Fast tool for line searching file, used in VIM
+	install_package "openssh"							# For SSH
+	install_package "sshfs"							# For mounting file systems over ssh
+	install_package "xorg-xrandr"							# monitor config
+	install_package "tlp"							# Power management
+	install_package "fzf"							# Fuzzy search tool
+	install_package "screenfetch"							# terminal system information
+	install_package "rsync"							# Copy files to network destinations
+	install_package "powertop"							# Power usage analysis
+	install_package "ntp"							# Network time protocol
+	install_package "ntfs-3g"							# Read and write support for ntfs file systems
+	install_package "downgrade"							# Tool for downgrading packages
+	install_package "os-prober"							# Detect other operating systems for grub
+	install_package "tree"							# Command line tool for graphical directory structures
+	install_package "jq"							# Javascript parsing in bash
+	install_package "spotify"							# Music streaming service
+	install_package "steam"							# game 
+	install_package "bluez"							# Bluetooth library
+	install_package "bluez-utils"							# Bluetooth library utilites
+}
+
+function enable_common_services {
+	sudo systemctl enable tlp.service								                                					# Enable TLP (Power Management)
+	sudo systemctl start tlp.service								                                					# Start TLP
+	sudo systemctl enable sshd									                                        						# Enable ssh
+	sudo systemctl start sshd									                                        							# Start ssh
+	sudo systemctl enable bluetooth.service																													# Bluetooth
+	sudo systemctl start bluetooth.service																													# Bluetooth
+}
+
 HOST_NAME=''
 USER_NAME=''
 USER_PASS=''
@@ -433,7 +494,7 @@ if [ "$1" == "initial" ]; then
 	CITY=$(dialog --stdout --inputbox "Enter city (Riga/Sydney)" 0 0) || exit 1 : ${CITY:?"City cannot be empty"}
 	USER_PASS=$(dialog --stdout --passwordbox "Enter user password" 0 0) || exit 1 : ${USER_PASS:?"User password cannot be empty"}
 	ROOT_PASS=$(dialog --stdout --passwordbox "Enter root password" 0 0) || exit 1 : ${ROOT_PASS:?"Root password cannot be empty"}
-	pacstrap /mnt base linux linux-firmware networkmanager amd-ucode intel-ucode base-devel grub efibootmgr vim wget git xorg plasma-wayland-session kde-applications plasma kwin ranger wmctrl breeze-sddm-theme
+	pacstrap /mnt base linux linux-firmware networkmanager amd-ucode intel-ucode base-devel grub efibootmgr vim wget git xorg plasma-wayland-session kde-applications plasma kwin ranger wmctrl
 	genfstab -U /mnt >> /mnt/etc/fstab
 	echo "${HOST_NAME}" >> /mnt/etc/hostname
 	arch-chroot /mnt useradd -m -g wheel "${USER_NAME}"
@@ -461,6 +522,13 @@ else
 	echo "Enter location (WORK/HOME)"
 	read LOCATION
 fi
+
+
+install_initial
+install_common
+
+
+#### OLD List
 
 install_initial
 install_audio
