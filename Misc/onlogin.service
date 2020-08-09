@@ -2,7 +2,7 @@
 Description=Run startup script
 
 [Service]
-ExecStart=$HOME/.startup.sh
+ExecStart=/home/stuart/Dotfiles/startup.sh
 
 [Install]
 WantedBy=multi-user.target

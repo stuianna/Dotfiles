@@ -137,11 +137,11 @@ function configure_vim {
 	vim +'CocInstall coc-clangd' +qall
 }
 
-function install_audio {
+#function install_audio {
 	#install_package "pulseaudio-alsa"										# For audio
 	#install_package "pulseaudio-bluetooth"							# For audio
 	#install_package "pasystray"							# For audio tray
-}
+#}
 
 function install_environment {
 
@@ -264,11 +264,11 @@ function install_utilities {
 	install_package "libc++"							# C++ standard library headers for clang
 }
 
-function install_maybe {
+#function install_maybe {
 
 	#install_package "matcha-gtk-theme"							# GTK theme
 
-}
+#}
 
 function install_thinkpad {
 
@@ -474,6 +474,7 @@ function install_i3 {
 	install_package "picom"							# Desktop composer
 	install_package "dmenu"							# Program launcher
 	install_package "dotfiles"							# To organise dotfiles
+	install_package "feh"							# Backgrounds
 
   if ls ~/Dotfiles 2> /dev/null; then
     :
@@ -485,7 +486,7 @@ function install_i3 {
     dotfiles -s
   fi
 
-  sudo cp -f ~/Dotfiles/Misc/plasma-i3.desktop /usr/share/xsessions/plasma-i3-desktop
+  sudo cp ~/Dotfiles/Misc/plasma-i3.desktop /usr/share/xsessions/plasma-i3.desktop
   sudo rm -f /usr/share/xsessions/i3.desktop
   sudo rm -f /usr/share/xsessions/i3-with-shmlog.desktop
   sudo mv -f /usr/bin/ksplashqml /usr/bin/ksplashqml.old
@@ -555,30 +556,30 @@ else
 fi
 
 
-install_initial
-install_common
+#install_initial
+#install_common
 install_i3
 
 
 #### OLD List
 
-install_initial
-install_audio
-install_environment
-install_utilities
-install_documents
+#install_initial
+#install_audio
+#install_environment
+#install_utilities
+#install_documents
 #enable_services
 #configure_environment
 #configure_vim
-install_dev
-install_pcb
-install_other
-install_optimisation
-install_python
-install_32Bit
-install_documents
-install_latex
-install_thinkpad
-install_intel
+#install_dev
+#install_pcb
+#install_other
+#install_optimisation
+#install_python
+#install_32Bit
+#install_documents
+#install_latex
+#install_thinkpad
+#install_intel
 
 
