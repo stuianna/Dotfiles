@@ -433,7 +433,7 @@ if [ "$1" == "initial" ]; then
 	CITY=$(dialog --stdout --inputbox "Enter city (Riga/Sydney)" 0 0) || exit 1 : ${CITY:?"City cannot be empty"}
 	USER_PASS=$(dialog --stdout --passwordbox "Enter user password" 0 0) || exit 1 : ${USER_PASS:?"User password cannot be empty"}
 	ROOT_PASS=$(dialog --stdout --passwordbox "Enter root password" 0 0) || exit 1 : ${ROOT_PASS:?"Root password cannot be empty"}
-	pacstrap /mnt base linux linux-firmware networkmanager amd-ucode intel-ucode base-devel grub efibootmgr vim wget git
+	pacstrap /mnt base linux linux-firmware networkmanager amd-ucode intel-ucode base-devel grub efibootmgr vim wget git xorg plasma-wayland-session kde-applications plasma kwin ranger wmctrl breeze-sddm-theme
 	genfstab -U /mnt >> /mnt/etc/fstab
 	echo "${HOST_NAME}" >> /mnt/etc/hostname
 	arch-chroot /mnt useradd -m -g wheel "${USER_NAME}"
@@ -450,6 +450,8 @@ if [ "$1" == "initial" ]; then
 	arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=efi --bootloader-id=GRUB
 	arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 	arch-chroot /mnt systemctl enable NetworkManager
+	arch-chroot /mnt systemctl enable NetworkManager.service
+	arch-chroot /mnt systemctl enable sddm.service
 	sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /mnt/etc/sudoers
 	cp install.sh /mnt/home/${USER_NAME}/install.sh
 	chmod +x /mnt/home/${USER_NAME}/install.sh
