@@ -485,10 +485,15 @@ function install_i3 {
     dotfiles -s
   fi
 
-  sudo cp ~/Dotfiles/Misc/plasma-i3.desktop /usr/share/xsessions/plasma-i3-desktop
+  sudo cp -f ~/Dotfiles/Misc/plasma-i3.desktop /usr/share/xsessions/plasma-i3-desktop
   sudo rm -f /usr/share/xsessions/i3.desktop
   sudo rm -f /usr/share/xsessions/i3-with-shmlog.desktop
-  sudo mv /usr/bin/ksplashqml /usr/bin/ksplashqml.old
+  sudo mv -f /usr/bin/ksplashqml /usr/bin/ksplashqml.old
+
+  mkdir -p $HOME/.config/systemd/user/
+  cp -f $HOME/Dotfiles/Misc/onlogin.service $HOME/.config/systemd/user/onlogin.service
+  systemctl --user enable onlogin.service
+  chmod +x $HOME/.startup.sh
 }
 
 HOST_NAME=''
