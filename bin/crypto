@@ -21,7 +21,7 @@ function getNextSymbol {
 }
 
 function checkStatus {
-	jsonStatus=$(CMCLogger -js 2> /dev/null)
+	jsonStatus=$(ssh crypto /home/stuart/.local/bin/CMCLogger -js 2> /dev/null)
 	lastCall=$(echo "$jsonStatus" | jq -r '.last_call')
 
 	if (( $lastCall > 10 )); then
@@ -31,8 +31,8 @@ function checkStatus {
 }
 
 getNextSymbol
-checkStatus
-CMCLogger -q $CURRENT_SYMBOL
+# checkStatus
+ssh crypto /home/stuart/.local/bin/CMCLogger -q $CURRENT_SYMBOL
 
 
 

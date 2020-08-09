@@ -26,6 +26,7 @@ exec --no-startup-id ~/.bin/wallpaper.sh &                                      
 exec --no-startup-id pasystray                                                                          # Audio control tray
 exec --no-startup-id xfce4-clipman                                                                      # Tray for copy/paste
 exec --no-startup-id wal -Ren
+exec --no-startup-id qxkb                                                                               # Keyboard layout switching
 exec --no-startup-id xfce4-power-manager
 
 # Catagorical menu

@@ -24,6 +24,9 @@ Plug 'michaeljsmith/vim-indent-object'														  " Indent text object selec
 Plug 'tpope/vim-surround'														  							" Suround text editing
 Plug 'tpope/vim-repeat'														  								" Repeat plugin based command
 Plug 'Konfekt/vim-alias'														  							" Command line vim aliases
+Plug 'tyru/open-browser.vim'														  							" Browser opener needed for plantuml
+Plug 'aklt/plantuml-syntax'														  						" Plant uml-syntax
+Plug 'weirongxu/plantuml-previewer.vim'															" Plant uml-syntax
 "Plug 'Vimjas/vim-python-pep8-indent'														 		" Python indentation compliant with PEP8
 
 Plug 'iamcco/markdown-preview.nvim',  { 'do': { -> mkdp#util#install() } }
@@ -62,6 +65,8 @@ highligh clear SignColumn
 
 " Fix sign priorities
 let g:gitgutter_sign_priority =  8
+
+nmap <F6> :term <CR>
 
 
 """"""""" COC
@@ -312,7 +317,8 @@ function! ToggleDebugMode()
 endfunction
 
 
-map <C-D> :Termdebug<CR> <C-W>j <C-W>j :bd! a?<CR> <C-W>k b main <CR> c <CR> <C-w><C-r> <C-W>k :resize 55 <CR> :call ToggleDebugMode() <CR>
+map <C-d> :Termdebug<CR>
+map <C-p> <C-W>j <C-W>j :bd! a?<CR> <C-W>k b main <CR> c <CR> <C-w><C-r> <C-W>k :resize 55 <CR> :call ToggleDebugMode() <CR>
 
 """"""""""	Plugin 'Markdown Preview' Settings
 let g:mkdp_browser = 'brave'

@@ -1,20 +1,25 @@
 #!/bin/sh
 
-jsonResponse=$(ssh pi /home/pi/.local/bin/CMCLogger -js 2> /dev/null)
+jsonResponse_cmc=$(ssh crypto /home/stuart/.local/bin/CMCLogger -js 2> /dev/null)
+jsonResponse_whale=$(ssh crypto /home/stuart/.local/bin/whaleAlertLogger -js 2> /dev/null)
 
-if [[ "$jsonResponse" == '' ]]; then
+if [[ "$jsonResponse_cmc" == ''  || "$jsonResponse_whale" == '' ]]; then
 	echo ''
 	exit
 fi
 
-health=$(echo "$jsonResponse" | jq -r '.health')
-lastCall=$(echo "$jsonResponse" | jq -r '.last_call')
+health_cmc=$(echo "$jsonResponse_cmc" | jq -r '.health')
+lastCall_cmc=$(echo "$jsonResponse_cmc" | jq -r '.last_call')
+health_whale=$(echo "$jsonResponse_whale" | jq -r '.health')
+lastCall_whale=$(echo "$jsonResponse_whale" | jq -r '.last_call')
 
-if (( $lastCall < 5 )); then
+if (( $lastCall_cmc < 15 && $lastCall_whale < 5 )); then
 	logStatus="Ok";
 else
 	logStatus="Error";
 fi
 
-echo "PI: $logStatus | $health%"
+averageHealth=$(echo "(($health_cmc + $health_whale) / 2)" | bc)
+
+echo "Log: $logStatus | $averageHealth%"
 

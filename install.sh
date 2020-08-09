@@ -194,6 +194,7 @@ function install_environment {
 	install_package "ccls"				# Code copleting for c / c++
 	install_package "flake8"				# Python linting
 	install_package "yapf"				# Python auto formatting (like clang-format)
+	install_package "qxkb"				# Keyboard layout switching
 }
 
 function install_utilities {
