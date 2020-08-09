@@ -145,10 +145,10 @@ function install_audio {
 
 function install_environment {
 
-	install_package "dotfiles"							# To organise dotfiles
+	#install_package "dotfiles"							# To organise dotfiles
 	install_package "polybar"							# Updated status bar
 	#install_package "ranger"							# File browser
-	install_package "feh"							# For background image
+	#install_package "feh"							# For background image
 	#install_package "brave-bin"							# Web browser
 	#install_package "deepin-screenshot"							# Screenshot tool
 	#install_package "termite"							# Terminal emulator (current
@@ -454,6 +454,9 @@ function install_common {
 	install_package "steam"							# game 
 	install_package "bluez"							# Bluetooth library
 	install_package "bluez-utils"							# Bluetooth library utilites
+	install_package "archlinux-themes-sddm"							# Bluetooth library utilites
+
+	sudo sed -i "s/Current=/Current=breeze/" /usr/lib/sddm/sddm.conf.d/default.conf
 }
 
 function enable_common_services {
@@ -463,6 +466,29 @@ function enable_common_services {
 	sudo systemctl start sshd									                                        							# Start ssh
 	sudo systemctl enable bluetooth.service																													# Bluetooth
 	sudo systemctl start bluetooth.service																													# Bluetooth
+}
+
+function install_i3 {
+
+	install_package "i3-gaps"							# To organise dotfiles
+	install_package "picom"							# Desktop composer
+	install_package "dmenu"							# Program launcher
+	install_package "dotfiles"							# To organise dotfiles
+
+  if ls ~/Dotfiles 2> /dev/null; then
+    :
+  else
+    git clone https://github.com/stuianna/Dotfiles.git
+    cd Dotfiles
+    git checkout plasma-with-i3
+    cd ../
+    dotfiles -s
+  fi
+
+  sudo cp ~/Dotfiles/Misc/plasma-i3.desktop /usr/share/xsessions/plasma-i3-desktop
+  sudo rm -f /usr/share/xsessions/i3.desktop
+  sudo rm -f /usr/share/xsessions/i3-with-shmlog.desktop
+  sudo mv /usr/bin/ksplashqml /usr/bin/ksplashqml.old
 }
 
 HOST_NAME=''
@@ -526,6 +552,7 @@ fi
 
 install_initial
 install_common
+install_i3
 
 
 #### OLD List
