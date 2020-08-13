@@ -66,7 +66,7 @@ highligh clear SignColumn
 " Fix sign priorities
 let g:gitgutter_sign_priority =  8
 
-nmap <F6> :term <CR>
+nmap <F6> :below term ++rows=12 <CR>
 
 
 """"""""" COC

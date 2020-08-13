@@ -1,0 +1,3 @@
+source ~/.bashrc
+printf "\033]30;dropdown\007"
+clear

@@ -5,4 +5,4 @@ Description=Run startup script
 ExecStart=/home/stuart/Dotfiles/startup.sh
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

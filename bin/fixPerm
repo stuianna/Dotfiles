@@ -1,0 +1,3 @@
+#!/bin/bash
+
+chmod -x *.json *.plist Makefile *.mk *.cpp *.hpp *.c *.h tags .gitignore .clang-format .cproject .gitmodules .project .ccls* .debugConf

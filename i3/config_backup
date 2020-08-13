@@ -21,20 +21,20 @@ for_window [title="Desktop — Plasma"] kill; floating enable; border none
 # Plasma compatibility improvements
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-
-for_window [class="yakuake"] floating enable
-for_window [class="systemsettings"] floating enable
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
 for_window [class="plasmashell"] floating enable;
-for_window [class="Plasma"] floating enable; border none
+for_window [class="Plasma"] floating enable; border none;
 for_window [title="plasma-desktop"] floating enable; border none
 for_window [title="win7"] floating enable; border none
 for_window [class="krunner"] floating enable; border none
 for_window [class="Kmix"] floating enable; border none
 for_window [class="Klipper"] floating enable; border none
-#for_window [class="Plasmoidviewer"] floating enable; border none
-for_window [class="(?i)*nextcloud*"] floating disable
-for_window [class="plasmashell" window_type="notification"] border none, move right 700px, move down 450px
+for_window [class="Plasmoidviewer"] floating enable; border none
+#for_window [class="(?i)*nextcloud*"] floating disable
+assign [class="plasmashell"] output primary
 no_focus [class="plasmashell" window_type="notification"]
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position 1450px 20px
+
 
 exec --no-startup-id "picom --config ~/.picom.conf"                                                          # Window compostor
 
@@ -71,6 +71,10 @@ bindsym $mod+b fullscreen disable; floating enable; resize set 35 ppt 35 ppt; st
 #Brightness
 #bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set +5%
 #bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 5%-
+#
+bar {
+
+}
 
 #Disable mouse focus
 focus_follows_mouse no
@@ -93,7 +97,7 @@ bindsym $mod+s exec --no-startup-id termite -e ranger -r ~/.ranger
 #for_window [instance="matlabterm"] border pixel 5
 
  #Calculator
-exec--no-startup-id galculator
+exec --no-startup-id galculator
 bindsym $mod+g [instance="galculator"] scratchpad show;
 for_window [instance="galculator"] floating enable
 for_window [instance="galculator"] resize set 300 200
@@ -111,7 +115,7 @@ for_window [title="dropdown"] resize set 625 400
 for_window [title="dropdown"] move scratchpad
 for_window [title="dropdown"] border pixel 5
 bindsym $mod+u [title="dropdown"] scratchpad show; [title="dropdown"] move position center
-exec --no-startup-id konsole -e /bin/bash --rcfile ~/Dotfiles/Misc/dropdownrc 
+exec_always --no-startup-id konsole -e /bin/bash --rcfile ~/Dotfiles/Misc/dropdownrc 
 
 #open terminal left and right
 bindsym $mod+bracketright split horizontal ;; exec --no-startup-id $term
@@ -287,4 +291,40 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+
+#exec --no-startup-id CMCLogger
+#exec --no-startup-id dropbox start                                                                      # Start Dropbox (Taskbar)
+#exec --no-startup-id sleep 2.5 && docked
+#exec --no-startup-id sleep 5 && /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki viss.ctd     # Auto-commits for wiki folder
+exec --no-startup-id "brave --app=https://www.protonmail.com/login"                                     # Email in workspace (defined below)
+#exec --no-startup-id "brave --incognito https://calendar.google.com"                 # Calendar in workspace (defined below)
+#exec --no-startup-id xautolock -time 5 -locker "/usr/bin/i3lock -c 000000 -f -n && sleep 5 && /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki update"                              # Auto screen lock
+#Lock screen
+#bindsym $mod+Shift+x exec --no-startup-id "/usr/bin/i3lock -c 000000 -f -n && sleep 5 && /home/stuart/Dotfiles/bin/gitMonitor.sh /home/stuart/Dropbox/git/wiki update"
+
+#calandar 
+#exec --no-startup-id urxvt -name cal -e calcurse 
+#bindsym $mod+y [instance="cal"] scratchpad show; [instance="cal"] move position center
+#for_window [instance="cal"] floating enable
+#for_window [instance="cal"] resize set 800 600
+#for_window [instance="cal"] move scratchpad
+#for_window [instance="cal"] border pixel 5
+
+#exec --no-startup-id termite --name whale -e "whaleAlertLogger -o"
+#for_window [instance="whale"] floating enable
+#for_window [instance="whale"] resize set 825 500
+#for_window [instance="whale"] move scratchpad
+#for_window [instance="whale"] border pixel 2
+#bindsym $mod+y [instance="whale"] scratchpad show; [instance="whale"] move position center
+
+#vocabBuilder
+#exec --no-startup-id vocabBuilder-cli ~/Dropbox/words/current.csv -q 5 -t 15
+
+#Floating window for laptop multiple monitor setup
+#for_window[instance="term10"] floating enable move to position 40 40 
+#for_window[instance="term10"] resize set 680 510
+##for_window[instance="term10"] move container to workspace 10
+
+exec --no-startup-id sleep 5 && feh --bg-fill ~/.wallpaper/camino_cross_dark.jpg
 

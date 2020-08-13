@@ -37,6 +37,7 @@ function add_config {
 }
 
 function configure_environment {
+  touch /home/$USER/.profile
 	add_config "source .profile" ~/.bashrc
 	add_config "export EDITOR=/usr/bin/vim" ~/.profile																									# Set editor
 	add_config "export BROWSER=/usr/bin/brave" ~/.profile																							# Set browser
@@ -72,6 +73,7 @@ function configure_environment {
 	#ln -sf ~/.termite/config	~/.config/termite/config																											# Link dotfiles stored config to termite's search location
 	mkdir -p ~/.config/zathura									                                        						# Make zathura config directory
 	ln -sf ~/.zathurarc ~/.config/zathura/zathurarc							                            				# Link config file to zathura
+  mkdir -p ~/.config/ranger
 	ln -sf ~/.ranger/rc.conf ~/.config/ranger/rc.conf						                            				# Link config file to ranger
 	#sudo mkdir -p /run/media/stuart									                                    						# Manually make media mounting directory
 	#ln -sf /run/media/stuart ~/media									                                    						# Link manual and media directory shortcut
@@ -355,12 +357,11 @@ function install_documents {
 function install_other {
 
 	install_package "skypeforlinux"							# Skype
-	#install_package "steam"							# game 
-	#install_package "spotify"							# Music streaming service
 }
 
 function install_32Bit {
 
+	install_package "steam"							# game 
 	install_package "lib32-vulkan-radeon"			# AMD drivers
 	install_package "lib32-vulkan-intel"			# Intel drivers
 	install_package "lib32-openal"			# 
@@ -371,7 +372,6 @@ function install_32Bit {
 	install_package "lib32-mesa-vdpau"			# 
 	install_package "lib32-gst-plugins-base"			# 
 	install_package "lib32-gst-plugins-good"			# 
-	install_package "mpt123"			# 
 
 }
 
@@ -405,6 +405,7 @@ function install_dev {
 	install_package "grafana"							# Service for web based dashboards
 	install_package "sqlitebrowser"							# For browsing sqlite databases
 	install_package "python-grip"							# View markdown files in webbrowser
+
 }
 
 function install_wine {
@@ -459,8 +460,6 @@ function install_common {
 	install_package "os-prober"							# Detect other operating systems for grub
 	install_package "tree"							# Command line tool for graphical directory structures
 	install_package "jq"							# Javascript parsing in bash
-	install_package "spotify"							# Music streaming service
-	install_package "steam"							# game 
 	install_package "bluez"							# Bluetooth library
 	install_package "bluez-utils"							# Bluetooth library utilites
 	install_package "archlinux-themes-sddm"							# Bluetooth library utilites
@@ -492,6 +491,7 @@ function install_i3 {
 	install_package "speedtest-cli"							# Internet speed test (CLI)
 	install_package "snapd"							# Package manager for snap packages
 	install_package "ngrok"							# Tunnel local port to remote
+	install_package "rofi"							# Application launcher
 
   if ls ~/Dotfiles 2> /dev/null; then
     :
@@ -579,17 +579,17 @@ fi
 #install_i3
 #configure_vim
 #configure_environment
-install_dev
-install_pcb
-install_thinkpad
-install_intel
-install_optimisation
-install_python
+#install_dev
+#install_pcb
+#install_thinkpad
+#install_intel
+#install_optimisation
+#install_python
 install_32Bit
-install_documents
-install_latex
-install_work
-install_virtualbox
+#install_documents
+#install_latex
+#install_work
+#install_virtualbox
 install_wine
 
 
